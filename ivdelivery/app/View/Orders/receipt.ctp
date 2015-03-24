@@ -48,14 +48,17 @@
          </div>
           <div class="col-lg-6 col-md-6 col-sm-6">
             
+               <h4>  <strong>Delivery Date </strong></h4>
+
+               Delivery Date :  <?php echo ($savedOrder['Order']['delivery_time'] . ', ' . $savedOrder['Order']['delivery_date']); ?>              <br />
+               Purchase Date : <?php $savedOrder['Order']['created']; ?>
                <h4>  <strong>Payment Details </strong></h4>
             <b>Bill Amount :  990 USD </b>
               <br />
                Bill Date : <?php echo $savedOrder['Order']['created']; ?>              <br />
                <b>Payment Status :  Paid </b>
                <br />
-               Delivery Date :  <?php echo $savedOrder['Order']['delivery_time']; ?>              <br />
-               Purchase Date :  30th July 2014
+
          </div>
      </div>
      <div class="row">
@@ -98,46 +101,13 @@
 			echo('<td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity'] . '</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
 
 		<?php  
-			$itemTotal = $cartItem['total'];
-			$groceryTotal = ($groceryTotal+$itemTotal); 
-			$deliveryFees = ($deliveryFees+$cartItem['delivery_fee']); 
+		
 		?>
 			
 
 		<?php } ?>
 		<?php //calculate delivery fee
-		if ($itemCount <= 3) {
-			$deliveryRate = 5;
-			$deliveryCost=($deliveryRate+$deliveryFees);
-			$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
-		} elseif ($itemCount > 3 && $itemCount <= 10) {
-			$deliveryRate = 10;
-			$deliveryCost=($deliveryRate+$deliveryFees);
-			$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
 
-		}  elseif ($itemCount > 10 && $itemCount <= 20) {
-			$deliveryRate = 15;
-			if ($groceryTotal >= 200) {
-				$smallCut = ($groceryTotal*.1);
-				$deliveryCost = ($deliveryFees+$smallCut);
-				$grandTotal = ($groceryTotal+$deliveryCost);
-			} else {
-				$deliveryCost=($deliveryRate+$deliveryFees);
-				$grandTotal = ($groceryTotal+$deliveryCost);
-
-			}
-
-		}  elseif ($itemCount > 20) {
-			$deliveryRate = 20;
-			if ($groceryTotal >= 200) {
-				$smallCut = ($groceryTotal*.1);
-				$deliveryCost = ($deliveryFees+$smallCut);
-				$grandTotal = ($groceryTotal+$deliveryCost);
-			} else {
-				$deliveryCost=($deliveryRate+$deliveryFees);
-				$grandTotal = ($groceryTotal+$deliveryCost);
-			}
-		}
 
 
 
@@ -149,7 +119,7 @@
                </div>
              <hr />
              <div class="ttl-amts">
-               <h5>  Grociery Total Amount: $<?php echo $savedOrder['Order']['item_total']; ?> </h5>
+               <h5>  Grocery Total Amount: $<?php echo $savedOrder['Order']['item_total']; ?> </h5>
              </div>
              <hr />
               <div class="ttl-amts">

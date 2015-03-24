@@ -128,6 +128,8 @@ class Item extends AppModel {
 		)
 	);
 
+
+
 /**
  * hasAndBelongsToMany associations
  *
@@ -136,7 +138,7 @@ class Item extends AppModel {
 	public $hasAndBelongsToMany = array(
 		'Order' => array(
 			'className' => 'Order',
-			'joinTable' => 'orders_items',
+			'joinTable' => 'items_orders',
 			'foreignKey' => 'item_id',
 			'associationForeignKey' => 'order_id',
 			'unique' => 'keepExisting',

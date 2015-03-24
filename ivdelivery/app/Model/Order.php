@@ -1,6 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-App::uses('OrdersItems', 'Model');
+App::uses('ItemsOrders', 'Model');
 App::uses('Orders', 'Model');
 
 
@@ -194,6 +194,13 @@ class Order extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Supermarket' => array(
+			'className' => 'Supermarket',
+			'foreignKey' => 'supermarket_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 
@@ -240,7 +247,7 @@ class Order extends AppModel {
 	public $hasAndBelongsToMany = array(
 		'Item' => array(
 			'className' => 'Item',
-			'joinTable' => 'orders_items',
+			'joinTable' => 'items_orders',
 			'foreignKey' => 'order_id',
 			'associationForeignKey' => 'item_id',
 			'unique' => 'keepExisting',
@@ -282,7 +289,7 @@ class Order extends AppModel {
 	//return false;
 	if (!empty($data)) {
 		if ($this->save($data)) {	
-			return true;
+			//return true;
 		//if ($this->save($data)) {
 			$orderId=$this->id;
 			foreach ($orderItemsData as $orderItem) {
@@ -344,32 +351,37 @@ class Order extends AppModel {
 	//debug($this->Session);
 	//return false;
 	$ordersDataSource = $this->getDataSource();
-	$ordersItemsDataSource = $this->OrdersItem->getDataSource();
+	$itemsOrderDataSource = $this->ItemsOrder->getDataSource();
 	$paymentsDataSource = $this->Payment->getDataSource();
 	$ordersDataSource->begin();
-	$ordersItemsDataSource->begin();
+	$itemsOrderDataSource->begin();
 	$paymentsDataSource->begin();
 
 	if (!empty($orderDetails)) {		
-		if ($this->save($orderDetails)) {
-			//debug('aaa');
-			//return false;
+		if ($this->saveAll($orderDetails)) {
+			//return true;
 			$orderId=$this->id;
 			foreach ($orderItemsData as $orderItem) {
 				$orderItem['order_id']=$orderId;
-				$this->OrdersItem->create();
-				if (!($this->OrdersItem->save($orderItem, array('deep' => true)))) {
+				$this->ItemsOrder->create();
+				//debug($orderItem);
+				//return false;
+				$orderItem['item_id'] = $orderItem['id'];
+				unset($orderItem['id']);
+				if (!($this->ItemsOrder->save($orderItem))) {
 					return false;
-				} 
+				}
+		
 			}	
 			$paymentData['order_id']=$orderId;
 			if (!($this->Payment->save($paymentData))) {
 				return false;
 			}
 			$ordersDataSource->commit();
-			$ordersItemsDataSource->commit();
+			$itemsOrderDataSource->commit();
 			$paymentsDataSource->commit();
-
+		//debug('aaa4');
+			//return false;
 			return true;		
 			//if ($this->saveAll($data, array('deep' => true))) {
 			//create, send and save email
@@ -384,18 +396,63 @@ class Order extends AppModel {
 			//debug($this->OrdersItem->invalidFields());
 			//debug($this->validationErrors);
 			$ordersDataSource->rollback();
-			$ordersItemsDataSource->rollback();
+			$itemsOrderDataSource->rollback();
 			$paymentsDataSource->rollback();
 			return false;
 		}
+	} else { 
+		$ordersDataSource->rollback();
+		$itemsOrderDataSource->rollback();
+		$paymentsDataSource->rollback();
+		
+		return false;
 	}
-	$ordersDataSource->rollback();
-	$ordersItemsDataSource->rollback();
-	$paymentsDataSource->rollback();
-	
-	return false;
 
     }
+
+
+	function clearOrders() {
+
+		if ($this->Model->deleteAll(array(), true)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+
+	function searchOrder($date, $time, $supermarket_id) {
+
+		if (!$date || !$time || !$supermarket_id) {
+			return false;	
+		}	
+
+
+		$options['joins'] = array(
+		    array('table' => 'items_orders',
+		        'alias' => 'ItemsOrder',
+		        'type' => 'LEFT',
+		        'conditions' => array(
+		            'ItemsOrder.order_id = Order.id',
+		        )
+		    )
+		);
+
+
+
+
+		$conditions = array('AND' => array(
+			array('Order.date' => $date),
+			array('Order.time' => $time),
+			array('Order.supermarket_id' => $supermarket_id)
+		));
+		
+		$orders = $this->Order->find('all', $options);
+		//$orders = $this->Order->find('all', array('conditions' => $conditions));
+
+		return $orders;
+	}
 
 
 

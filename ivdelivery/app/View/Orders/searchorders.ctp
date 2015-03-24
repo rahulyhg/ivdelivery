@@ -1,4 +1,4 @@
-<div class="items form">
+
 
 <?php if ($authUser['role'] == 'admin') { ?>
 
@@ -19,51 +19,57 @@
 <?php echo $this->Html->link(__('Add Item'), array('controller' => 'items', 'action' => 'add'), array('class' => 'btn btn-default')); ?> 
 <?php echo $this->Html->link(__('Search Delivery'), array('controller' => 'orders', 'action' => 'searchorders'), array('class' => 'btn btn-default')); ?> 
 
+
+
 	</div>
 </div>
 
 
 
 <?php } ?>
-<br>
 
 
-<?php echo $this->Form->create('Item', array(
+
+<div class="row">
+	<div class="col-lg-12">
+
+<br><br>
+<div class="orders form">
+
+<?php echo $this->Form->create('Order', array(
     'inputDefaults' => array(
-        'class' => 'form-control',
+        'class' => 'form-control'
     )
 )); ?>
-<br>
 	<fieldset>
-		<legend><?php echo __('Add Item'); ?></legend>
+		<legend><?php echo __('Search Orders'); ?></legend>
 	<?php
-		echo $this->Form->input('supermarket_id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('category_id');
-		echo $this->Form->input('delivery_fee', array('default' => '0'));
-		echo $this->Form->input('img');
-		echo $this->Form->input('brand');
-		echo $this->Form->input('cost');
-		echo $this->Form->input('description');
-		echo $this->Form->input('notes');
-		echo $this->Form->input('option_1');
-		echo $this->Form->input('option_2');
-		echo $this->Form->input('option_3');
+		echo $this->Form->input('delivery_date');
+	?>
+	<br>
+	<?php
+		echo $this->Form->label('Delivery Time');
+		echo ('<br>');
+		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
+		//$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+		echo $this->Form->select('delivery_time', $options);
+	?>
+	<br>	
+	<br>
+	<?php
+		echo $this->Form->input('supermarket');
 
 	?>
 	</fieldset>
-<br>
+<br><br>
 <?php
 echo $this->Form->submit(
-    'Add Item', 
-    array('class' => 'btn btn-primary')
+    'Search Orders', 
+    array('class' => 'btn btn-primary btn-md')
 );
 ?>
-<br>
-<br>
-
-
-
 
 </div>
-
+</div>
+</div>

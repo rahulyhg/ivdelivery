@@ -17,7 +17,6 @@
 		echo $this->Form->input('street_2');
 		echo $this->Form->input('zip');
 		echo $this->Form->input('email');
-		echo $this->Form->input('password');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

@@ -140,7 +140,8 @@
 	?>
 	<br>
 	<?php
-		$options = array('12:00 pm' => '12:00', '3:00 pm' => '15:00', '7:00 pm' => '19:00');
+		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
 		echo $this->Form->radio('delivery_time', $options, array('type' =>'radio', 'legend' => false));
 	?>
 	<br><br>
@@ -196,7 +197,7 @@
 <?php
 echo $this->Form->submit(
     'Add Details', 
-    array('class' => 'btn btn-success')
+    array('class' => 'btn btn-success btn-lg')
 );
 ?>
 <br><br><br>

@@ -63,10 +63,13 @@
 	?>
 		<?php 
 		echo('<tr><td>'); ?>
-  		<?php echo $this->Html->link(__('-'), array('controller' => 'OrdersItems', 'action' => 'deleteFromCart', $cartItem['id']), array('class' => 'btn btn-danger btn-lg')); ?> 
+  		<?php echo $this->Html->link(__('x'), array('controller' => 'ItemsOrders', 'action' => 'deleteFromCart', $cartItem['id']), array('class' => 'btn btn-danger btn-lg')); ?> 
 
 	<?php
-		echo('</td><td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity'] . '</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
+		echo('</td><td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity']); ?><br>
+				<?php echo $this->Html->link(__('-'), array('controller' => 'ItemsOrders', 'action' => 'removeItemsOrder', $cartItem['id']), array('class' => 'btn btn-primary btn-sm')); ?> 
+						<?php echo $this->Html->link(__('+'), array('controller' => 'ItemsOrders', 'action' => 'addItemsOrder', $cartItem['id']), array('class' => 'btn btn-primary btn-sm')); ?> 
+	<?php echo('</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
 
 	<?php   $itemTotal = $cartItem['total'];
 		$groceryTotal = ($groceryTotal+$itemTotal); ?>
@@ -126,15 +129,15 @@
 			<td class="actions">
 		<div>
 		<?php
-		echo $this->Form->hidden('OrdersItem.' . $x . '.item_id', array('value' => $item['id']));
+		echo $this->Form->hidden('ItemsOrder.' . $x . '.item_id', array('value' => $item['id']));
 		?>
 		</div>
 		<?php
-		echo $this->Form->hidden('OrdersItem.' . $x . '.quantity', array('default' => '0'));
-		echo $this->Form->hidden('OrdersItem.' . $x . '.total', array('default' => '0'));
+		echo $this->Form->hidden('ItemsOrder.' . $x . '.quantity', array('default' => '0'));
+		echo $this->Form->hidden('ItemsOrder.' . $x . '.total', array('default' => '0'));
 		?>  
 
-  		<?php echo $this->Html->link(__('Add to cart'), array('controller' => 'OrdersItems', 'action' => 'addOrdersItem', $item['id']), array('class' => 'btn btn-primary btn-lg')); ?> 
+  		<?php echo $this->Html->link(__('Add to cart'), array('controller' => 'ItemsOrders', 'action' => 'addItemsOrder', $item['id']), array('class' => 'btn btn-primary btn-lg')); ?> 
 		<?php $x=$x+1; ?>
 		</tr>
 	<?php endforeach; ?>
