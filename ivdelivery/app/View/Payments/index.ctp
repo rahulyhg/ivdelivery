@@ -29,7 +29,7 @@
 <br>
 
 	<h2><?php echo __('Payments'); ?></h2>
-	<table cellpadding="0" cellspacing="0" class="table">
+	<table cellpadding="0" cellspacing="0" class="table table-responsive table-bordered table-hover">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('type'); ?></th>
@@ -46,7 +46,7 @@
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $payment['Payment']['id']), array('class' => 'btn btn-primary')); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $payment['Payment']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $payment['Payment']['id'])); ?>
+			<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $payment['Payment']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to delete # %s?', $payment['Payment']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

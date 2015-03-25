@@ -30,7 +30,7 @@
 
 
 	<h2><?php echo __('List Orders'); ?></h2>
-	<table cellpadding="0" cellspacing="0" class="table">
+	<table cellpadding="0" cellspacing="0" class="table table-responsive table-bordered table-hover">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
@@ -63,7 +63,7 @@
 		<td><?php echo h($order['Order']['processing_fee']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-primary')); ?><br><br>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $order['Order']['id']), array('class' => 'btn btn-warning')); ?>
+	
 		</td>
 	</tr>
 <?php endforeach; ?>

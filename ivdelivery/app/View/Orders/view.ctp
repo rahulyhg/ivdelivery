@@ -1,29 +1,56 @@
-<div class="orders view">
-<h2><?php echo __('Order'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($order['Order']['id']); ?>
-			&nbsp;
-		</dd>
+
+<?php if ($authUser['role'] == 'admin') { ?>
+
+
+<div class="row">
+	<div class="col-lg-12">
+<h2><?php echo __('Admin Options'); ?></h2>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-lg-12">
+<br>
+<?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'adminindex'), array('class' => 'btn btn-default')); ?> 
+<?php echo $this->Html->link(__('List Orders'), array('controller' => 'orders', 'action' => 'index'), array('class' => 'btn btn-default')); ?> 
+<?php echo $this->Html->link(__('List Payments'), array('controller' => 'payments', 'action' => 'index'), array('class' => 'btn btn-default')); ?> 
+<?php echo $this->Html->link(__('Add Item'), array('controller' => 'items', 'action' => 'add'), array('class' => 'btn btn-default')); ?> 
+<?php echo $this->Html->link(__('Search Delivery'), array('controller' => 'orders', 'action' => 'searchorders'), array('class' => 'btn btn-default')); ?> 
+
+
+
+	</div>
+</div>
+
+
+
+<?php } ?>
+
+<div class="row">
+	<div class="col-lg-12">
+			<?php //debug($order); ?>
+<h2><?php echo __('Order Details'); ?>: <?php echo($order['Order']['first_name'] . ' ' . $order['Order']['last_name']); ?>, <?php echo($order['Order']['delivery_date'] . ' ' . $order['Order']['delivery_time']); ?></h2>
+	<dl class="dl-horizontal">
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['User']['id'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
+			<?php echo $this->Html->link(($order['User']['first_name'] . ' ' . $order['User']['last_name']), array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Created'); ?></dt>
+
+		<dt><?php echo __('Payment Type'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['created']); ?>
+			<?php echo h($order['Payment'][0]['type']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Delivery Time'); ?></dt>
+		<dt><?php echo __('Payment Status'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['delivery_time']); ?>
+			<?php echo h($order['Order']['payment_status']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Notes'); ?></dt>
+		<dt><?php echo __('Delivery Status'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['notes']); ?>
+			<?php echo h($order['Order']['delivery_status']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Delivery Charge'); ?></dt>
@@ -41,144 +68,50 @@
 			<?php echo $this->Html->link($order['Driver']['name'], array('controller' => 'drivers', 'action' => 'view', $order['Driver']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Processing Fee'); ?></dt>
+		<dt><?php echo __('Notes'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['processing_fee']); ?>
+			<?php echo h($order['Order']['notes']); ?>
 			&nbsp;
 		</dd>
 	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Order'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Order'), array('action' => 'delete', $order['Order']['id']), array(), __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Orders'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Order'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Drivers'), array('controller' => 'drivers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Driver'), array('controller' => 'drivers', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Emails'), array('controller' => 'emails', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Email'), array('controller' => 'emails', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Payments'), array('controller' => 'payments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Payment'), array('controller' => 'payments', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Items'), array('controller' => 'items', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Item'), array('controller' => 'items', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Emails'); ?></h3>
-	<?php if (!empty($order['Email'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Order Id'); ?></th>
-		<th><?php echo __('Driver Email'); ?></th>
-		<th><?php echo __('User Email'); ?></th>
-		<th><?php echo __('Driver Phone'); ?></th>
-		<th><?php echo __('User Phone'); ?></th>
-		<th><?php echo __('Message'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($order['Email'] as $email): ?>
-		<tr>
-			<td><?php echo $email['id']; ?></td>
-			<td><?php echo $email['order_id']; ?></td>
-			<td><?php echo $email['driver_email']; ?></td>
-			<td><?php echo $email['user_email']; ?></td>
-			<td><?php echo $email['driver_phone']; ?></td>
-			<td><?php echo $email['user_phone']; ?></td>
-			<td><?php echo $email['message']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'emails', 'action' => 'view', $email['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'emails', 'action' => 'edit', $email['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'emails', 'action' => 'delete', $email['id']), array(), __('Are you sure you want to delete # %s?', $email['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Email'), array('controller' => 'emails', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Payments'); ?></h3>
-	<?php if (!empty($order['Payment'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Type'); ?></th>
-		<th><?php echo __('Order Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($order['Payment'] as $payment): ?>
-		<tr>
-			<td><?php echo $payment['id']; ?></td>
-			<td><?php echo $payment['type']; ?></td>
-			<td><?php echo $payment['order_id']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'payments', 'action' => 'view', $payment['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'payments', 'action' => 'edit', $payment['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'payments', 'action' => 'delete', $payment['id']), array(), __('Are you sure you want to delete # %s?', $payment['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Payment'), array('controller' => 'payments', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Items'); ?></h3>
+	<h3><?php echo __('Item List'); ?></h3>
 	<?php if (!empty($order['Item'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
+	<?php //debug($order['Item']); ?>
+	<table cellpadding = "0" cellspacing = "0" class="table table-responsive table-bordered">
 	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Supermarket Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Brand'); ?></th>
+		<th><?php echo __('Category'); ?></th>
 		<th><?php echo __('Cost'); ?></th>
-		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Notes'); ?></th>
-		<th><?php echo __('Option 1'); ?></th>
-		<th><?php echo __('Option 2'); ?></th>
-		<th><?php echo __('Option 3'); ?></th>
+		<th><?php echo __('Quantity'); ?></th>
+		<th><?php echo __('Delivery Fee'); ?></th>
+		<th><?php echo __('Total'); ?></th>
+		<th><?php echo __('Purchased'); ?></th>
+		<th><?php echo __('Add to Order'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($order['Item'] as $item): ?>
 		<tr>
-			<td><?php echo $item['id']; ?></td>
-			<td><?php echo $item['supermarket_id']; ?></td>
 			<td><?php echo $item['name']; ?></td>
 			<td><?php echo $item['brand']; ?></td>
-			<td><?php echo $item['cost']; ?></td>
-			<td><?php echo $item['description']; ?></td>
-			<td><?php echo $item['notes']; ?></td>
-			<td><?php echo $item['option_1']; ?></td>
-			<td><?php echo $item['option_2']; ?></td>
-			<td><?php echo $item['option_3']; ?></td>
+			<td><?php //echo $item['ItemsOrder']['category_id']; ?></td>
+			<td>$<?php echo $item['ItemsOrder']['cost']; ?></td>
+			<td><?php echo $item['ItemsOrder']['quantity']; ?></td>
+			<td>$<?php echo $item['ItemsOrder']['delivery_fee']; ?></td>
+			<td>$<?php echo $item['ItemsOrder']['total']; ?></td>
+			<td><?php echo $item['ItemsOrder']['purchased']; ?></td>
+			<td><?php echo $item['ItemsOrder']['added_to_order']; ?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'items', 'action' => 'view', $item['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'items', 'action' => 'edit', $item['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'items', 'action' => 'delete', $item['id']), array(), __('Are you sure you want to delete # %s?', $item['id'])); ?>
+				<?php echo $this->Html->link(__('Added to Order'), array('controller' => 'ItemsOrders', 'action' => 'updateOrderStatus', $item['ItemsOrder']['id']), array('class' => 'btn btn-primary')); ?><br><br>
+				<?php //echo $this->Html->link(__('View'), array('controller' => 'items', 'action' => 'view', $item['id'])); ?>
+				<?php //echo $this->Html->link(__('Edit'), array('controller' => 'items', 'action' => 'edit', $item['id'])); ?>
+				<?php //echo $this->Form->postLink(__('Delete'), array('controller' => 'items', 'action' => 'delete', $item['id']), array(), __('Are you sure you want to delete # %s?', $item['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Item'), array('controller' => 'items', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
+</div>
 </div>

@@ -18,7 +18,7 @@ class OrdersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('placeorder', 'index', 'delete', 'searchorder', 'searchresults');
+        $this->Auth->allow('placeorder', 'index', 'delete', 'searchorder', 'searchresults', 'view');
     }
 
 	public function isAuthorized($user) {
@@ -621,6 +621,156 @@ class OrdersController extends AppController {
 			$this->redirect($this->request->referer());
 		}
 	}
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function unpaidresults($id = null) {
+		$this->layout = 'boots';
+		$date = $this->params['named']['date'];
+		//s$date = $this->Time->dayAsSql($da;te)
+		$date = ($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+		$date1 = $this->params['named']['date'];
+		$time = $this->params['named']['time'];
+		//debug($time);
+		//debug($date);
+		$supermarket_id = $this->params['named']['supermarket_id'];
+		//debug($supermarket_id);
+		$conditions = array(
+			array('Order.delivery_date' => $date),
+			array('Order.delivery_time' => $time),
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.payment_status' => 'false'),
+
+		);
+		
+		//$orders = $this->Order->find('all');
+		$orders = $this->Order->find('all', array('conditions' => $conditions));
+		$orderCount = count($orders);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketId($supermarket_id);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketIdAndDeliveryTimeAndDeliveryDate($supermarket_id, $time, $date);
+		//$orders = $this->Order->findAllByDeliveryDate($date);
+		$supermarket = $this->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+		//debug($orders);
+
+		//$orders = $this->Order->searchOrder($date, $time, $supermarket_id);
+		//debug($this->params['named']);
+		//return false;
+		//if ($orders
+		//$this->set(compact('orders'));
+		//$this->set('orders', $orders);
+		$this->set('orders', $this->Paginator->paginate());
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1', 'orderCount'));
+
+		//$this->Order->recursive = 0;
+		} 
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function deliveriesresults($id = null) {
+		$this->layout = 'boots';
+		$date = $this->params['named']['date'];
+		//s$date = $this->Time->dayAsSql($da;te)
+		$date = ($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+		$date1 = $this->params['named']['date'];
+		$time = $this->params['named']['time'];
+		//debug($time);
+		//debug($date);
+		$supermarket_id = $this->params['named']['supermarket_id'];
+		//debug($supermarket_id);
+		$conditions = array(
+			array('Order.delivery_date' => $date),
+			array('Order.delivery_time' => $time),
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.payment_status' => 'paid'),
+			array('Order.delivery_status' => 'false')
+
+		);
+		
+		//$orders = $this->Order->find('all');
+		$orders = $this->Order->find('all', array('conditions' => $conditions));
+		$orderCount = count($orders);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketId($supermarket_id);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketIdAndDeliveryTimeAndDeliveryDate($supermarket_id, $time, $date);
+		//$orders = $this->Order->findAllByDeliveryDate($date);
+		$supermarket = $this->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+		//debug($orders);
+
+		//$orders = $this->Order->searchOrder($date, $time, $supermarket_id);
+		//debug($this->params['named']);
+		//return false;
+		//if ($orders
+		//$this->set(compact('orders'));
+		//$this->set('orders', $orders);
+		$this->set('orders', $this->Paginator->paginate());
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1', 'orderCount'));
+
+		//$this->Order->recursive = 0;
+		} 
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function completedresults($id = null) {
+		$this->layout = 'boots';
+		$date = $this->params['named']['date'];
+		//s$date = $this->Time->dayAsSql($da;te)
+		$date = ($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+		$date1 = $this->params['named']['date'];
+		$time = $this->params['named']['time'];
+		//debug($time);
+		//debug($date);
+		$supermarket_id = $this->params['named']['supermarket_id'];
+		//debug($supermarket_id);
+		$conditions = array(
+			array('Order.delivery_date' => $date),
+			array('Order.delivery_time' => $time),
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.payment_status' => 'paid'),
+			array('Order.delivery_status' => 'delivered')
+
+		);
+		
+		//$orders = $this->Order->find('all');
+		$orders = $this->Order->find('all', array('conditions' => $conditions));
+		$orderCount = count($orders);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketId($supermarket_id);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketIdAndDeliveryTimeAndDeliveryDate($supermarket_id, $time, $date);
+		//$orders = $this->Order->findAllByDeliveryDate($date);
+		$supermarket = $this->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+		//debug($orders);
+
+		//$orders = $this->Order->searchOrder($date, $time, $supermarket_id);
+		//debug($this->params['named']);
+		//return false;
+		//if ($orders
+		//$this->set(compact('orders'));
+		//$this->set('orders', $orders);
+		$this->set('orders', $this->Paginator->paginate());
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1', 'orderCount'));
+
+		//$this->Order->recursive = 0;
+		} 
+
 
 
 }

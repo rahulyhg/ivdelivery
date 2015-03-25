@@ -15,6 +15,8 @@ App::uses('Orders', 'Model');
  */
 class Order extends AppModel {
 
+    //public $displayField = 'last_name';
+
 /**
  * Validation rules
  *
@@ -367,6 +369,9 @@ class Order extends AppModel {
 				//debug($orderItem);
 				//return false;
 				$orderItem['item_id'] = $orderItem['id'];
+				$orderItem['purchased'] = 'false';
+				$orderItem['added_to_order'] = 'false';
+
 				unset($orderItem['id']);
 				if (!($this->ItemsOrder->save($orderItem))) {
 					return false;

@@ -1,7 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-
-	<div class="orders index">
+<div class="orders index">
 
 
 	<h2>
@@ -10,9 +9,9 @@
 	<?php echo $this->Html->link(__('Unpaid'), array('controller' => 'orders', 'action' => 'unpaidresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Item List'), array('controller' => 'itemsorders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
 	<?php echo $this->Html->link(__('Deliveries'), array('controller' => 'orders', 'action' => 'deliveriesresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
-	<?php echo $this->Html->link(__('Completed'), array('controller' => 'orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?><br>
-		<br>
-		<h2><?php echo __('All Orders'); ?> (<?php echo($orderCount); ?>)</h2>
+	<?php echo $this->Html->link(__('Completed'), array('controller' => 'orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?><br><br>
+	
+		<h2><?php echo __('Completed'); ?> (<?php echo($orderCount); ?>)</h2>
 	<table cellpadding="0" cellspacing="0" class="table table-responsive table-bordered table-hover">
 	<thead>
 	<tr>
@@ -43,7 +42,7 @@
 		</td>
 		<td><?php echo h($order['Order']['notes']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-primary')); ?> <br><br>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-primary')); ?><br>
 
 		</td>
 	</tr>
@@ -67,8 +66,7 @@
 <br>
 
 
+</div>
+</div>
+</div>
 
-
-</div>
-</div>
-</div>

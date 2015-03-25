@@ -18,7 +18,7 @@ class ItemsOrdersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'add', 'edit', 'delete', 'addItemsOrder', 'getCount', 'saveItemsOrder', 'readItemsOrder');
+        $this->Auth->allow('index', 'view', 'add', 'edit', 'delete', 'addItemsOrder', 'getCount', 'resultsitemsorders', 'saveItemsOrder', 'readItemsOrder', 'deleteFromCart', 'updatePurchaseStatus', 'updateOrderStatus');
     }
 
 	public function isAuthorized($user) {
@@ -305,6 +305,9 @@ class ItemsOrdersController extends AppController {
 
 public function resultsitemsorders($id = null) {
 		$this->layout = 'boots';
+		$namedparams = $this->params['named'];
+		$this->set('namedparams', $namedparams);		
+
 		$date = $this->params['named']['date'];
 		$date1 = $this->params['named']['date'];
 
@@ -365,7 +368,110 @@ public function resultsitemsorders($id = null) {
 		//$this->set('orders', $orders);
 		//$this->set('orders', $this->Paginator->paginate());
 		//$this->ItemsOrder->recursive = 0;
-		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername'));
+		$supermarket = $this->ItemsOrder->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1'));
+
+		//$this->Order->recursive = 0;
+		} 
+
+
+
+   public function updatePurchaseStatus($id) {
+		//$this->Session->delete('cart');
+		$currentItemsOrder = $this->ItemsOrder->findById($id);
+		$this->ItemsOrder->id = $id;
+		$currentItemsOrder['ItemsOrder']['purchased'] = 'Purchased';
+		if ($this->ItemsOrder->save($currentItemsOrder)) {
+			$this->redirect($this->request->referer());
+		}
+
+	}
+
+	   public function updateOrderStatus($id) {
+		//$this->Session->delete('cart');
+		 $currentItemsOrder = $this->ItemsOrder->findById($id);
+		 $this->ItemsOrder->id = $id;
+		$currentItemsOrder['ItemsOrder']['added_to_order'] = 'Added';
+		if ($this->ItemsOrder->save($currentItemsOrder)) {
+			$this->redirect($this->request->referer());
+		}
+	}
+
+
+
+public function unpaiditemsorders($id = null) {
+		$this->layout = 'boots';
+		$namedparams = $this->params['named'];
+		$this->set('namedparams', $namedparams);		
+
+		$date = $this->params['named']['date'];
+		$date1 = $this->params['named']['date'];
+
+		//s$date = $this->Time->dayAsSql($da;te)
+		$date = ($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+		$time = $this->params['named']['time'];
+		//debug($time);
+		//debug($date);
+		$supermarket_id = $this->params['named']['supermarket_id'];
+		//$supermarket = $this->Order->Supermarket->findById($supermarket_id);
+		//$supername = $supermarket['Supermarket']['name'];
+		//debug($supermarket_id);
+		$conditions = array(
+			array('Order.delivery_date' => $date),
+			array('Order.delivery_time' => $time),
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.payment_status' => 'paid'),
+
+		);
+		
+		//$orders = $this->Order->find('all');
+		$itemsOrders = $this->ItemsOrder->find('all', array('conditions' => $conditions));
+		$this->set('itemsOrders', $this->Paginator->paginate());
+		$this->set('itemsOrders', $itemsOrders);		
+
+		//$itemsOrders = $this->Order->ItemsOrder->find('list', array('conditions' => $conditions));
+		//debug($orders);
+		//return false;
+		/* $allItemsOrders = array();
+
+		foreach ($orders as $order) {
+
+			$currentOrderId = $order['Order']['id'];
+			$currentItemsOrders=$this->ItemsOrder->find('all', array(
+					'conditions' => array('ItemsOrder.order_id' => $currentOrderId)
+				));
+			//debug($currentItemsOrders);
+			//return false;
+			$allItemsOrders=array_merge($allItemsOrders, $currentItemsOrders);
+
+		}
+
+		$itemsOrders = $allItemsOrders; */
+		    /*$usernameGroups = $this->Article->User->find('list', array(
+        'fields' => array('User.username', 'User.first_name', 'User.group')
+    )); */
+		//debug($itemsOrders);
+		//$orders = $this->Order->findAllBySupermarketId($supermarket_id);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketIdAndDeliveryTimeAndDeliveryDate($supermarket_id, $time, $date);
+		//$orders = $this->Order->findAllByDeliveryDate($date);
+
+		//debug($orders);
+
+		//$orders = $this->Order->searchOrder($date, $time, $supermarket_id);
+		//debug($this->params['named']);
+		//return false;
+		//if ($orders
+		//$this->set(compact('orders'));
+		//$this->set('orders', $orders);
+		//$this->set('orders', $this->Paginator->paginate());
+		//$this->ItemsOrder->recursive = 0;
+		$supermarket = $this->ItemsOrder->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1'));
 
 		//$this->Order->recursive = 0;
 		} 

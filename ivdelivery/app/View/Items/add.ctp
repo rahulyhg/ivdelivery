@@ -56,7 +56,7 @@
 <?php
 echo $this->Form->submit(
     'Add Item', 
-    array('class' => 'btn btn-primary')
+    array('class' => 'btn btn-primary btn-lg')
 );
 ?>
 <br>
