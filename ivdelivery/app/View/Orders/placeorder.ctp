@@ -34,6 +34,28 @@
 	max-width: 265px !important;
 
 }
+#title1 {
+	font-color: black !important;
+	color: #FFF;
+	text-shadow: none;
+	font-size: 60px;
+	line-height: 60px;
+	font-weight: 700;
+	font-family: Montserrat, sans-serif;
+	background-color: rgba(0, 0, 0, 0);
+	text-decoration: none;
+	text-transform: uppercase;
+	border-width: 0px;
+	border-color: #000;
+	border-style: none;
+	text-shadow: -1px 0 1px #000;
+}
+#supermarketname {
+	background-image: url('../img/bg1.jpg') no-repeat top center;
+	background-color: #FA8072 !important;
+
+
+}
 </style>
 
 
@@ -52,10 +74,12 @@
 
 <?php echo $this->Form->create('Order'); ?>
 	<?php //$this->Html->image($supermarket['Supermarket']['img'], array('width'=>'200px')); ?>
+<div id="supermarketname">
 
-<h1><?php echo h($supermarket['Supermarket']['name']); ?></h1>
+<h1 id="title1"><?php echo h($supermarket['Supermarket']['name']); ?></h1>
+</div>
+
 <br>
-
 <ul class="nav nav-pills">
 	<?php //debug($categories); ?>
 	<?php foreach ($categories as $category) { ?>
@@ -157,8 +181,8 @@
 		<?php 
 		echo('<tr><td id="controls">'); ?>
   		<?php //echo $this->Html->link(__('x'), array('controller' => 'ItemsOrders', 'action' => 'deleteFromCart', $cartItem['id']), array('class' => 'btn btn-danger btn-lg')); ?> 
-				<?php echo $this->Html->link(__('-'), array('controller' => 'ItemsOrders', 'action' => 'removeItemsOrder', $cartItem['id']), array('class' => 'btn btn-primary btn-sm')); ?> 
 				<?php echo $this->Html->link(__('+'), array('controller' => 'ItemsOrders', 'action' => 'addItemsOrder', $cartItem['id']), array('class' => 'btn btn-primary btn-sm')); ?> 
+				<?php echo $this->Html->link(__('-'), array('controller' => 'ItemsOrders', 'action' => 'removeItemsOrder', $cartItem['id']), array('class' => 'btn btn-primary btn-sm')); ?> 
 	<?php
 		echo('</td><td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity']); ?><br>
 

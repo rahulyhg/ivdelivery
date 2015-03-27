@@ -17,74 +17,100 @@
 $cakeDescription = __d('cake_dev', 'College Delivers');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<?php echo $this->Html->charset(); ?>
-	<title>
-		<?php echo $cakeDescription ?>:
-		<?php echo $this->fetch('title'); ?>
-	</title>
-	<?php
-		echo $this->Html->meta('icon');
-		echo $this->Html->css('boots');
+  <style>
+  .top-nav-collapse {
+    background-color: #FA8072 !important;
 
-		echo $this->fetch('meta');
-		echo $this->fetch('script');
-	?>
+  }
+  footer {
+    background-color: #FA8072 !important;
 
-<style>
-#navbar1 {
-	//position: fixed !important;
+  }
+
+    #brand {
+    color: #000;
+
+  }
+
+.navbar-custom.top-nav-collapse .navbar-brand {
+  color: #fff;
+
 }
-</style>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Latest compiled and minified CSS
-	Four bootstrap links
- -->
+  .navbar navbar-custom navbar-fixed-top{
+    background-color: #FA8072 !important;
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  }
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Squadfree - Free bootstrap 3 one page template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <?php echo $this->Html->css('nhbootstrap.min.css'); ?>
+
+    <!-- Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="css/animate.css" rel="stylesheet" />
+    <?php echo $this->Html->css('nhanimate.css'); ?>
+    <!-- Squad theme CSS -->
+    <link href="css/style.css" rel="stylesheet">
+      <?php echo $this->Html->css('nhstyle.css'); ?>
+  <link href="color/default.css" rel="stylesheet">
+  <?php //echo $this->Html->color('default.css'); ?>
 
 </head>
-<body>
 
-<div class="navbar navbar-inverse navbar-fixed-top" id="navbar1">
-    <div class="container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <?php echo $this->Html->link(__('College Delivers'), array('controller' => 'supermarkets', 'action' => 'home'), array('class' => 'navbar-brand')); ?> 
-        </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
-                <ul class="nav navbar-nav">
-		<li><?php echo $this->Html->link(__('About'), array('controller' => 'supermarkets', 'action' => 'about')); ?> </li>
-		<li><?php echo $this->Html->link(__('Pricing'), array('controller' => 'supermarkets', 'action' => 'pricing')); ?> </li>
-		<li><?php echo $this->Html->link(__('Contact Us'), array('controller' => 'supermarkets', 'action' => 'contactus')); ?> </li>
-                </ul>
-<ul class="nav pull-right">
-          <li class="dropdown" id="menuLogin">
-                <?php echo $this->Html->link(__('Profile'), array('controller' => 'Users', 'action' => 'view', $authUser['id']), array('class' => 'btn btn-primary btn-lg')); ?>
-                      </li>
-        </ul>
+  <!-- Preloader -->
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <h1 id="brand">Food Swoop</h1>
+                </a>
             </div>
 
-    </div>
-</div>
-
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+      <ul class="nav navbar-nav">
+        <li><?php echo $this->Html->link(__('Home'), array('controller' => 'supermarkets', 'action' => 'home', $authUser['id'])); ?></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+          </ul>
+        </li>
+        <li><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view', $authUser['id'])); ?></li>
+        <li><?php echo $this->Html->link(__('Log Out'), array('controller' => 'users', 'action' => 'index', $authUser['id'])); ?></li>
+      </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 <br><br><br>
 <div class="container">
 
   <div id="content">
+    <br><br><br>
   			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
@@ -92,4 +118,30 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </div>
 	<?php //echo $this->element('sql_dump'); ?>
 </body>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+          <div class="wow shake" data-wow-delay="0.4s">
+          <div class="page-scroll marginbot-30">
+            <a href="#intro" id="totop" class="btn btn-circle">
+              <i class="fa fa-angle-double-up animated"></i>
+            </a>
+          </div>
+          </div>
+          <p>&copy;Copyright 2014 - Squad. All rights reserved.</p>
+        </div>
+      </div>  
+    </div>
+  </footer>
+    <?php
+    echo $this->Html->script('nhjquery.min');
+    echo $this->Html->script('nhbootstrap.min.js');
+    echo $this->Html->script('nhjquery.easing.min');
+    echo $this->Html->script('nhjquery.scrollTo');
+    echo $this->Html->script('nhwow.min');
+    echo $this->Html->script('nhcustom');
+
+    ?>
 </html>

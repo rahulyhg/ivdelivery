@@ -22,6 +22,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html lang="en">
 
 <head>
+	<style>
+	.top-nav-collapse {
+		background-color: #FA8072 !important;
+
+	}
+	footer {
+		background-color: #FA8072 !important;
+
+	}
+	</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -65,18 +75,19 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#intro">Home</a></li>
+        <li class="active"><?php echo $this->Html->link(__('Home'), array('controller' => 'supermarkets', 'action' => 'home', $authUser['id'])); ?></li>
         <li><a href="#about">About</a></li>
 		<li><a href="#service">Service</a></li>
 		<li><a href="#contact">Contact</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
-            <li><a href="#">Example menu</a></li>
+            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
           </ul>
         </li>
+        <li><?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'view', $authUser['id'])); ?></li>
       </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -128,8 +139,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="wow bounceInUp" data-wow-delay="0.2s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Michael Zhang</h5>
-                        <p class="subtitle">The Plug</p>
+						<h5>Scott Alexander</h5>
+                        <p class="subtitle">Co-Founder / Developer</p>
                         <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
                     </div>
                 </div>
@@ -139,8 +150,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="wow bounceInUp" data-wow-delay="0.5s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Parker Webster</h5>
-                        <p class="subtitle">The Go To</p>
+						<h5>Michael Zhang</h5>
+                        <p class="subtitle">Co-Founder / Panda</p>
                         <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
@@ -152,7 +163,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Charlie Bond</h5>
-                        <p class="subtitle">Mole Guru</p>
+                        <p class="subtitle">Co-Founder / Dank</p>
                         <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
@@ -163,8 +174,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="wow bounceInUp" data-wow-delay="1s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Scott Alexander</h5>
-                        <p class="subtitle">Developer</p>
+						<h5>Parker Webster</h5>
+                        <p class="subtitle">Co-Founder / Delivery</p>
                         <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
@@ -205,9 +216,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <div class="col-sm-4 col-md-4">
 				<div class="wow fadeInLeft" data-wow-delay="0.2s">
                 <div class="service-box">
-					<div class="service-icon">
+					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-1.png" alt="" />
-					</div>
+					</div>-->
 					<div class="service-desc">
 						<h3>Albertsons</h3>
 						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
@@ -220,9 +231,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<div class="col-sm-4 col-md-4">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
-					<div class="service-icon">
+					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-2.png" alt="" />
-					</div>
+					</div>-->
 					<div class="service-desc">
 						<h3>Costco</h3>
 						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
@@ -235,9 +246,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<div class="col-sm-4 col-md-4">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
-					<div class="service-icon">
+					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-3.png" alt="" />
-					</div>
+					</div>-->
 					<div class="service-desc">
 						<h3>Trader Joes</h3>
 						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
