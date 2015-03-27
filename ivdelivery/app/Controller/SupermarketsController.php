@@ -124,7 +124,7 @@ class SupermarketsController extends AppController {
  * @return void
  */
 	public function home() {
- 		$this->layout = 'home';
+ 		$this->layout = 'newhome';
 		$this->Supermarket->recursive = 0;
 		$this->set('supermarkets', $this->Paginator->paginate());
 	}
