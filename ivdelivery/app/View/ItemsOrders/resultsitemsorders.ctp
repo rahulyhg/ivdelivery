@@ -8,9 +8,9 @@
 
 	//echo $this->Html->link(__('Back to search results'), array('controller' => 'orders', 'action' => 'searchresults', '?' => $namedparams), array('class' => 'btn btn-default')); ?> 
 <h2><?php echo __('Delivery: ' . $supername . ' ' . $time . ', ' . $date); ?></h2> 
- 	<?php echo $this->Html->link(__('All Orders'), array('controller' => 'orders', 'action' => 'searchresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
+ 	<?php //echo $this->Html->link(__('All Orders'), array('controller' => 'orders', 'action' => 'searchresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Unpaid'), array('controller' => 'orders', 'action' => 'unpaidresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
-	<?php echo $this->Html->link(__('Item List'), array('controller' => 'itemsorders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
+	<?php echo $this->Html->link(__('Grocery List'), array('controller' => 'itemsorders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
 	<?php echo $this->Html->link(__('Deliveries'), array('controller' => 'orders', 'action' => 'deliveriesresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Completed'), array('controller' => 'orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?><br><br>
 
@@ -46,8 +46,15 @@
 		<td><?php echo h($itemsOrder['ItemsOrder']['purchased']); ?>&nbsp;</td>
 
 		<td class="actions">
-			<?php echo $this->Html->link(__('Purchased'), array('action' => 'updatePurchaseStatus', $itemsOrder['ItemsOrder']['id']), array('class' => 'btn btn-primary')); ?><br><br>
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $itemsOrder['ItemsOrder']['id']), array('class' => 'btn btn-warning')); ?><br><br>
+			<?php if (!($itemsOrder['ItemsOrder']['purchased'] == "Purchased")) { ?>
+			<?php echo $this->Html->link(__('Purchase'), array('action' => 'updatePurchaseStatus', $itemsOrder['ItemsOrder']['id']), array('class' => 'btn btn-success')); ?>
+			<?php } else { ?>
+
+			<?php //echo $this->Html->link(__('Purchased'), array('action' => 'updatePurchaseStatus', $itemsOrder['ItemsOrder']['id']), array('class' => 'btn btn-danger')); ?>
+
+			<?php } ?>
+			<br><br>
+			<?php //echo $this->Html->link(__('View'), array('action' => 'view', $itemsOrder['ItemsOrder']['id']), array('class' => 'btn btn-warning')); ?>
 
 			<?php //echo $this->Html->link(__('Edit'), array('action' => 'edit', $itemsOrder['ItemsOrder']['id'])); ?>
 		</td>

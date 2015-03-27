@@ -81,6 +81,7 @@ class ItemsOrdersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+        	$this->layout = 'boots';
 		if (!$this->ItemsOrder->exists($id)) {
 			throw new NotFoundException(__('Invalid items order'));
 		}
@@ -106,16 +107,17 @@ class ItemsOrdersController extends AppController {
  */
 	public function delete($id = null) {
 		$this->ItemsOrder->id = $id;
-		if (!$this->OrdersItem->exists()) {
+		if (!$this->ItemsOrder->exists()) {
 			throw new NotFoundException(__('Invalid orders item'));
 		}
-		$this->request->allowMethod('post', 'delete');
+		//$this->request->allowMethod('post', 'delete');
 		if ($this->ItemsOrder->delete()) {
 			$this->Session->setFlash(__('The orders item has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The orders item could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		$this->redirect($this->request->referer());
+
 	}
 
    /*
@@ -323,7 +325,9 @@ public function resultsitemsorders($id = null) {
 		$conditions = array(
 			array('Order.delivery_date' => $date),
 			array('Order.delivery_time' => $time),
-			array('Order.supermarket_id' => $supermarket_id)
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.payment_status' => 'paid'),
+			array('ItemsOrder.canceled' => '')
 		);
 		
 		//$orders = $this->Order->find('all');
@@ -423,6 +427,7 @@ public function unpaiditemsorders($id = null) {
 			array('Order.delivery_time' => $time),
 			array('Order.supermarket_id' => $supermarket_id),
 			array('Order.payment_status' => 'paid'),
+			array('ItemsOrder.canceled' => '')
 
 		);
 		
@@ -477,7 +482,34 @@ public function unpaiditemsorders($id = null) {
 		} 
 
 
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function admindelete($id = null) {
+		$params = $this->params['named'];
+		$itemorderid = $params['itemorderid'];
+		$orderid = $params['orderid'];
+		//debug($params);
+		//return false;
+		$this->ItemsOrder->id = $itemorderid;
+		if (!$this->ItemsOrder->exists()) {
+			throw new NotFoundException(__('Invalid orders item'));
+		}
+		//$this->request->allowMethod('post', 'delete');
+		if ($this->ItemsOrder->delete()) {
+			$this->Session->setFlash(__('The orders item has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The orders item could not be deleted. Please, try again.'));
+		}
+		$this->redirect($this->request->referer());	
 
+
+
+	}
 
 
 

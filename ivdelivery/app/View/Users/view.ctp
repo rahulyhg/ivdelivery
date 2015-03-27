@@ -100,7 +100,7 @@
 
 	<h3><?php echo __('Related Orders'); ?></h3>
 	<?php if (!empty($user['Order'])): ?>
-	<table cellpadding = "0" cellspacing = "0" class="table">
+	<table cellpadding = "0" cellspacing = "0" class="table table-responsive table-bordered table-hover">
 	<tr>
 
 		<th><?php echo __('Created'); ?></th>
@@ -123,7 +123,7 @@
 			<td><?php echo $order['driver_id']; ?></td>
 			<td><?php echo $order['processing_fee']; ?></td>
 			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'orders', 'action' => 'view', $order['id'])); ?>	
+				<?php echo $this->Html->link(__('View'), array('controller' => 'orders', 'action' => 'view', $order['id']), array('class' => 'btn btn-primary')); ?><br><br>	
 			</td>
 		</tr>
 	<?php endforeach; ?>

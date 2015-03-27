@@ -1,28 +1,29 @@
 <div class="row">
 	<div class="col-lg-12">
-
-	<div class="orders index">
+<div class="orders index">
 
 
 	<h2>
 	<?php echo __('Delivery: ' . $supername . ' ' . $time . ', ' . $date); ?></h2> 
- 	<?php echo $this->Html->link(__('All Orders'), array('controller' => 'orders', 'action' => 'searchresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
+ 	<?php //echo $this->Html->link(__('All Orders'), array('controller' => 'orders', 'action' => 'searchresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Unpaid'), array('controller' => 'orders', 'action' => 'unpaidresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
-	<?php echo $this->Html->link(__('Item List'), array('controller' => 'itemsorders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
+	<?php echo $this->Html->link(__('Grocery List'), array('controller' => 'itemsorders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
 	<?php echo $this->Html->link(__('Deliveries'), array('controller' => 'orders', 'action' => 'deliveriesresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
-	<?php echo $this->Html->link(__('Completed'), array('controller' => 'orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?><br>
+	<?php echo $this->Html->link(__('Completed'), array('controller' => 'orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
+	<br>
 		<br>
-		<h2><?php echo __('All Orders'); ?> (<?php echo($orderCount); ?>)</h2>
+	
+		<h2><?php echo __('Cancellations'); ?> (<?php echo($orderCount); ?>)</h2>
 	<table cellpadding="0" cellspacing="0" class="table table-responsive table-bordered table-hover">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('order'); ?></th>
 			<th><?php echo $this->Paginator->sort('delivery_charge'); ?></th>
 			<th><?php echo $this->Paginator->sort('total'); ?></th>
-			<th><?php echo $this->Paginator->sort('driver_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('notes'); ?></th>
 			<th><?php echo $this->Paginator->sort('payment_status'); ?></th>
 			<th><?php echo $this->Paginator->sort('delivery_status'); ?></th>
+			<th><?php echo $this->Paginator->sort('driver_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('notes'); ?></th>
 
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -35,14 +36,15 @@
 		</td>
 		<td>$<?php echo h($order['Order']['delivery_charge']); ?>&nbsp;</td>
 		<td>$<?php echo h($order['Order']['total']); ?>&nbsp;</td>
+		<td><?php echo h($order['Order']['payment_status']); ?>&nbsp;</td>
+		<td><?php echo h($order['Order']['delivery_status']); ?>&nbsp;</td>
+
 		<td>
 			<?php echo $this->Html->link($order['Driver']['name'], array('controller' => 'drivers', 'action' => 'view', $order['Driver']['id'])); ?>
 		</td>
 		<td><?php echo h($order['Order']['notes']); ?>&nbsp;</td>
-		<td><?php echo h($order['Order']['payment_status']); ?>&nbsp;</td>
-		<td><?php echo h($order['Order']['delivery_status']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-primary')); ?> <br><br>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id']), array('class' => 'btn btn-primary')); ?><br>
 
 		</td>
 	</tr>
@@ -66,8 +68,7 @@
 <br>
 
 
+</div>
+</div>
+</div>
 
-
-</div>
-</div>
-</div>

@@ -144,7 +144,9 @@ class OrdersController extends AppController {
 		if (!$this->Supermarket->exists($id)) {
 			throw new NotFoundException(__('Invalid supermarket'));
 		}
-		$options = array('conditions' => array('Supermarket.' . $this->Supermarket->primaryKey => $id));
+		$options = array('conditions' => array(
+				'Supermarket.' . $this->Supermarket->primaryKey => $id,
+				));
 		$this->set('supermarket', $this->Supermarket->find('first', $options));
 		
 		$users = $this->Order->User->find('list');
@@ -153,11 +155,56 @@ class OrdersController extends AppController {
 		//debug($currentdriver);
 		///debug($drivers);
 		$items = $this->Order->Item->find('list');
+		//debug($items);
+
+		$categories = $this->Order->Item->Category->find('list');
+
+		$this->set('categories', $categories);		
+		$items1 = $this->Order->Item->findAllBySupermarketId($id);
+		//sdebug($items1);
+		$categories1 = array();
+		$catCount=0;
+		foreach ($categories as $catId => $catName) {
+		        $categories1[$catCount]['id'] = $catId;
+		        $categories1[$catCount]['name'] = $catName;
+
+		        $catCount = $catCount +1 ;
+		}		
+
+		$this->set('categoriesInfo', $categories1);		
+
+		//return false;
+		//debug($categories1);
+		//return false;
+		//$items1 = array();
+		//$items1[$itemCount]= $this->Order->Item->find('all', array(
+
+		$itemCount=0;
+		//foreach ($categories1 as $category) {
+				//debug($category);
+				//debug($categories1[$itemCount]['id']);
+				//$items1[$itemCount]= $this->Order->Item->find('all', array(
+					//'conditions' => array(
+						//array('Item.supermarket_id' => $id),
+						//array('Item.category_id' => $category['id'])
+						//)
+					//));
+				//$itemCount = $itemCount + 1;
+		//}
+		//debug($items1);
+		//$catCount=count($categories);
+		$itemsByCategory=array();
+		//reset($categories);
+		//debug($categories);
+		//debug($catCount);
+
+
+
 		$authuserid = $this->Auth->user('id');
 		//$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
-         	$cartData = $this->Session->read('cart');
+        $cartData = $this->Session->read('cart');
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
 
@@ -442,7 +489,7 @@ class OrdersController extends AppController {
 			$date = $order['Order']['delivery_date'];
 			$time = $order['Order']['delivery_time'];
 			$supermarket_id = $order['Order']['supermarket'];
-			return $this->redirect(array('action' => 'searchresults', 'date' => $date, 'time' => $time, 'supermarket_id' => $supermarket_id));
+			return $this->redirect(array('action' => 'unpaidresults', 'date' => $date, 'time' => $time, 'supermarket_id' => $supermarket_id));
 		}
 	} 
 
@@ -743,7 +790,197 @@ class OrdersController extends AppController {
 			array('Order.delivery_time' => $time),
 			array('Order.supermarket_id' => $supermarket_id),
 			array('Order.payment_status' => 'paid'),
-			array('Order.delivery_status' => 'delivered')
+			array('Order.delivery_status' => 'delivered'),
+			array('Order.canceled' => '')
+
+
+		);
+		
+		//$orders = $this->Order->find('all');
+		$orders = $this->Order->find('all', array('conditions' => $conditions));
+		$orderCount = count($orders);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketId($supermarket_id);
+		//debug($orders);
+		//$orders = $this->Order->findAllBySupermarketIdAndDeliveryTimeAndDeliveryDate($supermarket_id, $time, $date);
+		//$orders = $this->Order->findAllByDeliveryDate($date);
+		$supermarket = $this->Order->Supermarket->findById($supermarket_id);
+		$supername = $supermarket['Supermarket']['name'];
+		//debug($orders);
+
+		//$orders = $this->Order->searchOrder($date, $time, $supermarket_id);
+		//debug($this->params['named']);
+		//return false;
+		//if ($orders
+		//$this->set(compact('orders'));
+		//$this->set('orders', $orders);
+		$this->set('orders', $this->Paginator->paginate());
+		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1', 'orderCount'));
+
+		//$this->Order->recursive = 0;
+		} 
+
+
+
+    public function calculatevalue($id = null) {
+		$this->layout = 'boots';	
+
+		$params = $this->params['named'];
+		$itemorderid = $params['itemorderid'];
+		$orderid = $params['orderid'];
+		//debug($params);
+		//return false;
+		$this->Order->ItemsOrder->id = $itemorderid;
+		if (!$this->Order->ItemsOrder->exists()) {
+			throw new NotFoundException(__('Invalid items order'));
+		}
+
+		//$this->Order->ItemsOrder->canceled = 'true';
+		$currentItemsOrder = $this->Order->ItemsOrder->findById($itemorderid);
+		$currentItemsOrder['ItemsOrder']['canceled'] = 'true';
+		//return false;
+
+		//$this->request->allowMethod('post', 'delete');
+		if ($this->Order->ItemsOrder->save($currentItemsOrder)) {
+			$this->Session->setFlash(__('The items order has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The item order could not be deleted. Please, try again.'));
+		}
+
+
+		$this->Order->orderid = $id;
+		$currentOrder = $this->Order->findById($orderid);
+		//debug($currentOrder);
+		$total = 0;
+		$extraDeliveryFees = 0;
+	
+		if ($currentOrder['Item'] == null) {
+			//$currentOrder['Order']['item_total'] = 0;
+			//$currentOrder['Order']['delivery_charge'] = 0;
+			//$currentOrder['Order']['total'] = 0;
+			$currentOrder['Order']['canceled'] = 'true';
+
+			if ($this->Order->save($currentOrder)) {		
+				$this->Session->setFlash(__('Order updated'));
+				$this->redirect($this->request->referer());		
+
+			} else {
+				$this->Session->setFlash(__('Order could not update'));
+				$this->redirect($this->request->referer());	
+			}
+		}
+
+		//debug($currentOrder);
+		//return false;
+
+		$itemCount = 0;
+		foreach ($currentOrder['Item'] as $item) {
+				if (!($item['ItemsOrder']['canceled'] == 'true')) { 
+					$total = ($total + $item['ItemsOrder']['total']);	
+					$deliveryFees = ($extraDeliveryFees + $item['ItemsOrder']['delivery_fee']);
+					$itemCount = $itemCount + 1;
+				}
+		}
+		//$currentOrder['Order']['processing_fee'] = $total;
+
+		$groceryTotal = $total;
+		$itemcount=$itemCount;
+		if ($itemcount == 0) {
+			$currentOrder['Order']['item_total'] = 0;
+			$currentOrder['Order']['delivery_charge'] = 0;
+			$currentOrder['Order']['total'] = 0;
+			$currentOrder['Order']['canceled'] = 'true';
+
+			if ($this->Order->save($currentOrder)) {		
+				$this->Session->setFlash(__('Order updated'));
+				$this->redirect($this->request->referer());		
+
+			} else {
+				$this->Session->setFlash(__('Order could not update'));
+				$this->redirect($this->request->referer());	
+			}
+		}
+
+		if ($itemCount <= 3) {
+			$deliveryRate = 5;
+			$deliveryCost=($deliveryRate+$deliveryFees);
+			$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
+		} elseif ($itemCount > 3 && $itemCount <= 10) {
+			$deliveryRate = 10;
+			$deliveryCost=($deliveryRate+$deliveryFees);
+			$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
+
+		}  elseif ($itemCount > 10 && $itemCount <= 20) {
+			$deliveryRate = 15;
+			if ($groceryTotal >= 200) {
+				$smallCut = ($groceryTotal*.1);
+				$deliveryCost = ($deliveryFees+$smallCut);
+				$grandTotal = ($groceryTotal+$deliveryCost);
+			} else {
+				$deliveryCost=($deliveryRate+$deliveryFees);
+				$grandTotal = ($groceryTotal+$deliveryCost);
+
+			}
+
+		}  elseif ($itemCount > 20) {
+			$deliveryRate = 20;
+			if ($groceryTotal >= 200) {
+				$smallCut = ($groceryTotal*.1);
+				$deliveryCost = ($deliveryFees+$smallCut);
+				$grandTotal = ($groceryTotal+$deliveryCost);
+			} else {
+				$deliveryCost=($deliveryRate+$deliveryFees);
+				$grandTotal = ($groceryTotal+$deliveryCost);
+			}
+		}
+
+		$currentOrder['Order']['item_total'] = $total;
+		$currentOrder['Order']['delivery_charge'] = $deliveryCost;
+		$currentOrder['Order']['total'] = $grandTotal;
+
+		if ($this->Order->save($currentOrder)) {		
+			$this->Session->setFlash(__('Order updated'));
+			$this->redirect($this->request->referer());		
+
+		} else {
+			$this->Session->setFlash(__('Order could not update'));
+			$this->redirect($this->request->referer());	
+		}
+
+
+		//$this->Order->findAllByDeliveryTime($date, $time, $supermarket_id);
+
+		//$this->set('orders', $orders);
+		//$this->Order->recursive = 0;
+
+		//$this->redirect(array(');
+		//$this->redirect($this->request->referer());
+
+	}
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function canceledresults($id = null) {
+		$this->layout = 'boots';
+		$date = $this->params['named']['date'];
+		//s$date = $this->Time->dayAsSql($da;te)
+		$date = ($date['year'] . '-' . $date['month'] . '-' . $date['day']);
+		$date1 = $this->params['named']['date'];
+		$time = $this->params['named']['time'];
+		//debug($time);
+		//debug($date);
+		$supermarket_id = $this->params['named']['supermarket_id'];
+		//debug($supermarket_id);
+		$conditions = array(
+			array('Order.delivery_date' => $date),
+			array('Order.delivery_time' => $time),
+			array('Order.supermarket_id' => $supermarket_id),
+			array('Order.canceled' => 'true')
+
 
 		);
 		
