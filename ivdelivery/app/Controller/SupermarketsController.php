@@ -18,7 +18,7 @@ class SupermarketsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'choosemarket', 'home');
+        $this->Auth->allow('index', 'view', 'home');
     }
 
 	public function isAuthorized($user) {

@@ -55,7 +55,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	}
 	#contact {
 		  color: #fff;
-		  background-image: url('../img/img7.jpg') !important;
+		  background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;
 
 	}
 
@@ -72,14 +72,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php	echo $this->Html->css('nhbootstrap.min.css'); ?>
 
     <!-- Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $this->webroot; ?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     		<?php	//echo $this->Html->css('font-awesome.css'); ?>
 
 		<?php	echo $this->Html->css('nhanimate.css'); ?>
     <!-- Squad theme CSS -->
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
-	<link href="../color/default.css" rel="stylesheet">
-	<?php	//echo $this->Html->color('default.css'); ?>
+	<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">
 
 </head>
 
@@ -107,7 +106,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <li class="active"><?php echo $this->Html->link(__('Home'), array('controller' => 'Supermarkets', 'action' => 'home')); ?></li>
         <li><a href="#about">About</a></li>
 		<li><a href="#service">Service</a></li>
-		<li><a href="#contact">Contact</a></li>
+		<li><a href="#contact">Sign Up</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -137,19 +136,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			                    echo '</div>';
 			                    echo '<div class="form-group">';
 			                            echo $this->Form->input('User.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password'));
-			                    echo '</div>';
+			                    echo '<br></div>';
 								echo $this->Form->submit(
 								    'Sign In', 
-								    array('class' => 'btn btn-success btn-lg')
+								    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')
 								);
 			                ?>
                               </div>
                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                           <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'users', 'action' => 'signup', $authUser['id']), array('class' => 'btn btn-primary', 'id' => 'signup')); ?>
-                           
                         </li>
                      </ul>
                   </li>
@@ -400,7 +394,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					<div class="col-lg-8 col-lg-offset-2">
 						<div class="wow bounceInDown" data-wow-delay="0.4s">
 						<div class="section-heading">
-						<h2>Sign Up Now</h2>
+						<h2>Sign Up!</h2>
 						<i class="fa fa-2x fa-angle-down"></i>
 
 						</div>
@@ -416,28 +410,56 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				</div>
 			</div>
 		    <div class="row">
-		        <div class="col-lg-8">
-		            <div class="boxed-grey">
+		        <div class="col-lg-8 col-lg-offset-2">
+		        			<div class="wow fadeInUp" data-wow-delay="0.2s">
+							<div class="users form" id="signupform">
+							<?php echo $this->Form->create('User', array(
+							    'inputDefaults' => array(
+							        'class' => 'form-control',
+							    )
+							)); ?>
+								<fieldset>
+								<table class="table">
+								<tr><td>
+								<?php
+									echo $this->Form->hidden('type', array(
+										'value' => 'customer'	
+									));
+									echo $this->Form->input('first_name');
+								?>
+								</td><td>
+								<?php
+									echo $this->Form->input('last_name');
+								?></td></tr><tr><td><?php
+									echo $this->Form->input('phone');
+								?></td><td><?php
 
-		            </div>
+									echo $this->Form->input('street');
+								?></td></tr><tr><td><?php
+
+									echo $this->Form->input('street_2');
+								?></td><td><?php
+
+									echo $this->Form->input('zip');
+								?></td></tr><tr><td><?php
+
+									echo $this->Form->input('email');
+								?></td><td><?php
+
+									echo $this->Form->input('password');
+
+								?></td></tr></table>
+								</fieldset><br><br>
+							<?php
+							echo $this->Form->submit(
+							    'Submit', 
+							    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')
+							);
+							?>
+							</div>
+						</div>
 		        </div>
-			
-				<div class="col-lg-4">
-					<div class="widget-contact">
-						<h5>Main Office</h5>
-						
-						  <strong>We're on social networks</strong><br>
-		                       	<ul class="company-social">
-		                            <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-		                            <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-		                            <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-		                            <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-		                        </ul>	
-						</address>					
-					
-					</div>	
-				</div>
-		    </div>	
+			</div>
 
 		</div>
 	</section>

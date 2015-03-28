@@ -27,7 +27,7 @@ class UsersController extends AppController {
         //$this->layout = 'boots';
 	    if ($this->request->is('post')) {
 		if ($this->Auth->login()) {
-		    return $this->redirect($this->Auth->redirectUrl());
+		    return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'index'));
 		} else {
 				//return false;
 			$this->Session->setFlash(__('Auth fialed'));
