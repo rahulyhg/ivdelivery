@@ -18,7 +18,7 @@ class SupermarketsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'choosemarket');
+        $this->Auth->allow('index', 'view', 'choosemarket', 'home');
     }
 
 	public function isAuthorized($user) {
@@ -127,6 +127,16 @@ class SupermarketsController extends AppController {
  		$this->layout = 'newhome';
 		$this->Supermarket->recursive = 0;
 		$this->set('supermarkets', $this->Paginator->paginate());
+			    if ($this->request->is('post')) {
+		if ($this->Auth->login()) {
+		    $this->redirect($this->request->referer());
+		} else {
+				//return false;
+			$this->Session->setFlash(__('Auth fialed'));
+		}
+		//debug($this->request->data);
+		$this->Session->setFlash(__('Invalid username or password, try again'));
+	    }
 	}
 
 /**

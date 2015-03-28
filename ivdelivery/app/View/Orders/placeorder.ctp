@@ -34,33 +34,14 @@
 	max-width: 265px !important;
 
 }
-/*#title1 {
-	font-color: black !important;
-	color: #FFF;
-	text-shadow: none;
-	font-size: 60px;
-	line-height: 60px;
-	font-weight: 700;
-	font-family: Montserrat, sans-serif;
-	background-color: rgba(0, 0, 0, 0);
-	text-decoration: none;
-	text-transform: uppercase;
-	border-width: 0px;
-	border-color: #000;
-	border-style: none;
-	text-shadow: -1px 0 1px #000;
-}*/
+
 #title1 {
 
 	font-family: Montserrat, sans-serif;
 
 } 
-
-
-
-body {
-  background: url(../img/bg3.jpg) no-repeat top center !important;
-
+#category { 
+	font-size: 16px !important;
 }
 
 </style>
@@ -97,7 +78,7 @@ body {
 	<?php 		//debug($categoriesInfo); ?>
 <br>
 	<?php foreach($categoriesInfo as $category) { ?>
-	<h3><?php echo($category['name']); ?></h3>
+	<h3 id="category"><?php echo($category['name']); ?></h3>
 
 	<?php if (!empty($supermarket['Item'])): ?>
 	<table class="table table-hover" cellpadding = "0" cellspacing = "0">
@@ -156,7 +137,7 @@ body {
 
 <?php endif; ?>
 <?php } ?>
-<br>
+<br><br><br><br><br>
 </div>
 
 

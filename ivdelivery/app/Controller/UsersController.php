@@ -23,11 +23,13 @@ class UsersController extends AppController {
 	}
 
 	public function login() {
-        $this->layout = 'boots';
+		//return false;
+        //$this->layout = 'boots';
 	    if ($this->request->is('post')) {
 		if ($this->Auth->login()) {
 		    return $this->redirect($this->Auth->redirectUrl());
 		} else {
+				//return false;
 			$this->Session->setFlash(__('Auth fialed'));
 		}
 		//debug($this->request->data);

@@ -35,31 +35,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		color: #fff !important;
 
 	}
-	#story {
-		font-size: 24px !important;
-
-	}
-	#mission{
-		font-weight: normal !important;
-
-	}
-	#servicedescription {
-		font-size: 22px !important;
-
-	}
-
-	#btnContactUs {
-		background-color: #26BBA4 !important;
-		border-color: #23ab96 !important;
-		color: #fff;
-	}
-	#contact {
-		  color: #fff;
-		  background-image: url('../img/img7.jpg') !important;
-
-	}
-
-
 	</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,13 +47,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php	echo $this->Html->css('nhbootstrap.min.css'); ?>
 
     <!-- Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    		<?php	//echo $this->Html->css('font-awesome.css'); ?>
-
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<?php	echo $this->Html->css('nhanimate.css'); ?>
     <!-- Squad theme CSS -->
+    <link href="css/style.css" rel="stylesheet">
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
-	<link href="../color/default.css" rel="stylesheet">
+	<link href="color/default.css" rel="stylesheet">
 	<?php	//echo $this->Html->color('default.css'); ?>
 
 </head>
@@ -104,16 +78,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><?php echo $this->Html->link(__('Home'), array('controller' => 'Supermarkets', 'action' => 'home')); ?></li>
+        <li class="active"><?php echo $this->Html->link(__('Home'), array('controller' => 'supermarkets', 'action' => 'home')); ?></li>
         <li><a href="#about">About</a></li>
 		<li><a href="#service">Service</a></li>
 		<li><a href="#contact">Contact</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a')); ?></li>
-            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
-            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
           </ul>
         </li>
 
@@ -213,12 +187,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <div class="inner">
 						<h5>Scott Alexander</h5>
                         <p class="subtitle">Co-Founder / Developer</p>
-                        <div class="avatar">
-
-                        <?php	echo $this->Html->image('team/1.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-
-                        </div>
+                        <div class="avatar"><img src="img/team/1.jpg" alt="" class="img-responsive img-circle" /></div>
                     </div>
                 </div>
 				</div>
@@ -228,12 +197,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Michael Zhang</h5>
-                        <p class="subtitle">Co-Founder / Panda</p>
-                        <div class="avatar">
-
-                        <?php	echo $this->Html->image('team/2.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-                        </div>
+                        <p class="subtitle">Co-Founder / Wolfe of DP</p>
+                        <div class="avatar"><img src="img/team/2.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
                 </div>
@@ -245,12 +210,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <div class="inner">
 						<h5>Charlie Bond</h5>
                         <p class="subtitle">Co-Founder / Dab</p>
-                        <div class="avatar">
-
-                        <?php	echo $this->Html->image('team/3.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-
-                        </div>
+                        <div class="avatar"><img src="img/team/3.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
                 </div>
@@ -262,12 +222,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     <div class="inner">
 						<h5>Parker Webster</h5>
                         <p class="subtitle">Co-Founder / Delivery</p>
-                        <div class="avatar">
-
-                        <?php	echo $this->Html->image('team/4.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-
-                        </div>
+                        <div class="avatar"><img src="img/team/4.jpg" alt="" class="img-responsive img-circle" /></div>
 
                     </div>
                 </div>
@@ -275,20 +230,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             </div>
         </div>		
 		</div>
-
-	<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading"><br><br><br>
-					<p id="story">Founded on Del Playa, we are a new tech startup committed to serving Isla Vista. Our mission is to provide college students with an affordable way to get their favorite groceries at the simplest convenience.</p>
-
-					</div>
-					</div>
-				</div>
-			</div>
-	</div>
-		
 	</section>
 	<!-- /Section: about -->
 	
@@ -311,8 +252,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</div>
 			</div>
 		</div>
-
-
 		<div class="container">
 		<div class="row">
 			<div class="col-lg-2 col-lg-offset-5">
@@ -328,10 +267,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</div>-->
 					<div class="service-desc">
 						<h3>Albertsons</h3>
+						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
 					</div>
-                            <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?>
+					    <button type="submit" class="btn btn-skin" id="btnContactUs">
+                            Shop Now</button>
                 </div>
 				</div>
             </div>
@@ -343,11 +282,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</div>-->
 					<div class="service-desc">
 						<h3>Costco</h3>
+						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
 					</div>
-
-                                                        <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?>
+						<button type="submit" class="btn btn-skin" id="btnContactUs">
+                            Shop Now</button>
                 </div>
 				</div>
             </div>
@@ -359,33 +297,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</div>-->
 					<div class="service-desc">
 						<h3>Trader Joes</h3>
+						<p>Vestibulum tincidunt enim in pharetra malesuada. Duis semper magna metus electram accommodare.</p>
 					</div>
-                                                        <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?>
+						<button type="submit" class="btn btn-skin" id="btnContactUs">
+                            Shop Now</button>
                 </div>
 				</div>
             </div>
 
         </div>		
 		</div>
-
-	<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading"><br><br><br><br><br>
-					<p id="servicedescription">We shop at Trader Joe’s, Albertson’s, and Costco and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br>
- 
-<p>*orders must be placed one hour before the delivery window.</p>
-
-					</div>
-					</div>
-				</div>
-			</div>
-	</div>
-
-
 	</section>
 	<!-- /Section: services -->
 	
@@ -393,51 +314,64 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 
 	<!-- Section: contact -->
-    <section id="contact" class="home-section text-center" class="signup">
-			<div class="heading-contact">
-				<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
-						<div class="section-heading">
-						<h2>Sign Up Now</h2>
-						<i class="fa fa-2x fa-angle-down"></i>
+    <section id="contact" class="home-section text-center">
+		<div class="heading-contact">
+			<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow bounceInDown" data-wow-delay="0.4s">
+					<div class="section-heading">
+					<h2>Sign Up Now</h2>
+					<i class="fa fa-2x fa-angle-down"></i>
 
-						</div>
-						</div>
+					</div>
 					</div>
 				</div>
-				</div>
 			</div>
+			</div>
+		</div>
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-5">
-					<hr class="marginbot-50">
-				</div>
-			</div>
-		    <div class="row">
-		        <div class="col-lg-8">
-		            <div class="boxed-grey">
 
-		            </div>
-		        </div>
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-5">
+				<hr class="marginbot-50">
+			</div>
+		</div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="boxed-grey">
+
+            </div>
+        </div>
+		
+		<div class="col-lg-4">
+			<div class="widget-contact">
+				<h5>Main Office</h5>
+				
+				<address>
+				  <strong>Squas Design, Inc.</strong><br>
+				  Tower 795 Folsom Ave, Beautiful Suite 600<br>
+				  San Francisco, CA 94107<br>
+				  <abbr title="Phone">P:</abbr> (123) 456-7890
+				</address>
+
+				<address>
+				  <strong>Email</strong><br>
+				  <a href="mailto:#">email.name@example.com</a>
+				</address>	
+				<address>
+				  <strong>We're on social networks</strong><br>
+                       	<ul class="company-social">
+                            <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                            <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>	
+				</address>					
 			
-				<div class="col-lg-4">
-					<div class="widget-contact">
-						<h5>Main Office</h5>
-						
-						  <strong>We're on social networks</strong><br>
-		                       	<ul class="company-social">
-		                            <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
-		                            <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
-		                            <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-		                            <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-		                        </ul>	
-						</address>					
-					
-					</div>	
-				</div>
-		    </div>	
+			</div>	
+		</div>
+    </div>	
 
 		</div>
 	</section>
@@ -481,4 +415,3 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </body>
 
 </html>
-

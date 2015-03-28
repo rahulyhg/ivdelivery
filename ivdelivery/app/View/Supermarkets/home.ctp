@@ -1,3 +1,5 @@
+
+
 <div class="supermarkets index">
 	<h2><?php echo __('Supermarkets'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -46,11 +48,4 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Supermarket'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Items'), array('controller' => 'items', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Item'), array('controller' => 'items', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+

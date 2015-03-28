@@ -40,11 +40,11 @@ class AppController extends Controller {
         'Session',
         'Auth' => array(
             'loginRedirect' => array(
-                'controller' => 'supermarkets',
+                'controller' => 'Supermarkets',
                 'action' => 'home'
             ),
             'logoutRedirect' => array(
-                'controller' => 'supermarkets',
+                'controller' => 'Supermarkets',
                 'action' => 'home',
                 'home'
             ),
@@ -62,7 +62,7 @@ class AppController extends Controller {
 			'key' => 'auth',
 			'params' => array(
 				'plugin' => 'BoostCake',
-				'class' => 'alert-error'
+				'class' => 'alert alert-error'
 			)
 		),
         )
