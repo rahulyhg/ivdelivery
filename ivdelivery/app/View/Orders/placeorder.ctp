@@ -34,7 +34,7 @@
 	max-width: 265px !important;
 
 }
-#title1 {
+/*#title1 {
 	font-color: black !important;
 	color: #FFF;
 	text-shadow: none;
@@ -49,13 +49,20 @@
 	border-color: #000;
 	border-style: none;
 	text-shadow: -1px 0 1px #000;
-}
-#supermarketname {
-	background-image: url('../img/bg1.jpg') no-repeat top center;
-	background-color: #FA8072 !important;
+}*/
+#title1 {
+
+	font-family: Montserrat, sans-serif;
+
+} 
 
 
+
+body {
+  background: url(../img/bg3.jpg) no-repeat top center !important;
+
 }
+
 </style>
 
 
@@ -200,7 +207,7 @@
   		<?php echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'enterdetails', $supermarket['Supermarket']['id']), array('class' => 'btn btn-success btn-lg')); ?>
 <br><br> 
 			<?php echo $this->Form->postLink(__('Empty Cart'), array('controller' => 'OrdersItems', 'action' => 'emptyCart'), array('class' => 'btn btn-danger btn-sm'), __('Are you sure you want to empty cart')); ?>
-
+		<br>
 
 
 

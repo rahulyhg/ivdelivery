@@ -2,6 +2,14 @@
 html {
 	align: center !important;
 }
+body {
+  background: url(../img/bg3.jpg) no-repeat top center;
+  	color: #fff !important;
+
+}
+legend {
+	color: #fff !important;
+}
 </style>
 <div class="users form" id="signupform">
 <?php echo $this->Form->create('User', array(
@@ -10,7 +18,7 @@ html {
     )
 )); ?>
 	<fieldset>
-		<legend><?php echo __('Sign Up!'); ?></legend>
+		<h1><?php echo __('Sign Up!'); ?></h1>
 		<br>
 	<table class="table">
 	<tr><td>
@@ -42,12 +50,12 @@ html {
 		echo $this->Form->input('password');
 
 	?></td></tr></table>
-	</fieldset>
+	</fieldset><br><br>
 <?php
 echo $this->Form->submit(
     'Sign Up!', 
-    array('class' => 'btn btn-success')
+    array('class' => 'btn btn-success btn-lg')
 );
-?>
+?><br><br><br><br><br><br><br><br><br><br>
 </div>
 
