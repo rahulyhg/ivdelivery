@@ -127,15 +127,67 @@ class SupermarketsController extends AppController {
  		$this->layout = 'newhome';
 		$this->Supermarket->recursive = 0;
 		$this->set('supermarkets', $this->Paginator->paginate());
-			    if ($this->request->is('post')) {
-		if ($this->Auth->login()) {
-		    $this->redirect($this->request->referer());
-		} else {
-				//return false;
-			$this->Session->setFlash(__('Auth fialed'));
-		}
-		//debug($this->request->data);
-		$this->Session->setFlash(__('Invalid username or password, try again'));
+		if ($this->request->is('post')) {
+			//debug($this->request->data);
+			//return false;
+			if (isset($this->request->data['btn1'])){
+					unset($this->request->data['btn1']);
+					unset($this->request->data['log']);
+					unset($this->request->data['User'][1]);
+					$data = $this->request->data['User'][0];
+					unset($this->request->data['User'][0]);
+					$this->request->data['User'] = $data;
+					$password = $this->request->data['User']['password'];
+					unset($this->request->data['User']['password']);
+					$this->request->data['User']['password'] = $password;
+					//debug($this->request->data);
+					//return false;
+					//$data = $this->request->data['User'][0];
+					//$userdata = $data;
+					//debug($userdata);
+					//$this->loadModel('Users');
+					if ($this->Auth->login()) {
+						return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'home'));
+					} else {
+									$this->Session->setFlash(__('Nawwww'));
+
+
+					}
+			
+			}
+			if (isset($this->request->data['btn2'])){
+					unset($this->request->data['btn2']);
+					unset($this->request->data['log']);
+					$data = $this->request->data['User'][1];
+					unset($this->request->data['User'][0]);
+					unset($this->request->data['User'][1]);
+					$this->request->data['User'] = $data;
+					$this->loadModel('User');
+					$this->User->create();
+					if ($this->User->save($this->request->data)) {
+									$this->Session->setFlash(__('Success'));
+									return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'index'));
+
+					} else {
+									//$this->User->validationErrors;
+									//$this->set('validationErrorsArray', $this->User->invalidFields());
+									$this->User[1]->validate;
+									//return false;
+									//$this->redirect($this->request->referer());
+									//$this->Session->setFlash(__('Nawwww'));
+									//return $this->User->invalidFields();
+									//return false;
+
+
+					}
+
+					//debug($this->request->data);
+					//return false;
+					//$userdata = array('User' => $data);
+
+			}
+			//return false;
+			
 	    }
 	}
 

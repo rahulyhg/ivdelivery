@@ -22,6 +22,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html lang="en">
 
 <head>
+<script>
+
+</script>
+
 	<style>
 	.top-nav-collapse {
 		background-color: #FA8072 !important;
@@ -130,16 +134,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                            <div class="row">
                               <div class="col-md-12">
 			                              	<?php 
-			 					echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form'), array('controller' => 'Users', 'action'=>'login'));
+			 					echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form', 'novalidate' => true), array('controller' => 'Users', 'action'=>'login'));
 			                    echo '<div class="form-group">';
-			                            echo $this->Form->input('User.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username'));
+			                            echo $this->Form->input('User.0.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
 			                    echo '</div>';
 			                    echo '<div class="form-group">';
-			                            echo $this->Form->input('User.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password'));
+			                            echo $this->Form->input('User.0.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password', 'error' => false));
 			                    echo '<br></div>';
 								echo $this->Form->submit(
 								    'Sign In', 
-								    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')
+								    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name'=>'btn1')
 								);
 			                ?>
                               </div>
@@ -206,7 +210,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Scott Alexander</h5>
-                        <p class="subtitle">Co-Founder / Developer</p>
+                        <p class="subtitle">Co-Founder / bonglord</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/1.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -222,7 +226,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Michael Zhang</h5>
-                        <p class="subtitle">Co-Founder / Panda</p>
+                        <p class="subtitle">Co-Founder / Chief Exexitive Otter</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/2.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -238,7 +242,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Charlie Bond</h5>
-                        <p class="subtitle">Co-Founder / Dab</p>
+                        <p class="subtitle">Co-Founder / get arrested in big bear</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/3.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -255,7 +259,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Parker Webster</h5>
-                        <p class="subtitle">Co-Founder / Delivery</p>
+                        <p class="subtitle">Co-Founder / rage cage</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/4.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -416,44 +420,53 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 							<?php echo $this->Form->create('User', array(
 							    'inputDefaults' => array(
 							        'class' => 'form-control',
-							    )
+							        'novalidate' => true
+							    ),  array('controller' => 'Users', 'action'=>'login', 'btn2')
 							)); ?>
 								<fieldset>
 								<table class="table">
 								<tr><td>
 								<?php
-									echo $this->Form->hidden('type', array(
+									echo $this->Form->hidden('User.1.type', array(
 										'value' => 'customer'	
 									));
-									echo $this->Form->input('first_name');
+									echo $this->Form->input('User.1.first_name');
 								?>
 								</td><td>
 								<?php
-									echo $this->Form->input('last_name');
+									echo $this->Form->input('User.1.last_name');
 								?></td></tr><tr><td><?php
-									echo $this->Form->input('phone');
+									echo $this->Form->input('User.1.phone');
 								?></td><td><?php
 
-									echo $this->Form->input('street');
+									echo $this->Form->input('User.1.street');
 								?></td></tr><tr><td><?php
 
-									echo $this->Form->input('street_2');
+									echo $this->Form->input('User.1.street_2');
 								?></td><td><?php
 
-									echo $this->Form->input('zip');
+									echo $this->Form->input('User.1.zip');
 								?></td></tr><tr><td><?php
 
-									echo $this->Form->input('email');
+									echo $this->Form->input('User.1.email');
 								?></td><td><?php
 
-									echo $this->Form->input('password');
+									echo $this->Form->input('User.1.password');
 
-								?></td></tr></table>
+								?></td></tr><tr><td colspan="2">
+									<?php
+									echo $this->Form->hidden('User.1.role', array('value' => 'customer'));
+									echo $this->Form->input('User.1.username');
+
+									?>
+
+								</td></tr>
+								</table>
 								</fieldset><br><br>
 							<?php
 							echo $this->Form->submit(
-							    'Submit', 
-							    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')
+							    'Submit',
+							    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name' => 'btn2')
 							);
 							?>
 							</div>
