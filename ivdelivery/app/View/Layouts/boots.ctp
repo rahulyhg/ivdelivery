@@ -107,17 +107,17 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                         <li>
                            <div class="row">
                               <div class="col-md-12">
-                                      <?php 
-                echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form'), array('controller' => 'Users', 'action'=>'login'));
+                <?php 
+                echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form', 'novalidate' => true), array('controller' => 'Users', 'action'=>'login'));
                           echo '<div class="form-group">';
-                                  echo $this->Form->input('User.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username'));
+                                  echo $this->Form->input('User.0.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
                           echo '</div>';
                           echo '<div class="form-group">';
-                                  echo $this->Form->input('User.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password'));
-                          echo '</div>';
+                                  echo $this->Form->input('User.0.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password', 'error' => false));
+                          echo '<br></div>';
                 echo $this->Form->submit(
                     'Sign In', 
-                    array('class' => 'btn btn-success btn-lg')
+                    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name'=>'btn1')
                 );
                       ?>
                               </div>
@@ -125,7 +125,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                         </li>
                         <li class="divider"></li>
                         <li>
-                           <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'users', 'action' => 'signup', $authUser['id']), array('class' => 'btn btn-primary', 'id' => 'signup')); ?>
+                           <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'users', 'action' => 'signup', $authUser['id']), array('class' => 'btn btn-primary', 'id' => 'signup', 'name' => 'btn1')); ?>
                            
                         </li>
                      </ul>
@@ -145,7 +145,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
   <div id="content">
     <br><br><br>
-  			<?php echo $this->Session->flash(); ?>
+  			<?php //echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
   </div>

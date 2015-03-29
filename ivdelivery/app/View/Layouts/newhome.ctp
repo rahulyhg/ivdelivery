@@ -111,14 +111,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <li><a href="#about">About</a></li>
 		<li><a href="#service">Service</a></li>
 		<li><a href="#contact">Sign Up</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a')); ?></li>
-            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
-            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
-          </ul>
-        </li>
 
 
        <?php if (isset($authUser)) { ?>
@@ -152,7 +144,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                      </ul>
                   </li>
                 <?php } ?>
-
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
+            <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
+          </ul>
+        </li>
 
 
 
@@ -164,6 +163,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         </div>
         <!-- /.container -->
     </nav>
+			<?php echo $this->Session->flash(); ?>
 
 	<!-- Section: intro -->
     <section id="intro" class="intro">
@@ -325,7 +325,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						<img src="img/icons/service-icon-1.png" alt="" />
 					</div>-->
 					<div class="service-desc">
-						<h3>Albertsons</h3>
+						<br><h3>Albertsons</h3><br>
 					</div>
                             <?php
 								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
@@ -340,7 +340,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						<img src="img/icons/service-icon-2.png" alt="" />
 					</div>-->
 					<div class="service-desc">
-						<h3>Costco</h3>
+						<br><h3>Costco</h3><br>
 					</div>
 
                                                         <?php
@@ -356,7 +356,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						<img src="img/icons/service-icon-3.png" alt="" />
 					</div>-->
 					<div class="service-desc">
-						<h3>Trader Joes</h3>
+						<br><h3>Trader Joes</h3><br>
 					</div>
                                                         <?php
 								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
@@ -373,7 +373,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="wow bounceInDown" data-wow-delay="0.4s">
 					<div class="section-heading"><br><br><br><br><br>
-					<p id="servicedescription">We shop at Trader Joe’s, Albertson’s, and Costco and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br>
+					<p id="servicedescription">We shop at Trader Joe’s, Albertson’s, and Costco and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br><br>
  
 <p>*orders must be placed one hour before the delivery window.</p>
 

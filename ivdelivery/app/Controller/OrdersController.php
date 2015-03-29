@@ -330,7 +330,10 @@ class OrdersController extends AppController {
          	$cartData = $this->Session->read('cart');
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
+
 			//debug($this->request->data);
+			//return false;
+
 			$this->request->data['Order']['supermarket_id']=$id;	
 			$this->request->data['Order']['payment_status']='false';
 			$this->request->data['Order']['delivery_status']='false';	

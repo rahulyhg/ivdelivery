@@ -10,7 +10,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add', 'login', 'logout', 'index', 'edit', 'signup');
+        $this->Auth->allow('add', 'login', 'logout', 'index', 'edit', 'signup', 'home');
     }
 
 
@@ -23,22 +23,88 @@ class UsersController extends AppController {
 	}
 
 	public function login() {
-		debug($this->request->data);
-		return false;
-        //$this->layout = 'boots';
-	    if ($this->request->is('post')) {
-		if ($this->Auth->login()) {
-		    return $this->Auth->redirect($this->Auth->login());
-		} else {
-				//return false;
-			$this->Session->setFlash(__('Auth fialed'));
+
+		$id = AuthComponent::user('id');
+		//debug($id);
+		if (isset($id)) {
+				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 		}
-		//debug($this->request->data);
-		$this->Session->setFlash(__('Invalid username or password, try again'));
-	    }
+
+
+		        $this->layout = 'boots';
+		        //$lastRoute = $this->router->referer();
+
+
+				if ($this->request->is('post')) {
+							//debug($this->request->data);
+							//return false;
+							if (isset($this->request->data['btn1'])){
+									unset($this->request->data['btn1']);
+									unset($this->request->data['log']);
+									unset($this->request->data['User'][1]);
+									$data = $this->request->data['User'][0];
+									unset($this->request->data['User'][0]);
+									$this->request->data['User'] = $data;
+									$password = $this->request->data['User']['password'];
+									unset($this->request->data['User']['password']);
+									$this->request->data['User']['password'] = $password;
+									//debug($this->request->data);
+									//return false;
+									//$data = $this->request->data['User'][0];
+									//$userdata = $data;
+									//debug($userdata);
+									//$this->loadModel('Users');
+									if ($this->Auth->login()) {
+										//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+										return $this->redirect($this->Auth->redirect());
+									} else {
+													$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
+
+
+									}
+							
+							}
+							if (isset($this->request->data['btn2'])){
+									unset($this->request->data['btn2']);
+									unset($this->request->data['log']);
+									unset($this->request->data['User'][0]);
+									$data = $this->request->data['User'][1];
+									unset($this->request->data['User'][1]);
+									$this->request->data['User'] = $data;
+									$password = $this->request->data['User']['password'];
+									unset($this->request->data['User']['password']);
+									$this->request->data['User']['password'] = $password;
+									//debug($this->request->data);
+									//return false;
+									//$data = $this->request->data['User'][0];
+									//$userdata = $data;
+									//debug($userdata);
+									//$this->loadModel('Users');
+									if ($this->Auth->login()) {
+										//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+										return $this->redirect($this->Auth->redirect());
+									} else {
+													$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
+
+
+									}
+
+									//debug($this->request->data);
+									//return false;
+									//$userdata = array('User' => $data);
+
+							}
+							//return false;
+							
+					    }
+
+
+
+
 	}
 
 	public function logout() {
+		//$this->Session->setFlash(__('Logged out', 'alert alert-success'));
 	    return $this->redirect($this->Auth->logout());
 	}
 
@@ -149,19 +215,80 @@ class UsersController extends AppController {
  * @return void
  */
 	public function signup() {
+		$id = AuthComponent::user('id');
+		//debug($id);
+		if (isset($id)) {
+				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+		}
+
         $this->layout = 'boots';
+
 		if ($this->request->is('post')) {
-			$this->User->create();
-			debug($this->request->data);
-			return false;
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-		    	return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'home'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+					//debug($this->request->data);
+					//return false;
+					if (isset($this->request->data['btn1'])){
+							unset($this->request->data['btn1']);
+							unset($this->request->data['log']);
+							unset($this->request->data['User'][1]);
+							$data = $this->request->data['User'][0];
+							unset($this->request->data['User'][0]);
+							$this->request->data['User'] = $data;
+							$password = $this->request->data['User']['password'];
+							unset($this->request->data['User']['password']);
+							$this->request->data['User']['password'] = $password;
+							//debug($this->request->data);
+							//return false;
+							//$data = $this->request->data['User'][0];
+							//$userdata = $data;
+							//debug($userdata);
+							//$this->loadModel('Users');
+							if ($this->Auth->login()) {
+								//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+								return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+							} else {
+											$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
+
+
+							}
+					
+					}
+					if (isset($this->request->data['btn2'])){
+							unset($this->request->data['btn2']);
+							unset($this->request->data['log']);
+							$data = $this->request->data['User'][1];
+							unset($this->request->data['User'][0]);
+							unset($this->request->data['User'][1]);
+							$this->request->data['User'] = $data;
+							$this->loadModel('User');
+							$this->User->create();
+							if ($this->User->save($this->request->data)) {
+											//$this->Session->setFlash(__('Successful Registration and Login!', 'alert alert-success'));
+											//debug('a');
+											if ($this->Auth->login()) {
+												//debug('b');
+												return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+											}
+							} else {
+											//$this->User->validationErrors;
+											//$this->set('validationErrorsArray', $this->User->invalidFields());
+											$this->User->validate;
+											//return false;
+											//$this->redirect($this->request->referer());
+											//$this->Session->setFlash(__('Nawwww'));
+											//return $this->User->invalidFields();
+											//return false;
+
+
+							}
+
+							//debug($this->request->data);
+							//return false;
+							//$userdata = array('User' => $data);
+
+					}
+
 			}
 		}
-	}
 
 
 
@@ -204,10 +331,68 @@ class UsersController extends AppController {
  * @return void
  */
 	public function adminindex() {
-        	$this->layout = 'boots';
+        $this->layout = 'boots';
 		$this->User->recursive = 0;
 		$this->set('users', $this->Paginator->paginate());
 	}
+
+
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function home() {
+ 		$this->layout = 'userhome';
+		//$this->Supermarket->recursive = 0;
+		$this->set('supermarkets', $this->Paginator->paginate());
+		$id = $this->Auth->user('id');
+		//debug($id);
+		//return false;
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+		$this->set('user', $this->User->find('first', $options));
+
+		if ($this->request->is('post')) {
+			//debug($this->request->data);
+			//return false;
+			//if (isset($this->request->data['btn1'])){
+					/* unset($this->request->data['btn1']);
+					unset($this->request->data['log']);
+					unset($this->request->data['User'][1]);
+					$data = $this->request->data['User'][0];
+					unset($this->request->data['User'][0]);
+					$this->request->data['User'] = $data;
+					$password = $this->request->data['User']['password'];
+					unset($this->request->data['User']['password']);
+					$this->request->data['User']['password'] = $password; */
+					//debug($this->request->data);
+					//return false;
+					//$data = $this->request->data['User'][0];
+					//$userdata = $data;
+					//debug($userdata);
+					//$this->loadModel('Users');
+					if ($this->Auth->login()) {
+						$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+						return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'home'));
+					} else {
+									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
+
+
+					}
+			
+			//}
+		
+			//return false;
+			
+	    }
+	}
+
+
 
 
 }

@@ -124,6 +124,12 @@ class SupermarketsController extends AppController {
  * @return void
  */
 	public function home() {
+		//debug($this->Auth->user);
+		$id = AuthComponent::user('id');
+		//debug($id);
+		if (isset($id)) {
+				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+		}
  		$this->layout = 'newhome';
 		$this->Supermarket->recursive = 0;
 		$this->set('supermarkets', $this->Paginator->paginate());
@@ -147,9 +153,10 @@ class SupermarketsController extends AppController {
 					//debug($userdata);
 					//$this->loadModel('Users');
 					if ($this->Auth->login()) {
-						return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'home'));
+						$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+						return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 					} else {
-									$this->Session->setFlash(__('Nawwww'));
+									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
 
 
 					}
@@ -165,13 +172,17 @@ class SupermarketsController extends AppController {
 					$this->loadModel('User');
 					$this->User->create();
 					if ($this->User->save($this->request->data)) {
-									$this->Session->setFlash(__('Success'));
-									return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'index'));
-
+									//$this->Session->setFlash(__('Successful Registration and Login!', 'alert alert-success'));
+									//debug('a');
+									if ($this->Auth->login()) {
+										//debug('b');
+										return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+									}
 					} else {
 									//$this->User->validationErrors;
 									//$this->set('validationErrorsArray', $this->User->invalidFields());
-									$this->User[1]->validate;
+									$this->Session->setFlash(__('Registration failed', 'alert alert-danger'));
+									//$this->User->validate;
 									//return false;
 									//$this->redirect($this->request->referer());
 									//$this->Session->setFlash(__('Nawwww'));
