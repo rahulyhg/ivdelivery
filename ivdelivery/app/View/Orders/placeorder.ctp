@@ -168,6 +168,7 @@
 	<?php } else { 
 		$groceryTotal = 0;
 		$counter = 0;
+		//debug($cartData);
 		foreach ($cartData as $cartItem) {
 	?>
 		<?php 

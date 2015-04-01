@@ -134,7 +134,6 @@ class ItemsOrdersController extends AppController {
 	//$this->autoRender = false;
 	//$this->layout = $this->autoRender = false;
 	
-        $allOrdersItems = $this->Session->read('cart');
 	$currentItem = $this->ItemsOrder->Item->find('first', array(
 		'conditions' => array(
 			'Item.id' => $ordersitemId
@@ -144,7 +143,12 @@ class ItemsOrdersController extends AppController {
 	$itemCost = $currentItem['Item']['cost'];
 	$itemDelivery = $currentItem['Item']['delivery_fee'];
 	//debug($currentItem);
-	//$supermarket_id = $currentItem['Item']['delivery_fee'];
+	$supermarket_id = $currentItem['Item']['supermarket_id'];
+
+	$allOrdersItems = $this->Session->read('cart.' . $supermarket_id);
+
+	//$this->loadModel('Supermarkets');
+	//$currentSupe
 
 	//debug($currentItem);
 	//return false;
@@ -180,7 +184,7 @@ class ItemsOrdersController extends AppController {
         
 	//debug($allords 
 	
-        if ($this->saveItemsOrder($allOrdersItems)) {
+        if ($this->saveItemsOrder($allOrdersItems, $supermarket_id)) {
 		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
 		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
@@ -262,10 +266,10 @@ class ItemsOrdersController extends AppController {
     /*
      * save data to session
      */
-    public function saveItemsOrder($data) {
+    public function saveItemsOrder($data, $supermarketId) {
 	//$this->autoRender = false;
 	//$this->layout = $this->autoRender = false;	
-        return $this->Session->write('cart', $data);
+        return $this->Session->write('cart.' . $supermarketId, $data);
 
     }
  

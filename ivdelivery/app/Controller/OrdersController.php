@@ -207,7 +207,7 @@ class OrdersController extends AppController {
 		//$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
-        $cartData = $this->Session->read('cart');
+        $cartData = $this->Session->read('cart.' . $id);
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
 
@@ -253,7 +253,7 @@ class OrdersController extends AppController {
 		}
 		$options = array('conditions' => array('Supermarket.' . $this->Supermarket->primaryKey => $id));
 		$this->set('supermarket', $this->Supermarket->find('first', $options));
-		$cartData = $this->Session->read('cart');
+        $cartData = $this->Session->read('cart.' . $id);
 
 		if ($cartData == array() || null) {
 			$this->redirect(array('action' => 'placeorder', $id));
@@ -279,7 +279,7 @@ class OrdersController extends AppController {
 			//debug($this->request->data);
 			
 			//$orderData = $this->request->data['Order'];
-			$orderItemsData = $this->Session->read('cart');
+			$orderItemsData = $this->Session->read('cart.' . $id);
 			$paymentData = $this->request->data['Payment'];
 		
 		//	if ($this->Session->write('Order', $sessionOrderData)) {
@@ -290,7 +290,7 @@ class OrdersController extends AppController {
 				//if ($this->Order->placeNewOrder($this->request->data)) {
 					$newOrderId=$this->Order->id;
 					$this->Session->setFlash(__('The order has been saved.'));
-					$this->Session->delete('cart');
+					$this->Session->delete('cart.' . $id);
 					$this->Session->delete('Order');
 					return $this->redirect(array('action' => 'receipt', 'supermarketid' => $id, 'orderid' => $newOrderId));
 				} else {
@@ -320,7 +320,8 @@ class OrdersController extends AppController {
 		if (!$this->Supermarket->exists($id)) {
 			throw new NotFoundException(__('Invalid supermarket'));
 		}
-		$cartData = $this->Session->read('cart');
+		$cartData = $this->Session->read('cart.' . $id);
+
 		//debug($cartData);
 		if ($cartData == array() || null) {
 			$this->redirect(array('action' => 'placeorder', $id));
@@ -351,7 +352,8 @@ class OrdersController extends AppController {
 	
 
 			$orderData = $this->request->data['Order'];
-			$orderItemsData = $this->Session->read('cart');
+
+			$orderItemsData = $this->Session->read('cart.' . $id);
 			//debug($orderData);
 			//return false;	
 			if ($this->Session->write('Order', $orderData)) {
