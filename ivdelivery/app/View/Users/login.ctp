@@ -15,7 +15,7 @@
     <div class="col-md-8">
 <div class="users form">
     <br>
-<?php echo $this->Session->flash('auth'); ?>
+<?php //echo $this->Session->flash('auth'); ?>
 
                             <?php echo $this->Form->create('User', array(
                                 'inputDefaults' => array(

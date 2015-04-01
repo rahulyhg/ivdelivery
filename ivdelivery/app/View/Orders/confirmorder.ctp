@@ -19,32 +19,35 @@
 #itemth {
 	min-width: 171px !important;
 }
-
+#cart {
+	min-width: 358px !important;
+}
 </style>
 
-    <div class="container-fluid">
-      <div class="row row-offcanvas row-offcanvas-left">
+
+<div class="row">
         
         <!--sidebar-->
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div data-spy="affix" data-offset-top="45" data-offset-bottom="90"> 
+        <!-- <div class="col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
+      
 
-<br>	<br>
-<fieldset>
-	<h3><?php echo __('Grocery List'); ?></h3>
-</fieldset>
-	<table class="table table-bordered" id="cart">
-	<tr>
-		<th id="itemth">Item</th><th>Qty</th><th>Price</th>
-	</tr>
 
-	<?php if ($cartData == NULL) { ?>
+        </div><!--/sidebar-->
+        <!--/main--> 
+        <div class="col-md-8" data-spy="scroll" data-target="#sidebar-nav">
 
-	<tr>
-		<td colspan="3"><i>Cart is empty</i></td>
-	</tr>
-	
-	<?php } else { 
+
+
+
+
+
+
+
+
+
+
+
+        		<?php 
 		$groceryTotal = 0;
 		$counter = 0;
 		$deliveryFees=0;
@@ -52,11 +55,8 @@
 		$deliveryRate = 0;
 		foreach ($cartData as $cartItem) {
 	?>
-		<?php 
-		echo('<tr>'); ?>
+		
   
-	<?php
-		echo('<td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity'] . '</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
 
 	<?php  
 		$itemTotal = $cartItem['total'];
@@ -99,25 +99,7 @@
 			$grandTotal = ($groceryTotal+$deliveryCost);
 		}
 	}
-
-
-
-	?>
-	
-	<?php } ?>
-	<tr><td colspan="4"><b>Item Total: </b>$<?php echo $groceryTotal; ?></td></tr>
-
-	</table>
-  		<?php //echo $this->Html->link(__('Empty Cart'), array('controller' => 'OrdersItems', 'action' => 'emptyCart'), array('class' => 'btn btn-danger btn-lg')); ?> 
-  		<?php //echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'emptyCart'), array('class' => 'btn btn-primary btn-lg')); ?> 
-<br>
-
-
- 
-          </div>
-        </div><!-- Sidebar -->
-
-        <div class="col-xs-12 col-sm-9" data-spy="scroll" data-target="#sidebar-nav">
+?>
 
 
 <?php echo $this->Form->create('Order', array(
@@ -214,5 +196,97 @@ echo $this->Form->submit(
 ?>
 <br><br><br>
 </div>
-</div>
 
+
+
+     <div class="col-md-4 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div data-spy="affix" data-offset-top="45" data-offset-bottom="90">
+
+
+<br>	<br>
+<fieldset>
+	<h3><?php echo __('Grocery List'); ?></h3>
+</fieldset>
+	<table class="table table-bordered" id="cart">
+	<tr>
+		<th id="itemth">Item</th><th>Qty</th><th>Price</th>
+	</tr>
+
+	<?php if ($cartData == NULL) { ?>
+
+	<tr>
+		<td colspan="3"><i>Cart is empty</i></td>
+	</tr>
+	
+	<?php } else { 
+		$groceryTotal = 0;
+		$counter = 0;
+		$deliveryFees=0;
+		$itemCount = count($cartData);
+		$deliveryRate = 0;
+		foreach ($cartData as $cartItem) {
+	?>
+		<?php 
+		echo('<tr>'); ?>
+  
+	<?php
+		echo('<td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity'] . '</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
+
+	<?php  
+		$itemTotal = $cartItem['total'];
+		$groceryTotal = ($groceryTotal+$itemTotal); 
+		$deliveryFees = ($deliveryFees+$cartItem['delivery_fee']); 
+	?>
+		
+
+	<?php } ?>
+	<?php //calculate delivery fee
+	if ($itemCount <= 3) {
+		$deliveryRate = 5;
+		$deliveryCost=($deliveryRate+$deliveryFees);
+		$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
+	} elseif ($itemCount > 3 && $itemCount <= 10) {
+		$deliveryRate = 10;
+		$deliveryCost=($deliveryRate+$deliveryFees);
+		$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
+
+	}  elseif ($itemCount > 10 && $itemCount <= 20) {
+		$deliveryRate = 15;
+		if ($groceryTotal >= 200) {
+			$smallCut = ($groceryTotal*.1);
+			$deliveryCost = ($deliveryFees+$smallCut);
+			$grandTotal = ($groceryTotal+$deliveryCost);
+		} else {
+			$deliveryCost=($deliveryRate+$deliveryFees);
+			$grandTotal = ($groceryTotal+$deliveryCost);
+
+		}
+
+	}  elseif ($itemCount > 20) {
+		$deliveryRate = 20;
+		if ($groceryTotal >= 200) {
+			$smallCut = ($groceryTotal*.1);
+			$deliveryCost = ($deliveryFees+$smallCut);
+			$grandTotal = ($groceryTotal+$deliveryCost);
+		} else {
+			$deliveryCost=($deliveryRate+$deliveryFees);
+			$grandTotal = ($groceryTotal+$deliveryCost);
+		}
+	}
+
+
+
+	?>
+	
+	<?php } ?>
+	<tr><td colspan="4"><b>Item Total: </b>$<?php echo $groceryTotal; ?></td></tr>
+
+	</table>
+  		<?php //echo $this->Html->link(__('Empty Cart'), array('controller' => 'OrdersItems', 'action' => 'emptyCart'), array('class' => 'btn btn-danger btn-lg')); ?> 
+  		<?php //echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'emptyCart'), array('class' => 'btn btn-primary btn-lg')); ?> 
+<br>
+
+
+</div>
+</div>
+</div>

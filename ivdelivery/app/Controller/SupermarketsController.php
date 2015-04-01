@@ -153,7 +153,7 @@ class SupermarketsController extends AppController {
 					//debug($userdata);
 					//$this->loadModel('Users');
 					if ($this->Auth->login()) {
-						$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+						//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
 						return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 					} else {
 									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));

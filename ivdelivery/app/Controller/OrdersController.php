@@ -23,7 +23,10 @@ class OrdersController extends AppController {
 
 	public function isAuthorized($user) {
 	    // All registered users can add posts
-	    if ($this->action === 'placeorder') {
+	    if ($this->action === 'placeorder' || 'enterdetails' || 'confirmorder' || 'receipt') {
+		return true;
+	    }
+	    	    if (isset($user['role']) && $user['role'] === 'admin') {
 		return true;
 	    }
 	    return parent::isAuthorized($user);
@@ -250,7 +253,12 @@ class OrdersController extends AppController {
 		}
 		$options = array('conditions' => array('Supermarket.' . $this->Supermarket->primaryKey => $id));
 		$this->set('supermarket', $this->Supermarket->find('first', $options));
-		
+		$cartData = $this->Session->read('cart');
+
+		if ($cartData == array() || null) {
+			$this->redirect(array('action' => 'placeorder', $id));
+		}
+
 		$users = $this->Order->User->find('list');
 		$drivers = $this->Order->Driver->find('list');
 		//$currentdriver = $drivers[0];
@@ -262,7 +270,6 @@ class OrdersController extends AppController {
 		//$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
-         	$cartData = $this->Session->read('cart');
          	$sessionOrderData = $this->Session->read('Order');
 
 		$this->set('cartData', $cartData);		
@@ -313,6 +320,11 @@ class OrdersController extends AppController {
 		if (!$this->Supermarket->exists($id)) {
 			throw new NotFoundException(__('Invalid supermarket'));
 		}
+		$cartData = $this->Session->read('cart');
+		//debug($cartData);
+		if ($cartData == array() || null) {
+			$this->redirect(array('action' => 'placeorder', $id));
+		}
 		$options = array('conditions' => array('Supermarket.' . $this->Supermarket->primaryKey => $id));
 		$this->set('supermarket', $this->Supermarket->find('first', $options));
 		
@@ -327,7 +339,6 @@ class OrdersController extends AppController {
 		//$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
-         	$cartData = $this->Session->read('cart');
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
 
@@ -375,7 +386,7 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function receipt($id = null) {
-		$this->layout = 'confirmation';
+		$this->layout = 'boots';
 		$this->loadModel('Supermarket');
 		
 		$namedParams =$this->request->named;

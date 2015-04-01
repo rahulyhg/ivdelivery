@@ -59,7 +59,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	}
 	#contact {
 		  color: #fff;
-		  background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;
+		  /*background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;*/
+		  background-image: url('http://foodswoop.com/img/img7.jpg') !important;
 
 	}
 
@@ -76,14 +77,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php	echo $this->Html->css('nhbootstrap.min.css'); ?>
 
     <!-- Fonts -->
-    <link href="<?php echo $this->webroot; ?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="<?php echo $this->webroot; ?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
     		<?php	//echo $this->Html->css('font-awesome.css'); ?>
 
 		<?php	echo $this->Html->css('nhanimate.css'); ?>
     <!-- Squad theme CSS -->
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
-	<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">
-
+	<!--<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">-->
+    <link href="http://foodswoop.com/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="http://foodswoop.com//color/default.css" rel="stylesheet">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -210,7 +212,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Scott Alexander</h5>
-                        <p class="subtitle">Co-Founder / bonglord</p>
+                        <p class="subtitle">Co-Founder / Developer</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/1.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -226,7 +228,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Michael Zhang</h5>
-                        <p class="subtitle">Co-Founder / Chief Exexitive Otter</p>
+                        <p class="subtitle">Co-Founder / Management</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/2.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -242,7 +244,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Charlie Bond</h5>
-                        <p class="subtitle">Co-Founder / get arrested in big bear</p>
+                        <p class="subtitle">Co-Founder / Marketing</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/3.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
@@ -259,7 +261,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 <div class="team boxed-grey">
                     <div class="inner">
 						<h5>Parker Webster</h5>
-                        <p class="subtitle">Co-Founder / rage cage</p>
+                        <p class="subtitle">Co-Founder / Delivery</p>
                         <div class="avatar">
 
                         <?php	echo $this->Html->image('team/4.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>

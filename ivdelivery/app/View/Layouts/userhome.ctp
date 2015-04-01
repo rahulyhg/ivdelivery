@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'College Delivers');
+$cakeDescription = __d('cake_dev', 'Food Swoop');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 
@@ -59,7 +59,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	}
 	#contact {
 		  color: #fff;
-		  background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;
+		  /*background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;*/
+		  background-image: url('http://foodswoop.com/img/img7.jpg') !important;
 
 	}
 	#shopnow {
@@ -77,6 +78,34 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				text-align: center !important;
 
 	}
+	#shop1 {
+		margin-left: 70% !important;
+	}
+		#shop3 {
+		margin-right: 70% !important;
+	}
+	#userhomebuy h3 {
+		color: #fff !important;
+
+  color: #FFF;
+  text-shadow: none;
+  line-height: 60px;
+  font-weight: 700;
+  font-family: Montserrat, sans-serif;
+  background-color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+  text-transform: uppercase;
+  border-width: 0px;
+  border-color: #000;
+  border-style: none;
+  text-shadow: -1px 0 1px #000;
+	}
+
+
+		#about {
+
+	}
+
 	</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,18 +113,20 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <meta name="author" content="">
 
     <title>Food Swoop</title>
+    <link href="http://foodswoop.com/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="http://foodswoop.com/color/default.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
 	<?php	echo $this->Html->css('nhbootstrap.min.css'); ?>
 
     <!-- Fonts -->
-    <link href="<?php echo $this->webroot; ?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="<?php echo $this->webroot; ?>/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
     		<?php	//echo $this->Html->css('font-awesome.css'); ?>
 
 		<?php	echo $this->Html->css('nhanimate.css'); ?>
     <!-- Squad theme CSS -->
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
-	<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">
+	<!--<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">-->
 
 </head>
 
@@ -192,15 +223,16 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div id="shop">
 					<div class="page-scroll">
 
-       <div class="slogan">
-            <div class="col-sm-2 col-md-2 col-centered">
+ 
+ <div class="row">
+            <div class="col-sm-4 col-md-4" id="userhomebuy">
 				<div class="wow fadeInLeft" data-wow-delay="0.2s">
-                <div class="service-box">
+                <div class="service-box" id="shop1">
 					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-1.png" alt="" />
 					</div>-->
-					<div class="service-desc">
-						<br><h3>Albertsons</h3><br>
+					<div class="service-desc"><br>
+						<br><h3>Albertsons</h3>
 					</div>
                             <?php
 								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
@@ -208,14 +240,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </div>
 				</div>
             </div>
-			<div class="col-sm-2 col-md-2 col-centered">
+			<div class="col-sm-4 col-md-4" id="userhomebuy">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
 					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-2.png" alt="" />
 					</div>-->
-					<div class="service-desc">
-						<br><h3>Costco</h3><br>
+					<div class="service-desc"><br>
+						<br><h3>Costco</h3>
 					</div>
 
                                                         <?php
@@ -224,14 +256,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </div>
 				</div>
             </div>
-			<div class="col-sm-2 col-md-2 col-centered">
+			<div class="col-sm-4 col-md-4" id="userhomebuy">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
-                <div class="service-box">
+                <div class="service-box" id="shop3">
 					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-3.png" alt="" />
 					</div>-->
-					<div class="service-desc">
-						<br><h3>Trader Joes</h3><br>
+					<div class="service-desc"><br>
+						<br><h3>Trader Joes</h3>
 					</div>
                                                         <?php
 								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
@@ -239,7 +271,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                 </div>
 				</div>
             </div>
-           </div>
+
+        </div>		
+
+
        </div>
         </div>	
     </section>

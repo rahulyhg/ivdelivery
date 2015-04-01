@@ -17,13 +17,20 @@ class ItemsOrdersController extends AppController {
 
 
     public function beforeFilter() {
+
+
         parent::beforeFilter();
         $this->Auth->allow('index', 'view', 'add', 'edit', 'delete', 'addItemsOrder', 'getCount', 'resultsitemsorders', 'saveItemsOrder', 'readItemsOrder', 'deleteFromCart', 'updatePurchaseStatus', 'updateOrderStatus');
     }
 
 	public function isAuthorized($user) {
+
+	    if (isset($user['role']) && $user['role'] === 'admin') {
+			return true;
+	    }
+
 	    // All registered users can add posts
-	    if ($this->action === 'add') {
+	    if ($this->action === 'view') {
 		return true;
 	    }
 	    return parent::isAuthorized($user);

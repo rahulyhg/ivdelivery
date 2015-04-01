@@ -17,7 +17,7 @@
 	//text-align: center !important;
 }
 #itemth {
-	min-width: 171px !important;
+	min-width: 230px !important;
 }
 
 </style>

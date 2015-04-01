@@ -40,7 +40,7 @@
 	font-family: Montserrat, sans-serif;
 
 } 
-#category { 
+.category { 
 	font-size: 16px !important;
 }
 
@@ -71,14 +71,14 @@
 <ul class="nav nav-pills">
 	<?php //debug($categories); ?>
 	<?php foreach ($categories as $category) { ?>
-  <li role="presentation"><a href="#"><?php echo($category); ?></a></li>
+  <li role="presentation"><a href="#<?php echo($category); ?>"><?php echo($category); ?></a></li>
   	<?php } ?>
 </ul><br>
 
 	<?php 		//debug($categoriesInfo); ?>
 <br>
 	<?php foreach($categoriesInfo as $category) { ?>
-	<h3 id="category"><?php echo($category['name']); ?></h3>
+	<h3 class="category" id="<?php echo($category['name']); ?>"><?php echo($category['name']); ?></h3>
 
 	<?php if (!empty($supermarket['Item'])): ?>
 	<table class="table table-hover" cellpadding = "0" cellspacing = "0">

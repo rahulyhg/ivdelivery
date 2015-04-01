@@ -80,9 +80,9 @@ class AppController extends Controller {
 
     public function beforeFilter() {
 
-        $this->Auth->allow('index', 'view', 'login','home');
+        $this->Auth->allow('login','home', 'placeorder', 'logout', 'signup');
 
-	$this->set('authUser', $this->Auth->user());
+	   $this->set('authUser', $this->Auth->user());
 
 
     }

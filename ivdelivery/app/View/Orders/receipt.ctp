@@ -24,14 +24,14 @@
 
      <div  class="row text-center contact-info">
          <div class="col-lg-12 col-md-12 col-sm-12">
-             <hr />
-<h2>Sucess! Order submitted for delivery!</h2>
+                             <hr />
+                <h2>Sucess! Order submitted for delivery!</h2>
 
-                <hr />
+                                <hr />
          </div>
      </div>
      <div  class="row pad-top-botm client-info">
-         <div class="col-lg-6 col-md-6 col-sm-6">
+         <div class="col-lg-6 col-md-6 col-sm-6"><br>
          <h4>  <strong>Customer Information</strong></h4>
            <strong> <?php echo($savedOrder['Order']['first_name'] . ' ' . $savedOrder['Order']['last_name']); ?></strong>
              <br />
@@ -47,17 +47,13 @@
 
          </div>
           <div class="col-lg-6 col-md-6 col-sm-6">
-            
-               <h4>  <strong>Delivery Date </strong></h4>
-
-               Delivery Date :  <?php echo ($savedOrder['Order']['delivery_time'] . ', ' . $savedOrder['Order']['delivery_date']); ?>              <br />
-               Purchase Date : <?php $savedOrder['Order']['created']; ?>
-               <h4>  <strong>Payment Details </strong></h4>
-            <b>Bill Amount :  990 USD </b>
-              <br />
-               Bill Date : <?php echo $savedOrder['Order']['created']; ?>              <br />
-               <b>Payment Status :  Paid </b>
-               <br />
+            <br>
+               <h4>  <strong>Order Details </strong></h4>
+                           <b>Bill Amount :  $<?php echo $savedOrder['Order']['total']; ?></b><br>
+                                          <b>Payment Status :  Paid </b><br>
+               Delivery Date :  <?php echo ($savedOrder['Order']['delivery_date']); ?>              <br />
+               Delivery Time :  <?php echo ($savedOrder['Order']['delivery_time']); ?>              <br />
+               Purchase Date : <?php echo ($savedOrder['Order']['created']); ?><br>
 
          </div>
      </div>
@@ -75,10 +71,7 @@
 		
 		<table class="table table-striped table-bordered table-hover">
 		<tr>
-			<td colspan = "4"><b>Details</b></td>
-		</tr>
-		<tr>
-			<th>Item</th><th>Qty</th><th>Price</th>
+			<th>Items</th><th>Qty</th><th>Price</th>
 		</tr>
 
 		<?php if ($cartData == NULL) { ?>
@@ -114,7 +107,7 @@
 		?>
 		
 		<?php } ?>
-		</table>
+		</table><br>
 
                </div>
              <hr />
@@ -136,8 +129,8 @@
          <div class="col-lg-12 col-md-12 col-sm-12">
              <hr />
     <strong> Important: Please contact (XXX) XXX-XXXX with any concerns</strong>
-
+<br><br><br><br>
              </div>
          </div>
-
+</div>
 
