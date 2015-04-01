@@ -86,12 +86,13 @@
 			$deliveryFees=0;
 			$itemCount = count($cartData);
 			$deliveryRate = 0;
+      //debug()
 			foreach ($cartData as $cartItem) {
 		?>
 			<?php 
 			echo('<tr>'); ?>
 		<?php
-			echo('<td>' . $cartItem['name'] . '</td><td>' . $cartItem['quantity'] . '</td><td>$' . $cartItem['total'] . '</td></tr>'); ?> 
+			echo('<td>' . $cartItem['ItemsOrder']['name'] . '</td><td>' . $cartItem['ItemsOrder']['quantity'] . '</td><td>$' . $cartItem['ItemsOrder']['total'] . '</td></tr>'); ?> 
 
 		<?php  
 		

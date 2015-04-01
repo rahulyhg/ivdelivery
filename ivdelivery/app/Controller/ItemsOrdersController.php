@@ -143,6 +143,8 @@ class ItemsOrdersController extends AppController {
 	$itemName = $currentItem['Item']['name'];
 	$itemCost = $currentItem['Item']['cost'];
 	$itemDelivery = $currentItem['Item']['delivery_fee'];
+	//debug($currentItem);
+	//$supermarket_id = $currentItem['Item']['delivery_fee'];
 
 	//debug($currentItem);
 	//return false;
@@ -179,9 +181,9 @@ class ItemsOrdersController extends AppController {
 	//debug($allords 
 	
         if ($this->saveItemsOrder($allOrdersItems)) {
-		$this->Session->setFlash(__('The items order has been saved.'));
+		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
-		$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
+		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
 	}
 	$this->redirect($this->request->referer());
 	//$this->redirect( ‘/’ );
@@ -194,6 +196,7 @@ class ItemsOrdersController extends AppController {
 	//$this->layout = $this->autoRender = false;
 	
         $allOrdersItems = $this->Session->read('cart');
+
 	$currentItem = $this->ItemsOrder->Item->find('first', array(
 		'conditions' => array(
 			'Item.id' => $ordersitemId
@@ -229,9 +232,9 @@ class ItemsOrdersController extends AppController {
 	//debug($allords 
 	
         if ($this->saveItemsOrder($allOrdersItems)) {
-		$this->Session->setFlash(__('The items order has been saved.'));
+		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
-		$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
+		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
 	}
 	$this->redirect($this->request->referer());
 	//$this->redirect( ‘/’ );
@@ -301,9 +304,9 @@ class ItemsOrdersController extends AppController {
 	//debug($allords 
 	
         if ($this->saveItemsOrder($allOrdersItems)) {
-		$this->Session->setFlash(__('The items order has been saved.'));
+		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
-		$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
+		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
 	}
 	$this->redirect($this->request->referer());
 	//$this->redirect( ‘/’ );

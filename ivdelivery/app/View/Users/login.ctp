@@ -41,13 +41,13 @@
     </fieldset>
 			<?php echo $this->Form->submit('Sign in', array(
 				'div' => false,
-				'class' => 'btn btn-skin btn-lg',
+				'class' => 'btn btn-success btn-lg',
                 'name' => 'btn2'
 			)); ?>
             <br><br><br><br>
             <legend>
             Not a member?</legend><br>
-            <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'Users', 'action' => 'signup'), array('class' => 'btn btn-lg')); ?><br><br>
+            <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'Users', 'action' => 'signup'), array('class' => 'btn btn-success btn-lg')); ?><br><br>
 
             <br><br><br><br><br><br><br><br><br>
 </div>

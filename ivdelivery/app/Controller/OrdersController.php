@@ -412,10 +412,10 @@ class OrdersController extends AppController {
 			//return false;
 			$currentItem = $this->Order->Item->findById($item['ItemsOrder']['item_id']);
 			//`debug($currentItem);
-			$cartData['OrderItem']['quantity']= $item['ItemsOrder']['quantity'];
-			$cartData['OrderItem']['total']=$item['ItemsOrder']['total'];
-			$cartData['OrderItem']['name']=$item['ItemsOrder']['name'];
-
+			$cartData[$cartItemCount]['ItemsOrder']['quantity']= $item['ItemsOrder']['quantity'];
+			$cartData[$cartItemCount]['ItemsOrder']['total']=$item['ItemsOrder']['total'];
+			$cartData[$cartItemCount]['ItemsOrder']['name']=$item['ItemsOrder']['name'];
+			$cartItemCount = ($cartItemCount + 1);
 			//$cartData[$cartItemCount]['name']=
 			//return false;
 			

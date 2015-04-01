@@ -78,7 +78,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="/">
                     <h1 id="brand">Food Swoop</h1>
                 </a>
             </div>
@@ -157,13 +157,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <div class="container">
       <div class="row">
         <div class="col-md-12 col-lg-12">
-          <div class="wow shake" data-wow-delay="0.4s">
-          <div class="page-scroll marginbot-30">
-            <a href="#intro" id="totop" class="btn btn-circle">
-              <i class="fa fa-angle-double-up animated"></i>
-            </a>
-          </div>
-          </div>
+   
           <p>&copy;Copyright 2015 - Food Swoop. All rights reserved.</p>
         </div>
       </div>  

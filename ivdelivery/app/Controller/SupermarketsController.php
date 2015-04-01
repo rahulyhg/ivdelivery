@@ -156,8 +156,9 @@ class SupermarketsController extends AppController {
 						//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
 						return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 					} else {
+									debug($this->validationErrors);
 									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
-
+									return false;
 
 					}
 			
@@ -179,9 +180,12 @@ class SupermarketsController extends AppController {
 										return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 									}
 					} else {
-									//$this->User->validationErrors;
+									//debug($this->validationErrors->User);
+									//$this->validationErrors->User[1] = $this->validationErrors['User'];
 									//$this->set('validationErrorsArray', $this->User->invalidFields());
 									$this->Session->setFlash(__('Registration failed', 'alert alert-danger'));
+									return false;
+									//$this->set('formName2', 'User'); //we need to pass a reference to the view for validation display
 									//$this->User->validate;
 									//return false;
 									//$this->redirect($this->request->referer());

@@ -85,7 +85,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
 	<!--<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">-->
     <link href="http://foodswoop.com/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="http://foodswoop.com//color/default.css" rel="stylesheet">
+	<link href="http://foodswoop.com/color/default.css" rel="stylesheet">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -93,7 +93,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<div id="preloader">
 	  <div id="load"></div>
 	</div>
-
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=869140499816984&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -172,7 +179,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 		<div class="slogan">
 			<h2>WELCOME TO <span class="text_color">Food Swoop</span> </h2>
-			<h4>Now Delivering to Isla Vista</h4>
+			<h4>Coming Soon to Isla Vista</h4><div class="fb-like" data-href="https://www.facebook.com/foodswoopk" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+			<br><br>
+			<a class="twitter-follow-button"
+  href="https://twitter.com/food_swoop"
+  data-show-count="false"
+  data-lang="en">
+Follow Us
+</a>
+<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script><br>
 		</div>
 		<div class="page-scroll">
 			<a href="#service" class="btn btn-circle">
