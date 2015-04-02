@@ -29,14 +29,6 @@ public $displayField = 'username';
 		    )
 		),
 		'username' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
 		),
 		'first_name' => array(
 			'notEmpty' => array(
@@ -59,8 +51,8 @@ public $displayField = 'username';
 			),
 		),
 		'phone' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

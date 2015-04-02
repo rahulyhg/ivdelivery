@@ -9,18 +9,6 @@
  <div class="panel panel-info">
 <div class="panel-heading" id="edit1">Details<?php //echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?> 	<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('id'=> 'delete'), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </div>
 	<dl class="dl-horizontal" id="edit1">
-		<?php if ($user['User']['role'] == "admin") { ?>
-		<dt><?php echo __('Type'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['role']); ?>
-			&nbsp;
-		</dd>
-		<?php } ?>
-		<dt><?php echo __('Username'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['username']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('First Name'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['first_name']); ?>

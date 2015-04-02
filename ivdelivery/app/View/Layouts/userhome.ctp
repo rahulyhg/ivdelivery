@@ -115,7 +115,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <meta name="author" content="">
 
     <title>Food Swoop</title>
-    <link href="http://foodswoop.com/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link href="http://foodswoop.com/color/default.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->

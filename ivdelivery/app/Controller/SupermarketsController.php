@@ -125,6 +125,8 @@ class SupermarketsController extends AppController {
  */
 	public function home() {
 		//debug($this->Auth->user);
+		$this->response->header('Access-Control-Allow-Origin', '*');
+
 		$id = AuthComponent::user('id');
 		//debug($id);
 		if (isset($id)) {
@@ -156,9 +158,9 @@ class SupermarketsController extends AppController {
 						//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
 						return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 					} else {
-									debug($this->validationErrors);
+									//debug($this->validationErrors);
 									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
-									return false;
+									//return false;
 
 					}
 			
@@ -184,7 +186,7 @@ class SupermarketsController extends AppController {
 									//$this->validationErrors->User[1] = $this->validationErrors['User'];
 									//$this->set('validationErrorsArray', $this->User->invalidFields());
 									$this->Session->setFlash(__('Registration failed', 'alert alert-danger'));
-									return false;
+									//return false;
 									//$this->set('formName2', 'User'); //we need to pass a reference to the view for validation display
 									//$this->User->validate;
 									//return false;

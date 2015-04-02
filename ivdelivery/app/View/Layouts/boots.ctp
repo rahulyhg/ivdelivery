@@ -108,9 +108,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                            <div class="row">
                               <div class="col-md-12">
                 <?php 
-                echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form', 'novalidate' => true), array('controller' => 'Users', 'action'=>'login'));
+                echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form'), array('controller' => 'Users', 'action'=>'login'));
                           echo '<div class="form-group">';
-                                  echo $this->Form->input('User.0.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
+                                  echo $this->Form->input('User.0.email', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
                           echo '</div>';
                           echo '<div class="form-group">';
                                   echo $this->Form->input('User.0.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password', 'error' => false));
@@ -119,6 +119,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                     'Sign In', 
                     array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name'=>'btn1')
                 );
+                                echo $this->Form->end();
+
                       ?>
                               </div>
                            </div>

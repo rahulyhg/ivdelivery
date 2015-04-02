@@ -31,7 +31,7 @@
         </legend>
         <table class="table"><tr><td><br>
         <?php 
-	echo $this->Form->input('User.1.username'); ?>
+	echo $this->Form->input('User.1.email'); ?>
     <br>
 
 

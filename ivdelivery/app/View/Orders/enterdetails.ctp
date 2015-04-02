@@ -110,6 +110,37 @@
 	?>
 	<br>
 	<?php
+
+
+		date_default_timezone_set("America/Los_Angeles"); 
+		$time1 = time();
+		//debug($time1);
+		$date = date_create();
+		date_timestamp_set($date, $time1);
+		echo date_format($date, 'U = H:i:s') . "\n";
+		$currentTime = date_format($date, 'H:i:s');
+		debug($currentTime);
+
+		if ($currentTime < '10:00:00') {
+			debug('a');
+		} elseif ($currentTime < '13:00:00') {
+			$options = array('15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+
+		} elseif ($currentTime < '17:00:00') {
+			$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+
+		} else {
+			$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+
+
+		}
+
+//debug($time);
+//$timeval=array_values($time);
+//debug($timeval);
+				//$newtime=date('H:i', strtotime($time));
+				//debug($time);
+	
 		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
 		echo $this->Form->radio('delivery_time', $options, array('type' =>'radio', 'legend' => false));

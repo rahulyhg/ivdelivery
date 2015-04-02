@@ -50,13 +50,7 @@ legend {
 
 		echo $this->Form->input('User.1.password');
 
-	?></td></tr><tr><td colspan="2">
-									<?php
-									echo $this->Form->input('User.1.username');
-
-									?>
-
-								</td></tr>
+	?></td></tr>
 
 
 </table>

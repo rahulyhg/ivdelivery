@@ -22,6 +22,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <html lang="en">
 
 <head>
+	 <?php
+ header("Access-Control-Allow-Origin: *"); ?>
 <script>
 
 </script>
@@ -84,8 +86,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <!-- Squad theme CSS -->
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
 	<!--<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">-->
-    <link href="http://foodswoop.com/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="http://foodswoop.com/color/default.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link href="foodswoop.com/color/default.css" rel="stylesheet">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -135,9 +137,9 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
                            <div class="row">
                               <div class="col-md-12">
 			                              	<?php 
-			 					echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form', 'novalidate' => true), array('controller' => 'Users', 'action'=>'login'));
+			 					echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form'), array('controller' => 'Users', 'action'=>'login'));
 			                    echo '<div class="form-group">';
-			                            echo $this->Form->input('User.0.username', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
+			                            echo $this->Form->input('User.0.email', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
 			                    echo '</div>';
 			                    echo '<div class="form-group">';
 			                            echo $this->Form->input('User.0.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password', 'error' => false));
@@ -146,6 +148,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 								    'Sign In', 
 								    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name'=>'btn1')
 								);
+								echo $this->Form->end();
 			                ?>
                               </div>
                            </div>
@@ -179,15 +182,17 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 		<div class="slogan">
 			<h2>WELCOME TO <span class="text_color">Food Swoop</span> </h2>
-			<h4>Coming Soon to Isla Vista</h4><div class="fb-like" data-href="https://www.facebook.com/foodswoopk" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
-			<br><br>
+			<h4>Coming Soon to Isla Vista</h4>
+			
 			<a class="twitter-follow-button"
   href="https://twitter.com/food_swoop"
   data-show-count="false"
   data-lang="en">
 Follow Us
 </a>
-<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script><br>
+<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script><br><br>
+
+<div class="fb-like" data-href="https://www.facebook.com/foodswoopk" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div><br>
 		</div>
 		<div class="page-scroll">
 			<a href="#service" class="btn btn-circle">
@@ -203,7 +208,7 @@ Follow Us
 			<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
+					<div class="wow bounceInDown" data-wow-delay="0.1s">
 					<div class="section-heading">
 					<h2>Who We Are</h2>
 					<i class="fa fa-2x fa-angle-down"></i>
@@ -315,7 +320,7 @@ Follow Us
 			<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
+					<div class="wow bounceInDown" data-wow-delay="0.1s">
 					<div class="section-heading">
 					<h2>Our Services</h2>
 					<i class="fa fa-2x fa-angle-down"></i>
@@ -413,7 +418,7 @@ Follow Us
 				<div class="container">
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2">
-						<div class="wow bounceInDown" data-wow-delay="0.4s">
+						<div class="wow bounceInDown" data-wow-delay="0.1s">
 						<div class="section-heading">
 						<h2>Sign Up!</h2>
 						<i class="fa fa-2x fa-angle-down"></i>
@@ -437,7 +442,7 @@ Follow Us
 							<?php echo $this->Form->create('User', array(
 							    'inputDefaults' => array(
 							        'class' => 'form-control',
-							        'novalidate' => true
+							        //'novalidate' => true
 							    ),  array('controller' => 'Users', 'action'=>'login', 'btn2')
 							)); ?>
 								<fieldset>
@@ -470,14 +475,7 @@ Follow Us
 
 									echo $this->Form->input('User.1.password');
 
-								?></td></tr><tr><td colspan="2">
-									<?php
-									echo $this->Form->hidden('User.1.role', array('value' => 'customer'));
-									echo $this->Form->input('User.1.username');
-
-									?>
-
-								</td></tr>
+								?></td></tr>
 								</table>
 								</fieldset><br><br>
 							<?php
@@ -485,7 +483,9 @@ Follow Us
 							    'Submit',
 							    array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs', 'name' => 'btn2')
 							);
+							echo $this->Form->end();
 							?>
+
 							</div>
 						</div>
 		        </div>
