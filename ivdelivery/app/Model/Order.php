@@ -2,6 +2,7 @@
 App::uses('AppModel', 'Model');
 App::uses('ItemsOrders', 'Model');
 App::uses('Orders', 'Model');
+App::uses('Items', 'Model');
 
 
 /**
@@ -16,6 +17,7 @@ App::uses('Orders', 'Model');
 class Order extends AppModel {
 
     //public $displayField = 'last_name';
+public $recursive = 0;
 
 /**
  * Validation rules
@@ -358,19 +360,27 @@ class Order extends AppModel {
 	$ordersDataSource->begin();
 	$itemsOrderDataSource->begin();
 	$paymentsDataSource->begin();
-
+	//$this->loadModel('Item');
 	if (!empty($orderDetails)) {		
 		if ($this->saveAll($orderDetails)) {
 			//return true;
 			$orderId=$this->id;
+			//debug($orderItemsData);
+			//return false;
 			foreach ($orderItemsData as $orderItem) {
 				$orderItem['order_id']=$orderId;
+				//debug($orderItem['id']);
+				$item = $this->Item->find('first', array(
+					'conditions' => array('Item.id' => $orderItem['id'])
+					));
+				$category_id = $item['Item']['category_id'];
 				$this->ItemsOrder->create();
 				//debug($orderItem);
 				//return false;
 				$orderItem['item_id'] = $orderItem['id'];
 				$orderItem['purchased'] = 'false';
 				$orderItem['added_to_order'] = 'false';
+				$orderItem['category_id'] = $category_id;
 
 				unset($orderItem['id']);
 				if (!($this->ItemsOrder->save($orderItem))) {

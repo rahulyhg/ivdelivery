@@ -7,6 +7,9 @@ App::uses('AppModel', 'Model');
  */
 class Category extends AppModel {
 
+public $recursive = -1;
+
+
 /**
  * Validation rules
  *

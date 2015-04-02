@@ -29,7 +29,7 @@
 <?php } ?>
 
 <br>
-
+<?php debug($categories); ?>
 
 	<h2><?php echo __($supername . ' ' . $time . ', ' . $date); ?></h2>
 	<h4>Order Count: </h4>

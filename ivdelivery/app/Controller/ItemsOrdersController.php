@@ -344,14 +344,16 @@ public function resultsitemsorders($id = null) {
 			array('Order.delivery_time' => $time),
 			array('Order.supermarket_id' => $supermarket_id),
 			array('Order.payment_status' => 'paid'),
-			array('ItemsOrder.canceled' => '')
+			array('ItemsOrder.canceled' => ''),
 		);
 		
 		//$orders = $this->Order->find('all');
-		$itemsOrders = $this->ItemsOrder->find('all', array('conditions' => $conditions));
+		$itemsOrders = $this->ItemsOrder->find('all', array('conditions' => $conditions, 'order' => array('ItemsOrder.category_id' => 'desc'), 'recursive' => 0));
 		$this->set('itemsOrders', $this->Paginator->paginate());
 		$this->set('itemsOrders', $itemsOrders);		
 
+		$categories = $this->ItemsOrder->Item->Category->find('all');
+		$this->set('categories', $categories);		
 		//$itemsOrders = $this->Order->ItemsOrder->find('list', array('conditions' => $conditions));
 		//debug($orders);
 		//return false;
@@ -390,6 +392,7 @@ public function resultsitemsorders($id = null) {
 		//$this->set('orders', $this->Paginator->paginate());
 		//$this->ItemsOrder->recursive = 0;
 		$supermarket = $this->ItemsOrder->Order->Supermarket->findById($supermarket_id);
+		//debug($supermarket);
 		$supername = $supermarket['Supermarket']['name'];
 
 		$this->set(compact('orders', 'date', 'time', 'supermarket_id', 'supername', 'date1'));

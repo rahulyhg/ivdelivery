@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-
+		<?php //debug($categories); ?>
 <div class="itemsOrders index">
 <?php //debug($namedparams);
 		//unset($namedparams['sort']);
@@ -28,6 +28,7 @@
 			<th><?php echo $this->Paginator->sort('order_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('cost'); ?></th>
 			<th><?php echo $this->Paginator->sort('total'); ?></th>
+			<th><?php echo $this->Paginator->sort('category'); ?></th>
    			<th><?php echo $this->Paginator->sort('purchased'); ?></th>
 			<th class="actions"></th>
 	</tr>
@@ -45,6 +46,7 @@
 		</td>
 		<td>$<?php echo h($itemsOrder['ItemsOrder']['cost']); ?>&nbsp;</td>
 		<td>$<?php echo h($itemsOrder['ItemsOrder']['total']); ?>&nbsp;</td>
+		<td><?php echo h($itemsOrder['ItemsOrder']['category_id']); ?>&nbsp;</td>
 		<td><?php echo h($itemsOrder['ItemsOrder']['purchased']); ?>&nbsp;</td>
 
 		<td class="actions">

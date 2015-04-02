@@ -8,6 +8,9 @@ App::uses('AppModel', 'Model');
  */
 class Item extends AppModel {
 
+public $recursive = -1;
+
+
 /**
  * Validation rules
  *

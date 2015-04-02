@@ -7,6 +7,9 @@ App::uses('AppModel', 'Model');
  */
 class Supermarket extends AppModel {
 
+public $recursive = 1;
+
+
 /**
  * Validation rules
  *

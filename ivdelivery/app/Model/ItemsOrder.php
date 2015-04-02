@@ -8,6 +8,8 @@ App::uses('AppModel', 'Model');
  */
 class ItemsOrder extends AppModel {
 
+public $recursive = 0;
+
 /**
  * Validation rules
  *
