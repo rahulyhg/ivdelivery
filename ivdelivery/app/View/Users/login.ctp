@@ -20,14 +20,13 @@
                             <?php echo $this->Form->create('User', array(
                                 'inputDefaults' => array(
                                     'class' => 'form-control',
-                                    'novalidate' => true
                                 ),  array('controller' => 'Users', 'action'=>'login', 'btn2')
                             )); ?>
 
 
     <fieldset>
         <legend>
-            <?php echo __('Please enter your username and password'); ?>
+            <?php echo __('Please enter your email and password'); ?>
         </legend>
         <table class="table"><tr><td><br>
         <?php 
@@ -47,7 +46,11 @@
             <br><br><br><br>
             <legend>
             Not a member?</legend><br>
-            <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'Users', 'action' => 'signup'), array('class' => 'btn btn-success btn-lg')); ?><br><br>
+            <?php echo $this->Html->link(__('Sign Up'), array('controller' => 'Users', 'action' => 'signup'), array('class' => 'btn btn-success btn-lg')); ?>
+
+<?php                           echo $this->Form->end(); ?>
+
+            <br><br>
 
             <br><br><br><br><br><br><br><br><br>
 </div>

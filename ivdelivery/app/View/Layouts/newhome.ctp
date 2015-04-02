@@ -339,22 +339,7 @@ Follow Us
 			</div>
 		</div>
         <div class="row">
-            <div class="col-sm-4 col-md-4">
-				<div class="wow fadeInLeft" data-wow-delay="0.2s">
-                <div class="service-box">
-					<!--<div class="service-icon">
-						<img src="img/icons/service-icon-1.png" alt="" />
-					</div>-->
-					<div class="service-desc">
-						<br><h3>Albertsons</h3><br>
-					</div>
-                            <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?>
-                </div>
-				</div>
-            </div>
-			<div class="col-sm-4 col-md-4">
+			<div class="col-sm-6 col-md-6">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
 					<!--<div class="service-icon">
@@ -370,7 +355,7 @@ Follow Us
                 </div>
 				</div>
             </div>
-			<div class="col-sm-4 col-md-4">
+			<div class="col-sm-6 col-md-6">
 				<div class="wow fadeInUp" data-wow-delay="0.2s">
                 <div class="service-box">
 					<!--<div class="service-icon">
@@ -392,7 +377,7 @@ Follow Us
 	<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
+					<div class="wow bounceInDown" data-wow-delay="0.2s">
 					<div class="section-heading"><br><br><br><br><br>
 					<p id="servicedescription">We shop at Costco and Trader Joe’s and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br><br>
  
