@@ -191,10 +191,7 @@
 	<?php } ?>
 	</table>
   		<?php echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'enterdetails', $supermarket['Supermarket']['id']), array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')); ?>
-<br><br> 
-			<?php echo $this->Form->postLink(__('Empty Cart'), array('controller' => 'OrdersItems', 'action' => 'emptyCart'), array('class' => 'btn btn-danger btn-sm'), __('Are you sure you want to empty cart')); ?>
-		<br>
-
+<br>
 
 
 

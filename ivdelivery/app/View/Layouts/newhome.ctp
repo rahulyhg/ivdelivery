@@ -139,7 +139,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			                              	<?php 
 			 					echo $this->Form->create('User', array('class'=>'navbar-form navbar-right','role' => 'form'), array('controller' => 'Users', 'action'=>'login'));
 			                    echo '<div class="form-group">';
-			                            echo $this->Form->input('User.0.email', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Username', 'error' => false));
+			                            echo $this->Form->input('User.0.email', array('label' => false, 'class'=>'form-control', 'placeholder' => 'Email', 'error' => false));
 			                    echo '</div>';
 			                    echo '<div class="form-group">';
 			                            echo $this->Form->input('User.0.password',array('label' => false, 'class'=>'form-control', 'placeholder' => 'Password', 'error' => false));
@@ -159,7 +159,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Shop Now <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><?php echo $this->Html->link(__('Albertsons'), array('controller' => 'orders', 'action' => 'placeorder', '54eea603-9c10-4f74-afd7-04a4c0aa087a')); ?></li>
             <li><?php echo $this->Html->link(__('Costco'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a')); ?></li>
             <li><?php echo $this->Html->link(__('Trader Joes'), array('controller' => 'Orders', 'action' => 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a')); ?></li>
           </ul>
@@ -395,7 +394,7 @@ Follow Us
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="wow bounceInDown" data-wow-delay="0.4s">
 					<div class="section-heading"><br><br><br><br><br>
-					<p id="servicedescription">We shop at Trader Joe’s, Albertson’s, and Costco and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br><br>
+					<p id="servicedescription">We shop at Costco and Trader Joe’s and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br><br>
  
 <p>*orders must be placed one hour before the delivery window.</p>
 

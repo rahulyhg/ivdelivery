@@ -200,7 +200,37 @@ class OrdersController extends AppController {
 		//reset($categories);
 		//debug($categories);
 		//debug($catCount);
+		if ($this->request->is('post')) {
+			//debug($this->request->data);
+			//return false;
+			if (isset($this->request->data['btn1'])){
+					unset($this->request->data['btn1']);
+					unset($this->request->data['log']);
+					unset($this->request->data['User'][1]);
+					$data = $this->request->data['User'][0];
+					unset($this->request->data['User'][0]);
+					$this->request->data['User'] = $data;
+					$password = $this->request->data['User']['password'];
+					unset($this->request->data['User']['password']);
+					$this->request->data['User']['password'] = $password;
+					//debug($this->request->data);
+					//return false;
+					//$data = $this->request->data['User'][0];
+					//$userdata = $data;
+					//debug($userdata);
+					//$this->loadModel('Users');
+					if ($this->Auth->login()) {
+						//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
+						return $this->redirect(array('action' => 'placeorder', $id));
+					} else {
+									//debug($this->validationErrors);
+									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
+									//return false;
 
+					}
+			
+			}
+		}
 
 
 		$authuserid = $this->Auth->user('id');
@@ -209,31 +239,7 @@ class OrdersController extends AppController {
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
         $cartData = $this->Session->read('cart.' . $id);
 		$this->set('cartData', $cartData);		
-		if ($this->request->is('post')) {
-
-
-			debug($this->request->data);
-			
-			$orderData = $this->request->data['Order'];
-			$orderItemsData = $this->request->data['ItemsOrder'];
-			$paymentData = $this->request->data['Payment'];
-		
-			if ($this->Session->write('Order', $orderData)) {
-				return true;
-			}
-			return false;
-			
-			$this->Order->create();
-			//$this->Order->OrdersItem->create();
-			if ($this->Order->placeNewOrder($this->request->data)) {
-			//if ($this->Order->placeNewOrder($this->request->data)) {
-				$this->Session->setFlash(__('The order has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				//debug($this->Order->validationErrors);
-				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-			}
-		}
+	
 
 
 	}

@@ -20,7 +20,7 @@ class ItemsOrdersController extends AppController {
 
 
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'add', 'edit', 'delete', 'addItemsOrder', 'getCount', 'resultsitemsorders', 'saveItemsOrder', 'readItemsOrder', 'deleteFromCart', 'updatePurchaseStatus', 'updateOrderStatus');
+        $this->Auth->allow('index', 'view', 'add', 'edit', 'delete', 'addItemsOrder', 'getCount', 'resultsitemsorders', 'saveItemsOrder', 'removeItemsOrder', 'readItemsOrder', 'deleteFromCart', 'updatePurchaseStatus', 'updateOrderStatus', 'emptyCart');
     }
 
 	public function isAuthorized($user) {
@@ -183,7 +183,6 @@ class ItemsOrdersController extends AppController {
         }
         
 	//debug($allords 
-	
         if ($this->saveItemsOrder($allOrdersItems, $supermarket_id)) {
 		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
@@ -199,8 +198,6 @@ class ItemsOrdersController extends AppController {
 	//$this->autoRender = false;
 	//$this->layout = $this->autoRender = false;
 	
-        $allOrdersItems = $this->Session->read('cart');
-
 	$currentItem = $this->ItemsOrder->Item->find('first', array(
 		'conditions' => array(
 			'Item.id' => $ordersitemId
@@ -209,6 +206,9 @@ class ItemsOrdersController extends AppController {
 	$itemName = $currentItem['Item']['name'];
 	$itemCost = $currentItem['Item']['cost'];
 	$itemDelivery = $currentItem['Item']['delivery_fee'];
+	$supermarket_id = $currentItem['Item']['supermarket_id'];
+        
+        $allOrdersItems = $this->Session->read('cart.' . $supermarket_id);
 
 	//debug($currentItem);
 	//return false;
@@ -220,7 +220,7 @@ class ItemsOrdersController extends AppController {
                 $newQuantity = $allOrdersItems[$ordersitemId]['quantity'];
 
 				if ($newQuantity < 1)  {
-						$this->redirect(array('action' => 'deleteFromCart', $ordersitemId));
+						$this->redirect(array('action' => 'deleteFromCart', $ordersitemId, $supermarket_id));
 
 				} else {
 						$cost = $allOrdersItems[$ordersitemId]['cost'];
@@ -235,7 +235,7 @@ class ItemsOrdersController extends AppController {
         
 	//debug($allords 
 	
-        if ($this->saveItemsOrder($allOrdersItems)) {
+        if ($this->saveItemsOrder($allOrdersItems, $supermarket_id)) {
 		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
 		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
@@ -281,18 +281,21 @@ class ItemsOrdersController extends AppController {
          return $this->Session->read('cart');
             }
 
-    public function emptyCart() {
-	$this->Session->delete('cart');
-	$this->redirect($this->request->referer());
+
+    public function emptyCart($id) {
+    	debug($id);
+    	//return false;
+		$this->Session->delete('cart.' . $id);
+		$this->redirect($this->request->referer());
 
 	}
 
 
-  public function deleteFromCart($ordersitemId) {
+  public function deleteFromCart($ordersitemId, $supermarket_id) {
 	//$this->autoRender = false;
 	//$this->layout = $this->autoRender = false;
 	
-        $allOrdersItems = $this->Session->read('cart');
+        $allOrdersItems = $this->Session->read('cart.' . $supermarket_id);
 
 
 	//debug($currentItem);
@@ -307,7 +310,7 @@ class ItemsOrdersController extends AppController {
         
 	//debug($allords 
 	
-        if ($this->saveItemsOrder($allOrdersItems)) {
+        if ($this->saveItemsOrder($allOrdersItems, $supermarket_id)) {
 		//$this->Session->setFlash(__('The items order has been saved.'));
 	} else {
 		//$this->Session->setFlash(__('The items order could not be saved. Please, try again.'));
