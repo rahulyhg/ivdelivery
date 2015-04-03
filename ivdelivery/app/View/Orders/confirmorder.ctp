@@ -200,7 +200,7 @@ echo $this->Form->submit(
 
 
      <div class="col-md-4 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div data-spy="affix" data-offset-top="45" data-offset-bottom="90">
+          <div>
 
 
 <br>	<br>
