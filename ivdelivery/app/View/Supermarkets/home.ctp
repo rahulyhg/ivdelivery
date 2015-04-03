@@ -1,51 +1,56 @@
+<style>
+#edit1 {
+	text-align: left !important;
 
 
-<div class="supermarkets index">
-	<h2><?php echo __('Supermarkets'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('street'); ?></th>
-			<th><?php echo $this->Paginator->sort('zip'); ?></th>
-			<th><?php echo $this->Paginator->sort('phone'); ?></th>
-			<th><?php echo $this->Paginator->sort('img'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($supermarkets as $supermarket): ?>
-	<tr>
-		<td><?php echo h($supermarket['Supermarket']['id']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['name']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['street']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['zip']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['phone']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['img']); ?>&nbsp;</td>
-		<td><?php echo h($supermarket['Supermarket']['description']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $supermarket['Supermarket']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $supermarket['Supermarket']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $supermarket['Supermarket']['id']), array(), __('Are you sure you want to delete # %s?', $supermarket['Supermarket']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+}
+</style> 
+<?php $user['User'] = $authUser; ?>
+ <div class="panel panel-info">
+<div class="panel-heading" id="edit1">Details<?php //echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?> 	<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array('id'=> 'delete'), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?> </div>
+	<dl class="dl-horizontal" id="edit1">
+		<dt><?php echo __('First Name'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['first_name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Last Name'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['last_name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Phone'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['phone']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Street'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['street']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Street 2'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['street_2']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Zip'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['zip']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Email'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['email']); ?>
+			&nbsp;
+		</dd>
+
+	</dl>
 </div>
 
+
+</div>
+
+<br>
+<br>
+				            <?php echo $this->Html->link(__('Edit'), array('controller' => 'Users', 'action' => 'signup'), array('class' => 'btn btn-lg')); ?><br><br>

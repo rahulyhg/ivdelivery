@@ -27,7 +27,7 @@ class UsersController extends AppController {
 		$id = AuthComponent::user('id');
 		//debug($id);
 		if (isset($id)) {
-				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+				return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 		}
 
 
@@ -218,7 +218,7 @@ class UsersController extends AppController {
 		$id = AuthComponent::user('id');
 		//debug($id);
 		if (isset($id)) {
-				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+				return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 		}
 
         $this->layout = 'boots';

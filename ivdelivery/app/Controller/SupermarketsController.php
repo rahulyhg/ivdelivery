@@ -130,7 +130,7 @@ class SupermarketsController extends AppController {
 		$id = AuthComponent::user('id');
 		//debug($id);
 		if (isset($id)) {
-				return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+				//return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 		}
  		$this->layout = 'newhome';
 		$this->Supermarket->recursive = 0;
@@ -156,7 +156,7 @@ class SupermarketsController extends AppController {
 					//$this->loadModel('Users');
 					if ($this->Auth->login()) {
 						//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
-						return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+						return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 					} else {
 									//debug($this->validationErrors);
 									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
@@ -179,7 +179,7 @@ class SupermarketsController extends AppController {
 									//debug('a');
 									if ($this->Auth->login()) {
 										//debug('b');
-										return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+										return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 									}
 					} else {
 									//debug($this->validationErrors->User);
