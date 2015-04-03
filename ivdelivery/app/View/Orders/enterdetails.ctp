@@ -104,6 +104,7 @@
 	<?php
 		echo $this->Form->input('delivery_date', array('legend' => false));
 	?>
+	
 	<br>
 	<?php
 		echo $this->Form->label('Delivery Time');

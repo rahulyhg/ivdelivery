@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'College Delivers');
+$cakeDescription = __d('cake_dev', 'Food Swoop');
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 
@@ -27,7 +27,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script>
 
 </script>
-
+<meta name="keywords" content="Groceries, Goleta, Trader Joes, Costco, conveniance, lunch, dinner, delivery, isla vista, college, ucsb, grocery, food, swoop, del playa, dp, iv, service, student">
+<meta name="description" content="Isla Vista / UCSB Grocery Delivery">
 	<style>
 	.top-nav-collapse {
 		background-color: #FA8072 !important;
