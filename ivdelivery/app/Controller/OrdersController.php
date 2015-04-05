@@ -453,7 +453,7 @@ class OrdersController extends AppController {
          	//$cartData = $this->Session->read('cart');
 		//debug($cartData);
 		$this->set('cartData', $cartData);		
-		return false;
+		//return false;
 
 	}
 

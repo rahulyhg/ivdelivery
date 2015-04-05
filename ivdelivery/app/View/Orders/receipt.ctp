@@ -113,7 +113,7 @@
                </div>
              <hr />
              <div class="ttl-amts">
-               <h5>  Grocery Total Amount: $<?php echo $savedOrder['Order']['item_total']; ?> </h5>
+               <h5>  Grocery Item Total: $<?php echo $savedOrder['Order']['item_total']; ?> </h5>
              </div>
              <hr />
               <div class="ttl-amts">

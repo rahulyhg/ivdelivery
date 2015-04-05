@@ -21,6 +21,10 @@
 }
 
 </style>
+<script>
+$('#sandbox-container .input-group.date').datepicker({
+});
+</script>
 
 <div class="row">
         
@@ -101,9 +105,9 @@
 <br>
 <fieldset>
 	<legend>Delivery Options</legend>
-	<?php
-		echo $this->Form->input('delivery_date', array('legend' => false));
-	?>
+<div class="input-group date">
+  <input type="text" name="delivery_date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
 	
 	<br>
 	<?php

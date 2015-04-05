@@ -31,7 +31,7 @@ class UsersController extends AppController {
 		}
 
 
-		        $this->layout = 'boots';
+		        $this->layout = 'login';
 		        //$lastRoute = $this->router->referer();
 
 
@@ -221,7 +221,7 @@ class UsersController extends AppController {
 				return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 		}
 
-        $this->layout = 'boots';
+        $this->layout = 'login';
 
 		if ($this->request->is('post')) {
 					//debug($this->request->data);
@@ -244,7 +244,7 @@ class UsersController extends AppController {
 							//$this->loadModel('Users');
 							if ($this->Auth->login()) {
 								//$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
-								return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+								return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 							} else {
 											$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
 
@@ -266,7 +266,7 @@ class UsersController extends AppController {
 											//debug('a');
 											if ($this->Auth->login()) {
 												//debug('b');
-												return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
+												return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 											}
 							} else {
 											//$this->User->validationErrors;
@@ -378,7 +378,7 @@ class UsersController extends AppController {
 					//$this->loadModel('Users');
 					if ($this->Auth->login()) {
 						$this->Session->setFlash(__('Successfully Logged In', 'alert alert-success'));
-						return $this->redirect(array('controller' => 'Supermarkets', 'action' => 'home'));
+						return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 					} else {
 									$this->Session->setFlash(__('Failed Logged In', 'alert alert-danger'));
 

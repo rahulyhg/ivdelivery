@@ -179,7 +179,7 @@
 <?php
 		echo $this->Form->input('notes');
 
-		echo $this->Form->hidden('item_total', array('value' => $itemTotal));
+		echo $this->Form->hidden('item_total', array('value' => $groceryTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => '1'));
 		echo $this->Form->hidden('total', array('default' => '1'));
 		echo $this->Form->hidden('driver_id');
