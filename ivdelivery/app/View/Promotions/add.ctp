@@ -7,6 +7,7 @@
 		echo $this->Form->input('discount_amount');
 		echo $this->Form->input('expiration_date');
 		echo $this->Form->input('limit');
+		echo $this->Form->input('description');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

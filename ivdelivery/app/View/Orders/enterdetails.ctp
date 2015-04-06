@@ -21,10 +21,7 @@
 }
 
 </style>
-<script>
-$('#sandbox-container .input-group.date').datepicker({
-});
-</script>
+
 
 <div class="row">
         
@@ -96,7 +93,10 @@ $('#sandbox-container .input-group.date').datepicker({
     'inputDefaults' => array(
         'class' => 'form-control'
     )
-)); ?>
+));
+
+
+ ?>
 
 <br>
 <h1>Order Details for <?php echo h($supermarket['Supermarket']['name']); ?>
@@ -105,26 +105,25 @@ $('#sandbox-container .input-group.date').datepicker({
 <br>
 <fieldset>
 	<legend>Delivery Options</legend>
-<div class="input-group date">
-  <input type="text" name="delivery_date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-</div>
-	
+
 	<br>
 	<?php
+
+		echo $this->Form->input('delivery_date', array('legend' => false));
+	?> <br><?php
+
 		echo $this->Form->label('Delivery Time');
 	?>
 	<br>
 	<?php
-
 
 		date_default_timezone_set("America/Los_Angeles"); 
 		$time1 = time();
 		//debug($time1);
 		$date = date_create();
 		date_timestamp_set($date, $time1);
-		echo date_format($date, 'U = H:i:s') . "\n";
+		date_format($date, 'U = H:i:s') . "\n";
 		$currentTime = date_format($date, 'H:i:s');
-		debug($currentTime);
 
 		if ($currentTime < '10:00:00') {
 			debug('a');
@@ -149,6 +148,9 @@ $('#sandbox-container .input-group.date').datepicker({
 		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
 		echo $this->Form->radio('delivery_time', $options, array('type' =>'radio', 'legend' => false));
+
+				//debug($currentTime);
+
 	?>
 	<br><br>
 	<?php
@@ -180,8 +182,6 @@ $('#sandbox-container .input-group.date').datepicker({
 		echo $this->Form->input('street_2', array('default' => $currentUser['street_2']));
 		echo $this->Form->input('phone', array('default' => $currentUser['phone']));
 		echo $this->Form->input('email', array('default' => $currentUser['email']));
-
-
 		echo $this->Form->hidden('item_total', array('value' => $itemTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
 		echo $this->Form->hidden('total', array('default' => $grandTotal));
@@ -194,7 +194,6 @@ $('#sandbox-container .input-group.date').datepicker({
 
 <fieldset>
 
-<br>
 
 <br>
 
@@ -203,8 +202,10 @@ $('#sandbox-container .input-group.date').datepicker({
 <?php
 echo $this->Form->submit(
     'Add Details', 
-    array('class' => 'btn btn-success btn-lg')
+    array('class' => 'btn btn-success btn-lg', 'name'=>'btnOrder')
 );
+								echo $this->Form->end();
+
 ?>
 <br><br><br>
 
@@ -296,13 +297,37 @@ echo $this->Form->submit(
 
 	?>
 	<tr><td colspan="3"><b>Item Total: </b>$<?php echo $groceryTotal; ?></td></tr>
-	
+	<?php if ($voucherUsed == 'true') { ?>
+			<tr><td colspan="3"><b>Discount Reward: </b><?php echo $promotion; ?></td></tr>
+	<?php } ?>
+
+
 	<?php } ?>
 	</table>
   		<?php //echo $this->Html->link(__('Empty Cart'), array('controller' => 'OrdersItems', 'action' => 'emptyCart'), array('class' => 'btn btn-danger btn-lg')); ?> 
   		<?php //echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'emptyCart'), array('class' => 'btn btn-primary btn-lg')); ?> 
 <br>
+<?php echo $this->Form->create('Promotion', array(
+    'inputDefaults' => array(
+        'class' => 'form-control'
+    )
+)); ?>
+<?php
+	if ($voucherUsed == 'false')	{
+?>
+<?php
+		echo $this->Form->input('Promotion.code');
+?><br>
+<?php
+		echo $this->Form->submit(
+		    'Add Voucher', 
+		    array('class' => 'btn btn-success btn-lg', 'name'=>'btnPromotion')
+		);
 
+	}
+									echo $this->Form->end();
+
+?>
 
 </div>
 </div>

@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('code');
+		echo $this->Form->input('description');
 		echo $this->Form->input('discount_amount');
 		echo $this->Form->input('expiration_date');
 		echo $this->Form->input('limit');

@@ -2,12 +2,10 @@
 #itemimage {
 	max-width: 150px !important;
 	max-height: 150px !important;
-
 }
 #supermarketimage {
 	width: 250px !important;
 	height: 250px !important;
-
 }
 #ordersubmit {
 	align: center;
@@ -30,8 +28,6 @@
         <!--sidebar-->
         <!-- <div class="col-md-3 sidebar-offcanvas" id="sidebar" role="navigation">
       
-
-
         </div><!--/sidebar-->
         <!--/main--> 
         <div class="col-md-8" data-spy="scroll" data-target="#sidebar-nav">
@@ -75,7 +71,6 @@
 		$deliveryRate = 10;
 		$deliveryCost=($deliveryRate+$deliveryFees);
 		$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
-
 	}  elseif ($itemCount > 10 && $itemCount <= 20) {
 		$deliveryRate = 15;
 		if ($groceryTotal >= 200) {
@@ -85,9 +80,7 @@
 		} else {
 			$deliveryCost=($deliveryRate+$deliveryFees);
 			$grandTotal = ($groceryTotal+$deliveryCost);
-
 		}
-
 	}  elseif ($itemCount > 20) {
 		$deliveryRate = 20;
 		if ($groceryTotal >= 200) {
@@ -123,6 +116,14 @@
   <dd>$<?php echo $groceryTotal; ?></dd>
   <dt>Delivery Fees</dt>
   <dd>$<?php echo ($deliveryCost); ?></dd>
+  <dt>Discount Amount</dt>
+  <dd>$<?php 
+  if (!(isset($sessionOrderData['promotion_discount_amount']))) {
+  	echo('0');
+  } else {
+  	echo($sessionOrderData['promotion_discount_amount']);  
+  }
+  	?></dd>
   <dt>Processing Fee</dt>
   <dd> n/a </dd>
   <dt>Total Order Cost</dt>
@@ -149,8 +150,6 @@
   <dd><?php echo($sessionOrderData['email']);  ?></dd>
   <dt>Delivery Time </dt>
   <dd><?php
-
-
  echo($sessionOrderData['delivery_date']['month'] . '/' . $sessionOrderData['delivery_date']['day'] . '/' . $sessionOrderData['delivery_date']['year']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
 </dd>
 
@@ -172,13 +171,11 @@
 			'options' => $options1,
 			'label' => 'Payment Type'
 		));
-
 		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
 
 <br>
 <?php
 		echo $this->Form->input('notes');
-
 		echo $this->Form->hidden('item_total', array('value' => $groceryTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => '1'));
 		echo $this->Form->hidden('total', array('default' => '1'));
@@ -249,7 +246,6 @@ echo $this->Form->submit(
 		$deliveryRate = 10;
 		$deliveryCost=($deliveryRate+$deliveryFees);
 		$grandTotal = ($groceryTotal+$deliveryRate+$deliveryFees);
-
 	}  elseif ($itemCount > 10 && $itemCount <= 20) {
 		$deliveryRate = 15;
 		if ($groceryTotal >= 200) {
@@ -259,9 +255,7 @@ echo $this->Form->submit(
 		} else {
 			$deliveryCost=($deliveryRate+$deliveryFees);
 			$grandTotal = ($groceryTotal+$deliveryCost);
-
 		}
-
 	}  elseif ($itemCount > 20) {
 		$deliveryRate = 20;
 		if ($groceryTotal >= 200) {
@@ -273,9 +267,6 @@ echo $this->Form->submit(
 			$grandTotal = ($groceryTotal+$deliveryCost);
 		}
 	}
-
-
-
 	?>
 	
 	<?php } ?>

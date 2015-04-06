@@ -327,7 +327,25 @@ class OrdersController extends AppController {
 			throw new NotFoundException(__('Invalid supermarket'));
 		}
 		$cartData = $this->Session->read('cart.' . $id);
+		$orderData = $this->Session->read('Order');
+		$voucherUsed = 'false';
+		if (isset($orderData)) {
+				//debug($orderData);
+			if (isset($orderData['promotion_code'])) {
+				$voucherUsed = 'true';
+				$setPromotion = $this->Order->Promotion->findByCode($orderData['promotion_code']);
+				//debug($setPromotion);
+				$promotionDescription = $setPromotion['Promotion']['description'];
+				$promoAmount = $setPromotion['Promotion']['discount_amount'];
+				$promoCode = $orderData['promotion_code'];
+				$this->set('promotion', $promotionDescription);	
+			}
+		}
+		//debug($voucherUsed);
+		$this->set('voucherUsed', $voucherUsed);		
 
+
+		//debug($orderData);
 		//debug($cartData);
 		if ($cartData == array() || null) {
 			$this->redirect(array('action' => 'placeorder', $id));
@@ -350,6 +368,26 @@ class OrdersController extends AppController {
 		if ($this->request->is('post')) {
 
 			//debug($this->request->data);
+			//return false;
+			if (isset($this->request->data['btnPromotion'])) {
+				$pcode = $this->request->data['Promotion']['code'];
+				//$newPromotion = $this->Order->Promotion->findByCode($promotionCode);
+				if ($this->Session->write('Order.promotion_code', $pcode)) {
+					return $this->redirect(array('action' => 'enterdetails', $id));
+
+				}
+			}
+			//debug($promotioncode);
+
+			unset($this->request->data['btnOrder']);
+			if (isset($promoCode)) {
+
+						$this->request->data['Order']['promotion_code'] = $promoCode;
+						$this->request->data['Order']['promotion_discount_amount'] = $promoAmount;
+
+			}
+
+
 			//return false;
 
 			$this->request->data['Order']['supermarket_id']=$id;	

@@ -205,6 +205,13 @@ public $recursive = 0;
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Promotion' => array(
+			'className' => 'Promotion',
+			'foreignKey' => 'promotion_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

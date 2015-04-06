@@ -8,12 +8,34 @@ App::uses('AppController', 'Controller');
  */
 class PromotionsController extends AppController {
 
+
 /**
  * Components
  *
  * @var array
  */
 	public $components = array('Paginator');
+
+
+
+
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('add', 'view', 'index', 'edit');
+    }
+
+	public function isAuthorized($user) {
+	    // All registered users can add posts
+	    if ($this->action === 'add' || 'view' || 'index' || 'edit') {
+		return true;
+	    }
+	    	    if (isset($user['role']) && $user['role'] === 'admin') {
+		return true;
+	    }
+	    return parent::isAuthorized($user);
+	}
+
 
 /**
  * index method
