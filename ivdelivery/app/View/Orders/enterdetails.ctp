@@ -21,7 +21,15 @@
 }
 
 </style>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+$(function() {
+$( "#datepicker" ).datepicker();
 
+});
+</script>
 
 <div class="row">
         
@@ -109,7 +117,8 @@
 	<br>
 	<?php
 
-		echo $this->Form->input('delivery_date', array('legend' => false));
+		echo $this->Form->input('delivery_date', array(
+        'completed ' => 0));
 	?> <br><?php
 
 		echo $this->Form->label('Delivery Time');
@@ -122,7 +131,7 @@
 		//debug($time1);
 		$date = date_create();
 		date_timestamp_set($date, $time1);
-		date_format($date, 'U = H:i:s') . "\n";
+		//date_format($date, 'U = H:i:s') . "\n";
 		$currentTime = date_format($date, 'H:i:s');
 
 		if ($currentTime < '10:00:00') {
@@ -207,7 +216,6 @@ echo $this->Form->submit(
 								echo $this->Form->end();
 
 ?>
-<br><br><br>
 
 </div>
 
@@ -300,7 +308,9 @@ echo $this->Form->submit(
 	<?php if ($voucherUsed == 'true') { ?>
 			<tr><td colspan="3"><b>Discount Reward: </b><?php echo $promotion; ?></td></tr>
 	<?php } ?>
-
+	<?php if ($voucherFailed == 'true') { ?>
+			<tr><td colspan="3"><b>Invalid Reward Code! </b></td></tr>
+	<?php } ?>
 
 	<?php } ?>
 	</table>

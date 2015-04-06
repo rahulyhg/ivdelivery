@@ -329,20 +329,30 @@ class OrdersController extends AppController {
 		$cartData = $this->Session->read('cart.' . $id);
 		$orderData = $this->Session->read('Order');
 		$voucherUsed = 'false';
+		$voucherFailed = 'false';
 		if (isset($orderData)) {
 				//debug($orderData);
 			if (isset($orderData['promotion_code'])) {
-				$voucherUsed = 'true';
 				$setPromotion = $this->Order->Promotion->findByCode($orderData['promotion_code']);
 				//debug($setPromotion);
-				$promotionDescription = $setPromotion['Promotion']['description'];
-				$promoAmount = $setPromotion['Promotion']['discount_amount'];
-				$promoCode = $orderData['promotion_code'];
-				$this->set('promotion', $promotionDescription);	
+				//$this->Order->Promotion->findByCode($orderData['promotion_code']);
+				if ($setPromotion) {
+					$voucherUsed = 'true';
+					//$setPromotion = $this->Order->Promotion->findByCode($orderData['promotion_code']);
+					$promotionDescription = $setPromotion['Promotion']['description'];
+					$promoAmount = $setPromotion['Promotion']['discount_amount'];
+					$promoCode = $orderData['promotion_code'];
+					$this->set('promotion', $promotionDescription);	
+				} else {
+					$voucherFailed = 'true';
+
+
+				}
 			}
 		}
 		//debug($voucherUsed);
 		$this->set('voucherUsed', $voucherUsed);		
+		$this->set('voucherFailed', $voucherFailed);		
 
 
 		//debug($orderData);
