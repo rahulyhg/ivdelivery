@@ -11,6 +11,9 @@
 	padding-right: auto !important;
 }
 </style>
+  <meta name="keywords" content="Groceries, Goleta, Trader Joes, Costco, conveniance, lunch, dinner, delivery, isla vista, college, ucsb, grocery, food, swoop, del playa, dp, iv, service, student, deltopia, halloween, santa barbara, college, california, university, beach, ocean, sun, fraternity, sorority, greek">
+  <meta name="description" content="Isla Vista / UCSB Grocery Delivery">
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">

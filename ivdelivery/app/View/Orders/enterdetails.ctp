@@ -21,13 +21,12 @@
 }
 
 </style>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script>
-$(function() {
-$( "#datepicker" ).datepicker();
 
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#datepicker').datepicker({
+        dateFormat : 'yy-mm-dd'
+    });
 });
 </script>
 
@@ -110,16 +109,20 @@ $( "#datepicker" ).datepicker();
 <h1>Order Details for <?php echo h($supermarket['Supermarket']['name']); ?>
 </h1>
 <br>
-<br>
 <fieldset>
 	<legend>Delivery Options</legend>
 
-	<br>
+	
+
+
 	<?php
 
-		echo $this->Form->input('delivery_date', array(
-        'completed ' => 0));
-	?> <br><?php
+		/* echo $this->Form->input('delivery_date', array(
+    'id' => 'datepicker',
+    'type' => 'text')); */
+	?> 
+
+	<?php
 
 		echo $this->Form->label('Delivery Time');
 	?>
@@ -133,9 +136,10 @@ $( "#datepicker" ).datepicker();
 		date_timestamp_set($date, $time1);
 		//date_format($date, 'U = H:i:s') . "\n";
 		$currentTime = date_format($date, 'H:i:s');
-
+		//$currentDate = date_format($date, 'H:i:s');
+		//debug($date);
 		if ($currentTime < '10:00:00') {
-			debug('a');
+			//debug('a');
 		} elseif ($currentTime < '13:00:00') {
 			$options = array('15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 
@@ -146,31 +150,496 @@ $( "#datepicker" ).datepicker();
 			$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 
 
-		}
-
+		} 
 //debug($time);
 //$timeval=array_values($time);
 //debug($timeval);
 				//$newtime=date('H:i', strtotime($time));
 				//debug($time);
 	
-		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+		//$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
-		echo $this->Form->radio('delivery_time', $options, array('type' =>'radio', 'legend' => false));
+		//echo $this->Form->radio('delivery_time', $options, array('type' =>'radio', 'legend' => false));
 
+
+
+					/*$time = $this->request->data['Rideoffer']['DepartureTime'];
+                    $date = new DateTime($time['hour'] . ':' . $time['min'] . ' ' . $time['meridian']); 
+
+                        $currentDate = strtotime($date['date']); // this line gives error
+                        $futureDate = $currentDate+(60*30);
+                        $formatDate = date("Y-m-d H:i", $futureDate);*/
+            $dates = array();
+            $zz = 7;
+
+            for ($x=0; $x <= $zz; $x++) {
+
+
+            }
+			
+
+
+			$dw = date("w");
+			//debug($dw);
+
+			$dw1 = date("m-d");
+			//debug($dw1);
+			$dw2 = new DateTime("+1 days");
+			$dw2 = date_format($dw2, 'm-d');
+			$dw3 = new DateTime("+2 days");
+			$dw3 = date_format($dw3, 'm-d');
+			$dw4 = new DateTime("+3 days");
+			$dw4 = date_format($dw4, 'm-d');
+			$dw5 = new DateTime("+4 days");
+			$dw5 = date_format($dw5, 'm-d');
+			$dw6 = new DateTime("+5 days");
+			$dw6 = date_format($dw6, 'm-d');
+			$dw7 = new DateTime("+6 days");
+			$dw7 = date_format($dw7, 'm-d');
+
+			$dates = array($dw1, $dw2, $dw3, $dw4, $dw5, $dw6, $dw7);
+
+			$times = array('12:00 pm', '5:00 pm');
+
+			$deliveryOptions = array();
+
+			if ($dw == 1) {
+
+				if ($currentTime < '10:30:00') {
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Tuesday, ' . $dates[1] . ' @' . $times[0]),
+							('Tuesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[1]),
+							('Thursday, ' . $dates[3] . ' @' . $times[0]),
+							('Thursday, ' . $dates[3] . ' @' . $times[1]),
+							('Friday, ' . $dates[4] . ' @' . $times[0]),
+							('Friday, ' . $dates[4] . ' @' . $times[1]),
+							('Saturday, ' . $dates[5] . ' @' . $times[0]),
+							('Saturday, ' . $dates[5] . ' @' . $times[1]),
+							('Sunday, ' . $dates[6] . ' @' . $times[0]),
+							('Sunday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Tuesday, ' . $dates[1] . ' @' . $times[0]),
+							('Tuesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[1]),
+							('Thursday, ' . $dates[3] . ' @' . $times[0]),
+							('Thursday, ' . $dates[3] . ' @' . $times[1]),
+							('Friday, ' . $dates[4] . ' @' . $times[0]),
+							('Friday, ' . $dates[4] . ' @' . $times[1]),
+							('Saturday, ' . $dates[5] . ' @' . $times[0]),
+							('Saturday, ' . $dates[5] . ' @' . $times[1]),
+							('Sunday, ' . $dates[6] . ' @' . $times[0]),
+							('Sunday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} else {
+
+					$deliveryOptions = array(
+							('Tuesday, ' . $dates[1] . ' @' . $times[0]),
+							('Tuesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[2] . ' @' . $times[1]),
+							('Thursday, ' . $dates[3] . ' @' . $times[0]),
+							('Thursday, ' . $dates[3] . ' @' . $times[1]),
+							('Friday, ' . $dates[4] . ' @' . $times[0]),
+							('Friday, ' . $dates[4] . ' @' . $times[1]),
+							('Saturday, ' . $dates[5] . ' @' . $times[0]),
+							('Saturday, ' . $dates[5] . ' @' . $times[1]),
+							('Sunday, ' . $dates[6] . ' @' . $times[0]),
+							('Sunday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+
+
+
+				}
+
+			} elseif ($dw == 2) {
+
+				if ($currentTime < '10:30:00') {
+
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
+							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Thursday, ' . $dates[2] . ' @' . $times[0]),
+							('Thursday, ' . $dates[2] . ' @' . $times[1]),
+							('Friday, ' . $dates[3] . ' @' . $times[0]),
+							('Friday, ' . $dates[3] . ' @' . $times[1]),
+							('Saturday, ' . $dates[4] . ' @' . $times[0]),
+							('Saturday, ' . $dates[4] . ' @' . $times[1]),
+							('Sunday, ' . $dates[5] . ' @' . $times[0]),
+							('Sunday, ' . $dates[5] . ' @' . $times[1]),
+							('Monday, ' . $dates[6] . ' @' . $times[0]),
+							('Monday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
+							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Thursday, ' . $dates[2] . ' @' . $times[0]),
+							('Thursday, ' . $dates[2] . ' @' . $times[1]),
+							('Friday, ' . $dates[3] . ' @' . $times[0]),
+							('Friday, ' . $dates[3] . ' @' . $times[1]),
+							('Saturday, ' . $dates[4] . ' @' . $times[0]),
+							('Saturday, ' . $dates[4] . ' @' . $times[1]),
+							('Sunday, ' . $dates[5] . ' @' . $times[0]),
+							('Sunday, ' . $dates[5] . ' @' . $times[1]),
+							('Monday, ' . $dates[6] . ' @' . $times[0]),
+							('Monday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} else {
+					$deliveryOptions = array(
+							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
+							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Thursday, ' . $dates[2] . ' @' . $times[0]),
+							('Thursday, ' . $dates[2] . ' @' . $times[1]),
+							('Friday, ' . $dates[3] . ' @' . $times[0]),
+							('Friday, ' . $dates[3] . ' @' . $times[1]),
+							('Saturday, ' . $dates[4] . ' @' . $times[0]),
+							('Saturday, ' . $dates[4] . ' @' . $times[1]),
+							('Sunday, ' . $dates[5] . ' @' . $times[0]),
+							('Sunday, ' . $dates[5] . ' @' . $times[1]),
+							('Monday, ' . $dates[6] . ' @' . $times[0]),
+							('Monday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				}
+
+
+
+			} elseif ($dw == 3) {
+
+				if ($currentTime < '10:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Thursday, ' . $dates[1] . ' @' . $times[0]),
+							('Thursday,' . $dates[1] . ' @' . $times[1]),
+							('Friday, ' . $dates[2] . ' @' . $times[0]),
+							('Friday, ' . $dates[2] . ' @' . $times[1]),
+							('Saturday, ' . $dates[3] . ' @' . $times[0]),
+							('Saturday, ' . $dates[3] . ' @' . $times[1]),
+							('Sunday, ' . $dates[4] . ' @' . $times[0]),
+							('Sunday, ' . $dates[4] . ' @' . $times[1]),
+							('Monday, ' . $dates[5] . ' @' . $times[0]),
+							('Monday, ' . $dates[5] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[6] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+								('Today @' . $times[1]),
+								('Thursday, ' . $dates[1] . ' @' . $times[0]),
+								('Thursday,' . $dates[1] . ' @' . $times[1]),
+								('Friday, ' . $dates[2] . ' @' . $times[0]),
+								('Friday, ' . $dates[2] . ' @' . $times[1]),
+								('Saturday, ' . $dates[3] . ' @' . $times[0]),
+								('Saturday, ' . $dates[3] . ' @' . $times[1]),
+								('Sunday, ' . $dates[4] . ' @' . $times[0]),
+								('Sunday, ' . $dates[4] . ' @' . $times[1]),
+								('Monday, ' . $dates[5] . ' @' . $times[0]),
+								('Monday, ' . $dates[5] . ' @' . $times[1]),
+								('Tuesday, ' . $dates[6] . ' @' . $times[0]),
+								('Tuesday, ' . $dates[6] . ' @' . $times[1]),
+							);
+				} else {
+					$deliveryOptions = array(
+								('Thursday, ' . $dates[1] . ' @' . $times[0]),
+								('Thursday,' . $dates[1] . ' @' . $times[1]),
+								('Friday, ' . $dates[2] . ' @' . $times[0]),
+								('Friday, ' . $dates[2] . ' @' . $times[1]),
+								('Saturday, ' . $dates[3] . ' @' . $times[0]),
+								('Saturday, ' . $dates[3] . ' @' . $times[1]),
+								('Sunday, ' . $dates[4] . ' @' . $times[0]),
+								('Sunday, ' . $dates[4] . ' @' . $times[1]),
+								('Monday, ' . $dates[5] . ' @' . $times[0]),
+								('Monday, ' . $dates[5] . ' @' . $times[1]),
+								('Tuesday, ' . $dates[6] . ' @' . $times[0]),
+								('Tuesday, ' . $dates[6] . ' @' . $times[1]),
+							);
+				}
+
+
+
+			} elseif ($dw == 4) {
+
+				if ($currentTime < '10:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Friday, ' . $dates[1] . ' @' . $times[0]),
+							('Friday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[2] . ' @' . $times[0]),
+							('Saturday, ' . $dates[2] . ' @' . $times[1]),
+							('Sunday, ' . $dates[3] . ' @' . $times[0]),
+							('Sunday, ' . $dates[3] . ' @' . $times[1]),
+							('Monday, ' . $dates[4] . ' @' . $times[0]),
+							('Monday, ' . $dates[4] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Friday, ' . $dates[1] . ' @' . $times[0]),
+							('Friday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[2] . ' @' . $times[0]),
+							('Saturday, ' . $dates[2] . ' @' . $times[1]),
+							('Sunday, ' . $dates[3] . ' @' . $times[0]),
+							('Sunday, ' . $dates[3] . ' @' . $times[1]),
+							('Monday, ' . $dates[4] . ' @' . $times[0]),
+							('Monday, ' . $dates[4] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[1]),
+							);
+				} else {
+					$deliveryOptions = array(
+							('Friday, ' . $dates[1] . ' @' . $times[0]),
+							('Friday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[2] . ' @' . $times[0]),
+							('Saturday, ' . $dates[2] . ' @' . $times[1]),
+							('Sunday, ' . $dates[3] . ' @' . $times[0]),
+							('Sunday, ' . $dates[3] . ' @' . $times[1]),
+							('Monday, ' . $dates[4] . ' @' . $times[0]),
+							('Monday, ' . $dates[4] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[5] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[6] . ' @' . $times[1]),
+					);
+
+					}
+
+			} elseif ($dw == 5) {
+
+				if ($currentTime < '10:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Saturday, ' . $dates[1] . ' @' . $times[0]),
+							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[2] . ' @' . $times[0]),
+							('Sunday, ' . $dates[2] . ' @' . $times[1]),
+							('Monday, ' . $dates[3] . ' @' . $times[0]),
+							('Monday, ' . $dates[3] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[1]),
+							('Thursday, ' . $dates[6] . ' @' . $times[0]),
+							('Thursday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Saturday, ' . $dates[1] . ' @' . $times[0]),
+							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[2] . ' @' . $times[0]),
+							('Sunday, ' . $dates[2] . ' @' . $times[1]),
+							('Monday, ' . $dates[3] . ' @' . $times[0]),
+							('Monday, ' . $dates[3] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[1]),
+							('Thursday, ' . $dates[6] . ' @' . $times[0]),
+							('Thursday, ' . $dates[6] . ' @' . $times[1]),
+					);
+				} else {
+					$deliveryOptions = array(
+							('Saturday, ' . $dates[1] . ' @' . $times[0]),
+							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[2] . ' @' . $times[0]),
+							('Sunday, ' . $dates[2] . ' @' . $times[1]),
+							('Monday, ' . $dates[3] . ' @' . $times[0]),
+							('Monday, ' . $dates[3] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[4] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[5] . ' @' . $times[1]),
+							('Thursday, ' . $dates[6] . ' @' . $times[0]),
+							('Thursday, ' . $dates[6] . ' @' . $times[1]),
+					);
+				}
+
+			} elseif($dw == 6) {
+
+				if ($currentTime < '10:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Sunday, ' . $dates[1] . ' @' . $times[0]),
+							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[2] . ' @' . $times[0]),
+							('Monday, ' . $dates[2] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[1]),
+							('Thursday, ' . $dates[5] . ' @' . $times[0]),
+							('Thursday, ' . $dates[5] . ' @' . $times[1]),
+							('Friday, ' . $dates[6] . ' @' . $times[0]),
+							('Friday, ' . $dates[6] . ' @' . $times[1]),
+						);
+
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Sunday, ' . $dates[1] . ' @' . $times[0]),
+							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[2] . ' @' . $times[0]),
+							('Monday, ' . $dates[2] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[1]),
+							('Thursday, ' . $dates[5] . ' @' . $times[0]),
+							('Thursday, ' . $dates[5] . ' @' . $times[1]),
+							('Friday, ' . $dates[6] . ' @' . $times[0]),
+							('Friday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				} else {
+					$deliveryOptions = array(
+							('Sunday, ' . $dates[1] . ' @' . $times[0]),
+							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[2] . ' @' . $times[0]),
+							('Monday, ' . $dates[2] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[3] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[4] . ' @' . $times[1]),
+							('Thursday, ' . $dates[5] . ' @' . $times[0]),
+							('Thursday, ' . $dates[5] . ' @' . $times[1]),
+							('Friday, ' . $dates[6] . ' @' . $times[0]),
+							('Friday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				}
+
+
+			} elseif($dw == 7) {
+
+				if ($currentTime < '10:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[0]),
+							('Today @' . $times[1]),
+							('Monday, ' . $dates[1] . ' @' . $times[0]),
+							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[1]),
+							('Thursday, ' . $dates[4] . ' @' . $times[0]),
+							('Thursday, ' . $dates[4] . ' @' . $times[1]),
+							('Friday, ' . $dates[5] . ' @' . $times[0]),
+							('Friday, ' . $dates[5] . ' @' . $times[1]),
+							('Saturday, ' . $dates[6] . ' @' . $times[0]),
+							('Saturday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				} elseif ($currentTime < '15:30:00') {
+
+					$deliveryOptions = array(
+							('Today @' . $times[1]),
+							('Monday, ' . $dates[1] . ' @' . $times[0]),
+							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[1]),
+							('Thursday, ' . $dates[4] . ' @' . $times[0]),
+							('Thursday, ' . $dates[4] . ' @' . $times[1]),
+							('Friday, ' . $dates[5] . ' @' . $times[0]),
+							('Friday, ' . $dates[5] . ' @' . $times[1]),
+							('Saturday, ' . $dates[6] . ' @' . $times[0]),
+							('Saturday, ' . $dates[6] . ' @' . $times[1]),
+						);
+				} else {
+					$deliveryOptions = array(
+							('Monday, ' . $dates[1] . ' @' . $times[0]),
+							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
+							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[0]),
+							('Wednesday, ' . $dates[3] . ' @' . $times[1]),
+							('Thursday, ' . $dates[4] . ' @' . $times[0]),
+							('Thursday, ' . $dates[4] . ' @' . $times[1]),
+							('Friday, ' . $dates[5] . ' @' . $times[0]),
+							('Friday, ' . $dates[5] . ' @' . $times[1]),
+							('Saturday, ' . $dates[6] . ' @' . $times[0]),
+							('Saturday, ' . $dates[6] . ' @' . $times[1]),
+						);
+					}
+			}
+
+
+			// /$dw2 = date("m-d", $dw2['date']);
+			//$dd = $date();
+			///$dw2 = strtotime($dw1); 
+			//$dw2 = date("d-m", $dw1);
+
+			//debug($dw2);
 				//debug($currentTime);
 
+			/*$time = "06:58:00";
+			$time2 = "00:40:00";
+
+			$secs = strtotime($time2)-strtotime("00:00:00");
+			$result = date("H:i:s",strtotime($time)+$secs);
+			$deliveryOptions = array();
+			$optionAmount = 14;
+			for ($x = 0; $x <= $optionAmount; $x++) {
+				//$deliveryOptions[$x] = $this->Time->Formatv
+
+
+				}
+*/
 	?>
-	<br><br>
+	
 	<?php
-		echo $this->Form->label('Immediate Deliver?');
+//$options = array('1' => 'Today ', '2' => 'Today', '3' => );
+$attributes = array('legend' => false, 'separator' => '</li><br><li>');
+
+echo $this->Form->select('delivery_choice', $deliveryOptions);
+?>
+	<br>	<?php
+		//echo $this->Form->label('Immediate Deliver?');
 	?>
-	<br>
-	<?php
+	
+	<?php /*
 		echo $this->Form->checkbox('fast_track', array(
 			'label' => false
 		));
 		echo $this->Form->label('+$20');
+		*/
 	?>
 
 </fieldset>
@@ -182,7 +651,6 @@ $( "#datepicker" ).datepicker();
 	<?php
 		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
 
-<br>
 <?php
 		//echo $this->Form->input('notes');
 		echo $this->Form->input('first_name', array('default' => $currentUser['first_name']));

@@ -69,6 +69,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <?php echo $this->Html->css('nhstyle.css'); ?>
   <link href="color/default.css" rel="stylesheet">
   <?php //echo $this->Html->color('default.css'); ?>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <link href="//styles/glDatePicker.default.css" rel="stylesheet" type="text/css">
+    <link href="css/nhstyle.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 </head>
 
@@ -143,7 +151,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         <!-- /.container -->
     </nav>
 
-<br><br>
+<br><br><br>
 <div class="container">
 
   <div id="content">
@@ -155,12 +163,28 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </div>
 	<?php //echo $this->element('sql_dump'); ?>
 </body>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+   
+          <p>&copy;Copyright 2015 - Food Swoop. All rights reserved.</p>
+        </div>
+      </div>  
+    </div>
+  </footer>
+
     <?php
     echo $this->Html->script('nhjquery.min');
     echo $this->Html->script('nhbootstrap.min.js');
     echo $this->Html->script('nhjquery.easing.min');
     echo $this->Html->script('nhjquery.scrollTo');
     echo $this->Html->script('nhwow.min');
+    //echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js');
+    //echo $this->Html->script('code.jquery.com/jquery-1.10.2.js');
+    //echo $this->Html->script('code.jquery.com/ui/1.11.4/jquery-ui.js');
+
     //echo $this->Html->script('nhcustom');
 
     ?>

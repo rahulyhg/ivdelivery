@@ -175,6 +175,16 @@ public $recursive = 0;
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),		
 		),
+		'delivery_choice' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),		
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -378,7 +388,8 @@ public $recursive = 0;
 				$orderItem['order_id']=$orderId;
 				//debug($orderItem['id']);
 				$item = $this->Item->find('first', array(
-					'conditions' => array('Item.id' => $orderItem['id'])
+					'conditions' => array('Item.id' => $orderItem['id']),
+						'recursive' => 0
 					));
 				$category_id = $item['Item']['category_id'];
 				$this->ItemsOrder->create();

@@ -321,7 +321,7 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function enterdetails($id = null) {
-		$this->layout = 'boots';
+		$this->layout = 'order';
 		$this->loadModel('Supermarket');
 		if (!$this->Supermarket->exists($id)) {
 			throw new NotFoundException(__('Invalid supermarket'));
@@ -377,8 +377,8 @@ class OrdersController extends AppController {
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
 
-			//debug($this->request->data);
-			//return false;
+			debug($this->request->data);
+			return false;
 			if (isset($this->request->data['btnPromotion'])) {
 				$pcode = $this->request->data['Promotion']['code'];
 				//$newPromotion = $this->Order->Promotion->findByCode($promotionCode);
@@ -451,7 +451,8 @@ class OrdersController extends AppController {
 		$supermarketid=$namedParams['supermarketid'];	
 
 		$savedOrder=$this->Order->find('first', array(
-			'conditions' => array('Order.id' => $orderid)
+			'conditions' => array('Order.id' => $orderid),
+			'recursive' => 0
 		));
 		$savedItemsOrders = $this->Order->ItemsOrder->findAllByOrderId($orderid);
 

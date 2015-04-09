@@ -153,7 +153,7 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			$this->User->create();
-			debug($this->request->data);
+			//debug($this->request->data);
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'index'));
