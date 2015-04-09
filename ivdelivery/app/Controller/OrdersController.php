@@ -354,6 +354,46 @@ class OrdersController extends AppController {
 		$this->set('voucherUsed', $voucherUsed);		
 		$this->set('voucherFailed', $voucherFailed);		
 
+		date_default_timezone_set("America/Los_Angeles"); 
+		$time1 = time();
+		//debug($time1);
+		$date = date_create();
+		date_timestamp_set($date, $time1);
+		//date_format($date, 'U = H:i:s') . "\n";
+		$currentTime = date_format($date, 'H:i:s');
+		$dw = date("w");
+		//debug($dw);
+
+		$dw1 = date("m-d");
+		$fulldate = date("Y-m-d");
+		//debug($fulldate);
+		//debug($dw1);
+		$dw2 = new DateTime("+1 days");
+		$full2 = date_format($dw2, 'Y-m-d');
+		$dw2 = date_format($dw2, 'm-d');
+		$dw3 = new DateTime("+2 days");
+		$full3 = date_format($dw3, 'Y-m-d');
+		$dw3 = date_format($dw3, 'm-d');
+		$dw4 = new DateTime("+3 days");
+		$full4 = date_format($dw4, 'Y-m-d');
+		$dw4 = date_format($dw4, 'm-d');
+		$dw5 = new DateTime("+4 days");
+		$full5 = date_format($dw5, 'Y-m-d');
+		$dw5 = date_format($dw5, 'm-d');
+		$dw6 = new DateTime("+5 days");
+		$full6 = date_format($dw6, 'Y-m-d');
+		$dw6 = date_format($dw6, 'm-d');
+		$dw7 = new DateTime("+6 days");
+		$full7 = date_format($dw7, 'Y-m-d');
+		$dw7 = date_format($dw7, 'm-d');
+
+		$dates = array($dw1, $dw2, $dw3, $dw4, $dw5, $dw6, $dw7);
+
+		$times = array('12:00 pm', '5:00 pm');
+
+		$this->set('dates', $dates);
+		$this->set('times', $times);
+
 
 		//debug($orderData);
 		//debug($cartData);
@@ -373,12 +413,12 @@ class OrdersController extends AppController {
 		$this->set('currentUser', $this->Auth->user());
 		//$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
-		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
+		$this->set(compact('users', 'drivers', 'items', 'authuserid', 'currentTime', 'dw'));
 		$this->set('cartData', $cartData);		
 		if ($this->request->is('post')) {
 
-			debug($this->request->data);
-			return false;
+			//debug($this->request->data);
+			//return false;
 			if (isset($this->request->data['btnPromotion'])) {
 				$pcode = $this->request->data['Promotion']['code'];
 				//$newPromotion = $this->Order->Promotion->findByCode($promotionCode);
@@ -399,6 +439,254 @@ class OrdersController extends AppController {
 
 
 			//return false;
+
+
+			//set order time here
+			$orderChoice = $this->request->data['Order']['delivery_choice'];	
+			if ($currentTime < '10:30:00') {
+				if ($orderChoice == '0') {
+						$orderDate=$fulldate;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 1) { 
+						$orderDate=$fulldate;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 2) { 
+						$orderDate=$full2;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 3) { 
+						$orderDate=$full2;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 4) { 
+						$orderDate=$full3;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 5) { 
+						$orderDate=$full3;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 6) { 
+						$orderDate=$full4;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 7) { 
+						$orderDate=$full4;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 8) { 
+						$orderDate=$full5;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;			
+				} elseif ($orderChoice == 9) { 
+						$orderDate=$full5;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 10) { 
+						$orderDate=$full6;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 11) { 
+						$orderDate=$full6;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 12) { 
+						$orderDate=$full7;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 13) { 
+						$orderDate=$full7;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				}
+
+			} elseif ($currentTime < '15:30:00') {
+				if ($orderChoice == 0) { 
+						$orderDate=$fulldate;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 1) { 
+						$orderDate=$full2;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 2) { 
+						$orderDate=$full2;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 3) { 
+						$orderDate=$full3;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 4) { 
+						$orderDate=$full3;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 5) { 
+						$orderDate=$full4;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 6) { 
+						$orderDate=$full4;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 7) { 
+						$orderDate=$full5;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;			
+
+				} elseif ($orderChoice == 8) { 
+						$orderDate=$full5;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 9) { 
+						$orderDate=$full6;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 10) { 
+						$orderDate=$full6;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 11) { 
+						$orderDate=$full7;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['deliver_time'] = $orderTime;
+						$this->request->data['Order']['deliver_date'] = $orderDate;
+
+				} elseif ($orderChoice == 12) { 
+						$orderDate=$full7;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				}	
+
+			} else {
+				if ($orderChoice == '0') { 
+						$orderDate=$full2;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == '1') { 
+						$orderDate=$full2;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 2) { 
+						$orderDate=$full3;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 3) { 
+						$orderDate=$full3;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 4) { 
+						$orderDate=$full4;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 5) { 
+						$orderDate=$full4;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 6) { 
+						$orderDate=$full5;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;			
+
+				} elseif ($orderChoice == 7) { 
+						$orderDate=$full5;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['deliver_time'] = $orderTime;
+						$this->request->data['Order']['deliver_date'] = $orderDate;
+
+				} elseif ($orderChoice == 8) { 
+						$orderDate=$full6;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 9) { 
+						$orderDate=$full6;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 10) { 
+						$orderDate=$full7;
+						$orderTime = "12:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				} elseif ($orderChoice == 11) { 
+						$orderDate=$full7;
+						$orderTime = "17:00:00";
+						$this->request->data['Order']['delivery_time'] = $orderTime;
+						$this->request->data['Order']['delivery_date'] = $orderDate;
+
+				}		
+
+
+			}
 
 			$this->request->data['Order']['supermarket_id']=$id;	
 			$this->request->data['Order']['payment_status']='false';

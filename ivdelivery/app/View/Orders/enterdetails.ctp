@@ -129,28 +129,6 @@ jQuery(document).ready(function() {
 	<br>
 	<?php
 
-		date_default_timezone_set("America/Los_Angeles"); 
-		$time1 = time();
-		//debug($time1);
-		$date = date_create();
-		date_timestamp_set($date, $time1);
-		//date_format($date, 'U = H:i:s') . "\n";
-		$currentTime = date_format($date, 'H:i:s');
-		//$currentDate = date_format($date, 'H:i:s');
-		//debug($date);
-		if ($currentTime < '10:00:00') {
-			//debug('a');
-		} elseif ($currentTime < '13:00:00') {
-			$options = array('15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
-
-		} elseif ($currentTime < '17:00:00') {
-			$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
-
-		} else {
-			$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
-
-
-		} 
 //debug($time);
 //$timeval=array_values($time);
 //debug($timeval);
@@ -169,37 +147,8 @@ jQuery(document).ready(function() {
                         $currentDate = strtotime($date['date']); // this line gives error
                         $futureDate = $currentDate+(60*30);
                         $formatDate = date("Y-m-d H:i", $futureDate);*/
-            $dates = array();
-            $zz = 7;
+ 
 
-            for ($x=0; $x <= $zz; $x++) {
-
-
-            }
-			
-
-
-			$dw = date("w");
-			//debug($dw);
-
-			$dw1 = date("m-d");
-			//debug($dw1);
-			$dw2 = new DateTime("+1 days");
-			$dw2 = date_format($dw2, 'm-d');
-			$dw3 = new DateTime("+2 days");
-			$dw3 = date_format($dw3, 'm-d');
-			$dw4 = new DateTime("+3 days");
-			$dw4 = date_format($dw4, 'm-d');
-			$dw5 = new DateTime("+4 days");
-			$dw5 = date_format($dw5, 'm-d');
-			$dw6 = new DateTime("+5 days");
-			$dw6 = date_format($dw6, 'm-d');
-			$dw7 = new DateTime("+6 days");
-			$dw7 = date_format($dw7, 'm-d');
-
-			$dates = array($dw1, $dw2, $dw3, $dw4, $dw5, $dw6, $dw7);
-
-			$times = array('12:00 pm', '5:00 pm');
 
 			$deliveryOptions = array();
 
@@ -227,7 +176,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Tuesday, ' . $dates[1] . ' @' . $times[0]),
-							('Tuesday,' . $dates[1] . ' @' . $times[1]),
+							('Tuesday, ' . $dates[1] . ' @' . $times[1]),
 							('Wednesday, ' . $dates[2] . ' @' . $times[0]),
 							('Wednesday, ' . $dates[2] . ' @' . $times[1]),
 							('Thursday, ' . $dates[3] . ' @' . $times[0]),
@@ -271,7 +220,7 @@ jQuery(document).ready(function() {
 							('Today @' . $times[0]),
 							('Today @' . $times[1]),
 							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
-							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[1] . ' @' . $times[1]),
 							('Thursday, ' . $dates[2] . ' @' . $times[0]),
 							('Thursday, ' . $dates[2] . ' @' . $times[1]),
 							('Friday, ' . $dates[3] . ' @' . $times[0]),
@@ -289,7 +238,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
-							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[1] . ' @' . $times[1]),
 							('Thursday, ' . $dates[2] . ' @' . $times[0]),
 							('Thursday, ' . $dates[2] . ' @' . $times[1]),
 							('Friday, ' . $dates[3] . ' @' . $times[0]),
@@ -305,7 +254,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 							('Wednesday, ' . $dates[1] . ' @' . $times[0]),
-							('Wednesday,' . $dates[1] . ' @' . $times[1]),
+							('Wednesday, ' . $dates[1] . ' @' . $times[1]),
 							('Thursday, ' . $dates[2] . ' @' . $times[0]),
 							('Thursday, ' . $dates[2] . ' @' . $times[1]),
 							('Friday, ' . $dates[3] . ' @' . $times[0]),
@@ -329,7 +278,7 @@ jQuery(document).ready(function() {
 							('Today @' . $times[0]),
 							('Today @' . $times[1]),
 							('Thursday, ' . $dates[1] . ' @' . $times[0]),
-							('Thursday,' . $dates[1] . ' @' . $times[1]),
+							('Thursday, ' . $dates[1] . ' @' . $times[1]),
 							('Friday, ' . $dates[2] . ' @' . $times[0]),
 							('Friday, ' . $dates[2] . ' @' . $times[1]),
 							('Saturday, ' . $dates[3] . ' @' . $times[0]),
@@ -347,7 +296,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 								('Today @' . $times[1]),
 								('Thursday, ' . $dates[1] . ' @' . $times[0]),
-								('Thursday,' . $dates[1] . ' @' . $times[1]),
+								('Thursday, ' . $dates[1] . ' @' . $times[1]),
 								('Friday, ' . $dates[2] . ' @' . $times[0]),
 								('Friday, ' . $dates[2] . ' @' . $times[1]),
 								('Saturday, ' . $dates[3] . ' @' . $times[0]),
@@ -362,7 +311,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 								('Thursday, ' . $dates[1] . ' @' . $times[0]),
-								('Thursday,' . $dates[1] . ' @' . $times[1]),
+								('Thursday, ' . $dates[1] . ' @' . $times[1]),
 								('Friday, ' . $dates[2] . ' @' . $times[0]),
 								('Friday, ' . $dates[2] . ' @' . $times[1]),
 								('Saturday, ' . $dates[3] . ' @' . $times[0]),
@@ -404,7 +353,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Friday, ' . $dates[1] . ' @' . $times[0]),
-							('Friday,' . $dates[1] . ' @' . $times[1]),
+							('Friday, ' . $dates[1] . ' @' . $times[1]),
 							('Saturday, ' . $dates[2] . ' @' . $times[0]),
 							('Saturday, ' . $dates[2] . ' @' . $times[1]),
 							('Sunday, ' . $dates[3] . ' @' . $times[0]),
@@ -419,7 +368,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 							('Friday, ' . $dates[1] . ' @' . $times[0]),
-							('Friday,' . $dates[1] . ' @' . $times[1]),
+							('Friday, ' . $dates[1] . ' @' . $times[1]),
 							('Saturday, ' . $dates[2] . ' @' . $times[0]),
 							('Saturday, ' . $dates[2] . ' @' . $times[1]),
 							('Sunday, ' . $dates[3] . ' @' . $times[0]),
@@ -442,7 +391,7 @@ jQuery(document).ready(function() {
 							('Today @' . $times[0]),
 							('Today @' . $times[1]),
 							('Saturday, ' . $dates[1] . ' @' . $times[0]),
-							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[1] . ' @' . $times[1]),
 							('Sunday, ' . $dates[2] . ' @' . $times[0]),
 							('Sunday, ' . $dates[2] . ' @' . $times[1]),
 							('Monday, ' . $dates[3] . ' @' . $times[0]),
@@ -460,7 +409,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Saturday, ' . $dates[1] . ' @' . $times[0]),
-							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[1] . ' @' . $times[1]),
 							('Sunday, ' . $dates[2] . ' @' . $times[0]),
 							('Sunday, ' . $dates[2] . ' @' . $times[1]),
 							('Monday, ' . $dates[3] . ' @' . $times[0]),
@@ -475,7 +424,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 							('Saturday, ' . $dates[1] . ' @' . $times[0]),
-							('Saturday,' . $dates[1] . ' @' . $times[1]),
+							('Saturday, ' . $dates[1] . ' @' . $times[1]),
 							('Sunday, ' . $dates[2] . ' @' . $times[0]),
 							('Sunday, ' . $dates[2] . ' @' . $times[1]),
 							('Monday, ' . $dates[3] . ' @' . $times[0]),
@@ -497,7 +446,7 @@ jQuery(document).ready(function() {
 							('Today @' . $times[0]),
 							('Today @' . $times[1]),
 							('Sunday, ' . $dates[1] . ' @' . $times[0]),
-							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[1] . ' @' . $times[1]),
 							('Monday, ' . $dates[2] . ' @' . $times[0]),
 							('Monday, ' . $dates[2] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
@@ -515,7 +464,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Sunday, ' . $dates[1] . ' @' . $times[0]),
-							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[1] . ' @' . $times[1]),
 							('Monday, ' . $dates[2] . ' @' . $times[0]),
 							('Monday, ' . $dates[2] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
@@ -530,7 +479,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 							('Sunday, ' . $dates[1] . ' @' . $times[0]),
-							('Sunday,' . $dates[1] . ' @' . $times[1]),
+							('Sunday, ' . $dates[1] . ' @' . $times[1]),
 							('Monday, ' . $dates[2] . ' @' . $times[0]),
 							('Monday, ' . $dates[2] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[3] . ' @' . $times[0]),
@@ -553,7 +502,7 @@ jQuery(document).ready(function() {
 							('Today @' . $times[0]),
 							('Today @' . $times[1]),
 							('Monday, ' . $dates[1] . ' @' . $times[0]),
-							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[1] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
 							('Wednesday, ' . $dates[3] . ' @' . $times[0]),
@@ -570,7 +519,7 @@ jQuery(document).ready(function() {
 					$deliveryOptions = array(
 							('Today @' . $times[1]),
 							('Monday, ' . $dates[1] . ' @' . $times[0]),
-							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[1] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
 							('Wednesday, ' . $dates[3] . ' @' . $times[0]),
@@ -585,7 +534,7 @@ jQuery(document).ready(function() {
 				} else {
 					$deliveryOptions = array(
 							('Monday, ' . $dates[1] . ' @' . $times[0]),
-							('Monday,' . $dates[1] . ' @' . $times[1]),
+							('Monday, ' . $dates[1] . ' @' . $times[1]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[0]),
 							('Tuesday, ' . $dates[2] . ' @' . $times[1]),
 							('Wednesday, ' . $dates[3] . ' @' . $times[0]),

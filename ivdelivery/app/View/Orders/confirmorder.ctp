@@ -150,7 +150,7 @@
   <dd><?php echo($sessionOrderData['email']);  ?></dd>
   <dt>Delivery Time </dt>
   <dd><?php
- echo($sessionOrderData['delivery_date']['month'] . '/' . $sessionOrderData['delivery_date']['day'] . '/' . $sessionOrderData['delivery_date']['year']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
+ echo($sessionOrderData['delivery_date']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
 </dd>
 
 </dl>
