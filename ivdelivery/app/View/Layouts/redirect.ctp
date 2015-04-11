@@ -24,6 +24,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <head>
   <meta name="keywords" content="Groceries, Goleta, Trader Joes, Costco, conveniance, lunch, dinner, delivery, isla vista, college, ucsb, grocery, food, swoop, del playa, dp, iv, service, student, deltopia, halloween, santa barbara, college, california, university, beach, ocean, sun, fraternity, sorority, greek">
 <meta name="description" content="Isla Vista / UCSB Grocery Delivery">
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,21 +46,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <!-- Squad theme CSS -->
   <?php //echo $this->Html->color('default.css'); ?>
 <script type="text/javascript">
-<!--
-function breakout_of_frame()
-{
-  // see http://www.thesitewizard.com/archive/framebreak.shtml
-  // for an explanation of this script and how to use it on your
-  // own website
-  if (top.location != location) {
-    top.location.href = document.location.href ;
-  }
-}
--->
+  <!--
+    if (top.location!= self.location) {
+      top.location = self.location.href
+    }
+  //-->
 </script>
 </head>
 
-
+<body>
 
 <br><br><br>
 <div class="container">

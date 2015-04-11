@@ -105,7 +105,7 @@ class UsersController extends AppController {
 
 	public function logout() {
 		//$this->Session->setFlash(__('Logged out', 'alert alert-success'));
-	    return $this->redirect($this->Auth->logout());
+	    return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 	}
 
 

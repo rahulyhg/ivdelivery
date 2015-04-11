@@ -7,5 +7,11 @@ foreach ($theParams as $p1) {
 
 
 }
+foreach ($theParams1 as $p11) {
 
+	echo($p11);
+	echo('<br>');
+
+
+}
  ?> </h4>

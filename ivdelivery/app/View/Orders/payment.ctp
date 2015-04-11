@@ -165,7 +165,7 @@
 	<legend>Payment Type</legend>
 
 	<fieldset>
-<iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="550px" id="iframe1"></iframe>
+<iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="1150px" id="iframe1"></iframe>
 
 	<?php
 	/*	$options1 = array(

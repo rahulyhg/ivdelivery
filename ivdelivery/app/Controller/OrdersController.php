@@ -326,7 +326,13 @@ class OrdersController extends AppController {
 
 		if ($arr['RESULT'] != 0) {echo "<p>To order, please contact us.</p>";}
 
-		$paypalUrl="https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'];
+		$paypalUrl="https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'] . "&ECHODATA=True&BILLTOFIRSTNAME=Scott";
+
+		/*
+			Custom Parameters - USER1, USER2, USER3
+
+		*/
+
 
 		$this->set('paypalUrl', $paypalUrl);		
 
@@ -1545,7 +1551,8 @@ class OrdersController extends AppController {
 		$theParams = $_POST;
 		$this->set('theParams', $theParams);		
 
-
+		$theParams1 = $_GET;
+		$this->set('theParams1', $theParams1);
 		/* if (!($this->Order->deleteAll(array(), true))) {
 			return false;	
 		} */
