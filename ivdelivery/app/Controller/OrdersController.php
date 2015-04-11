@@ -350,7 +350,7 @@ class OrdersController extends AppController {
 		if ($this->request->is('post')) {
 			//debug($this->request->data);
 			
-			//$orderData = $this->request->data['Order'];
+			$sessionOrderData = $this->request->data['Order'];
 			$orderItemsData = $this->Session->read('cart.' . $id);
 			$paymentData = $this->request->data['Payment'];
 		
@@ -812,7 +812,17 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function receipt($id = null) {
-		$this->layout = 'boots';
+
+
+
+
+
+
+		//old receipt code
+
+
+
+		$this->layout = 'receipt';
 		$this->loadModel('Supermarket');
 		
 		$namedParams =$this->request->named;
@@ -1492,50 +1502,6 @@ class OrdersController extends AppController {
 
 
 
-		if ($this->request->is('post')) {
-			//debug($this->request->data);
-			
-			//$orderData = $this->request->data['Order'];
-			$orderItemsData = $this->Session->read('cart.' . $id);
-			$paymentData = $this->request->data['Payment'];
-		
-		//	if ($this->Session->write('Order', $sessionOrderData)) {
-			
-				$this->Order->create();
-				//$this->Order->OrdersItem->create();
-				if ($this->Order->saveNewOrder($sessionOrderData, $orderItemsData, $paymentData)) {
-				//if ($this->Order->placeNewOrder($this->request->data)) {
-					$newOrderId=$this->Order->id;
-					$this->Session->setFlash(__('The order has been saved.'));
-					$this->Session->delete('cart.' . $id);
-					$this->Session->delete('Order');
-
-
-					/*$Email = new CakeEmail();
-					$Email->config('gmail');
-					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'));
-					$Email->to('imscotta92@yahoo.com');
-					$Email->subject('Food Swoop Order Receipt');
-					$Email->send('My message'); */
-
-
-
-
-
-
-
-
-					return $this->redirect(array('action' => 'receipt', 'supermarketid' => $id, 'orderid' => $newOrderId));
-				} else {
-					//debug($this->Order->validationErrors);
-					$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
-				}
-		/*	} else {
-					$this->Session->setFlash(__('The order could not be saved. Please, try again. Session Error.'));
-
-			} */
-		}
-
 
 	}
 
@@ -1550,7 +1516,7 @@ class OrdersController extends AppController {
 
 		$theParams = $_POST;
 		$this->set('theParams', $theParams);		
-
+		//debug($theParams);
 		$theParams1 = $_GET;
 		$this->set('theParams1', $theParams1);
 		/* if (!($this->Order->deleteAll(array(), true))) {
@@ -1558,6 +1524,80 @@ class OrdersController extends AppController {
 		} */
 		//$this->Order->recursive = 0;
 		//$this->set('orders', $this->Paginator->paginate());
+		if (isset($theParams)) {
+				if (isset($theParams['RESPMSG'])) {
+				if ($theParams['RESPMSG'] == "Approved") {
+
+
+
+
+		//confirm order code
+
+			//debug($this->request->data);
+			
+			//$orderData = $this->request->data['Order'];
+			$paymentData = array('type' => 'Credit Card');
+			$sessionOrderData = $this->Session->read('Order');
+			$sessionOrderData['paypal_transaction_id'] = $theParams['PNREF'];
+			$superid = $sessionOrderData['supermarket_id'];
+			//$sessionOrderData = array('Order' => $sessionOrderData);
+		//	if ($this->Session->write('Order', $sessionOrderData)) {
+			$orderItemsData = $this->Session->read('cart.' . $superid);
+			//debug($sessionOrderData);
+			$this->Order->create();
+			//$this->Order->OrdersItem->create();
+			//debug($sessionOrderData);
+			//debug($orderItemsData);
+			//$debug($paymentData);
+			if ($this->Order->saveNewOrder($sessionOrderData, $orderItemsData, $paymentData)) {
+			//if ($this->Order->placeNewOrder($this->request->data)) {
+				$newOrderId=$this->Order->id;
+				$this->Session->setFlash(__('The order has been saved.'));
+				$this->Session->delete('cart.' . $superid);
+				$this->Session->delete('Order');
+
+
+				/*$Email = new CakeEmail();
+				$Email->config('gmail');
+				$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'));
+				$Email->to('imscotta92@yahoo.com');
+				$Email->subject('Food Swoop Order Receipt');
+				$Email->send('My message'); */
+
+				//return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
+				$completedOrder = array(array('order_id' => $newOrderId), array('supermarket_id' => $superid));
+
+
+				$this->Session->write('completedOrder', $completedOrder);
+
+
+
+			} else {
+				//debug($this->Order->validationErrors);
+				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+			}
+	/*	} else {
+				$this->Session->setFlash(__('The order could not be saved. Please, try again. Session Error.'));
+
+		} */
+	}
+		} else {
+				$completedOrder = $this->Session->read('completedOrder');
+
+				$superid = $completedOrder[1]['supermarket_id'];
+				$newOrderId = $completedOrder[0]['order_id'];
+
+				return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
+
+
+		}
+		
+
+
+
+		}
+		//$this->redirect($this->request->referer());		
+
 	}
 
 

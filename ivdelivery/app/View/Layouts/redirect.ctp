@@ -48,7 +48,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script type="text/javascript">
   <!--
     if (top.location!= self.location) {
-      top.location = self.location.href
+      top.location = self.location.href; 
     }
   //-->
 </script>
@@ -58,7 +58,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 <br><br><br>
 <div class="container">
-<h1> hello world </h1>
+<h1>Please wait while the payment is loading </h1>
   <div id="content">
     <br><br><br>
   			<?php //echo $this->Session->flash(); ?>
