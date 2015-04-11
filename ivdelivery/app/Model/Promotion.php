@@ -31,16 +31,6 @@ public $recursive = 0;
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'expiration_date' => array(
-			'date' => array(
-				'rule' => array('date'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'limit' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -51,7 +41,16 @@ public $recursive = 0;
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),		
-
+		'description' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),		
+		),
 
 	);
 

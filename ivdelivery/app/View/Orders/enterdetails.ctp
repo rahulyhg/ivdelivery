@@ -105,7 +105,7 @@ jQuery(document).ready(function() {
 
  ?>
 
-<br>
+
 <h1>Order Details for <?php echo h($supermarket['Supermarket']['name']); ?>
 </h1>
 <br>

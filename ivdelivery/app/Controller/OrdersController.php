@@ -251,7 +251,7 @@ class OrdersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function confirmorder($id = null) {
+	public function payment($id = null) {
 		$this->layout = 'boots';
 		$this->loadModel('Supermarket');
 		if (!$this->Supermarket->exists($id)) {
@@ -281,6 +281,66 @@ class OrdersController extends AppController {
 		$this->set('cartData', $cartData);		
 		$this->set('sessionOrderData', $sessionOrderData);		
 
+		$secureTokenId = 0;
+		$secureToken = 0;
+		$paypalUrl = "https://payflowlink.paypal.com?MODE=TEST&SECURETOKENID=MySecureTokenID&SECURETOKEN=MySecureToken";
+		$paypalBase = "https://payflowlink.paypal.com";
+		$paypalParams = "TRXTYPE=A&BILLTOSTREET=123 Main St.&BILLTOZIP=95131&AMT=23.45&CURRENCY=USD&INVNUM=INV12345&PONUM=PO9876&**CREATESECURETOKEN**=Y&**SECURETOKENID**=9a9ea8208de1413abc3d60c86cb1f4c5&ECHODATA=True";
+		//$paypalUrl = ($paypalBase . '/?' . $paypalParams);
+
+
+
+
+
+
+
+		$amt = 10.00;
+		$txt = "Pay Now!";
+
+		$PF_HOST_ADDR = "https://pilot-payflowpro.paypal.com";
+
+		$secureTokenId = uniqid('', true);
+
+		$postData = "USER=" . "djbloads"
+		        .   "&VENDOR=" . "FoodSwoop777"
+		        .   "&PARTNER=" . "PayPal"
+		        .   "&PWD=" . "Swoop420"
+		        .   "&CREATESECURETOKEN=Y"
+		        .   "&SECURETOKENID=" . $secureTokenId
+		        .   "&TRXTYPE=S"
+		        .   "&AMT=" . $amt;
+
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $PF_HOST_ADDR);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		curl_setopt($ch, CURLOPT_POST, TRUE);
+
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+		$resp = curl_exec($ch);
+
+		if (!$resp) {echo "<p>To order, please contact us.</p>";}
+
+		parse_str($resp, $arr);
+
+		if ($arr['RESULT'] != 0) {echo "<p>To order, please contact us.</p>";}
+
+		$paypalUrl="https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'];
+
+		$this->set('paypalUrl', $paypalUrl);		
+
+
+
+
+
+
+
+
+
+
+
+
 		if ($this->request->is('post')) {
 			//debug($this->request->data);
 			
@@ -298,6 +358,22 @@ class OrdersController extends AppController {
 					$this->Session->setFlash(__('The order has been saved.'));
 					$this->Session->delete('cart.' . $id);
 					$this->Session->delete('Order');
+
+
+					/*$Email = new CakeEmail();
+					$Email->config('gmail');
+					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'));
+					$Email->to('imscotta92@yahoo.com');
+					$Email->subject('Food Swoop Order Receipt');
+					$Email->send('My message'); */
+
+
+
+
+
+
+
+
 					return $this->redirect(array('action' => 'receipt', 'supermarketid' => $id, 'orderid' => $newOrderId));
 				} else {
 					//debug($this->Order->validationErrors);
@@ -706,7 +782,7 @@ class OrdersController extends AppController {
 				//if ($this->Order->placeNewOrder($this->request->data)) {
 				//	$newOrderId=$this->Order->id;
 				//	$this->Session->setFlash(__('The order has been saved.'));
-					return $this->redirect(array('action' => 'confirmorder', $id));
+					return $this->redirect(array('action' => 'payment', $id));
 			/*	} else {
 					//debug($this->Order->validationErrors);
 					$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
@@ -1366,6 +1442,118 @@ class OrdersController extends AppController {
 
 		//$this->Order->recursive = 0;
 		} 
+
+
+
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function confirmorder($id = null) {
+		$this->layout = 'boots';
+		$this->loadModel('Supermarket');
+		if (!$this->Supermarket->exists($id)) {
+			throw new NotFoundException(__('Invalid supermarket'));
+		}
+		$options = array('conditions' => array('Supermarket.' . $this->Supermarket->primaryKey => $id));
+		$this->set('supermarket', $this->Supermarket->find('first', $options));
+        $cartData = $this->Session->read('cart.' . $id);
+
+		if ($cartData == array() || null) {
+			$this->redirect(array('action' => 'placeorder', $id));
+		}
+
+		$users = $this->Order->User->find('list');
+		$drivers = $this->Order->Driver->find('list');
+		//$currentdriver = $drivers[0];
+		//debug($currentdriver);
+		///debug($drivers);
+		$items = $this->Order->Item->find('list');
+		$authuserid = $this->Auth->user('id');
+		$this->set('currentUser', $this->Auth->user());
+		//$this->set('authUser', $this->Auth->user()); 
+		//debug($authUser);
+		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
+         	$sessionOrderData = $this->Session->read('Order');
+
+		$this->set('cartData', $cartData);		
+		$this->set('sessionOrderData', $sessionOrderData);		
+
+
+
+
+
+		if ($this->request->is('post')) {
+			//debug($this->request->data);
+			
+			//$orderData = $this->request->data['Order'];
+			$orderItemsData = $this->Session->read('cart.' . $id);
+			$paymentData = $this->request->data['Payment'];
+		
+		//	if ($this->Session->write('Order', $sessionOrderData)) {
+			
+				$this->Order->create();
+				//$this->Order->OrdersItem->create();
+				if ($this->Order->saveNewOrder($sessionOrderData, $orderItemsData, $paymentData)) {
+				//if ($this->Order->placeNewOrder($this->request->data)) {
+					$newOrderId=$this->Order->id;
+					$this->Session->setFlash(__('The order has been saved.'));
+					$this->Session->delete('cart.' . $id);
+					$this->Session->delete('Order');
+
+
+					/*$Email = new CakeEmail();
+					$Email->config('gmail');
+					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'));
+					$Email->to('imscotta92@yahoo.com');
+					$Email->subject('Food Swoop Order Receipt');
+					$Email->send('My message'); */
+
+
+
+
+
+
+
+
+					return $this->redirect(array('action' => 'receipt', 'supermarketid' => $id, 'orderid' => $newOrderId));
+				} else {
+					//debug($this->Order->validationErrors);
+					$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+				}
+		/*	} else {
+					$this->Session->setFlash(__('The order could not be saved. Please, try again. Session Error.'));
+
+			} */
+		}
+
+
+	}
+
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function paypalredirect() {
+		$this->layout = 'redirect';		
+
+		$theParams = $_POST;
+		$this->set('theParams', $theParams);		
+
+
+		/* if (!($this->Order->deleteAll(array(), true))) {
+			return false;	
+		} */
+		//$this->Order->recursive = 0;
+		//$this->set('orders', $this->Paginator->paginate());
+	}
+
+
 
 
 

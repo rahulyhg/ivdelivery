@@ -20,6 +20,11 @@
 #cart {
 	min-width: 358px !important;
 }
+#iframe1 {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+}
 </style>
 
 
@@ -160,9 +165,10 @@
 	<legend>Payment Type</legend>
 
 	<fieldset>
+<iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="550px" id="iframe1"></iframe>
 
 	<?php
-		$options1 = array(
+	/*	$options1 = array(
 			'Cash' => 'Cash',
 			'Venmo' => 'Venmo',
 		);	
@@ -181,7 +187,7 @@
 		echo $this->Form->hidden('total', array('default' => '1'));
 		echo $this->Form->hidden('driver_id');
 		echo $this->Form->hidden('processing_fee', array('default' => '1'));
-		//echo $this->Form->input('Item');
+		//echo $this->Form->input('Item'); */
 	?>
 	</fieldset>
 <br>
