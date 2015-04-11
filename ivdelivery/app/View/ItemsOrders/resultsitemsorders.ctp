@@ -9,7 +9,7 @@
 	//echo $this->Html->link(__('Back to search results'), array('controller' => 'orders', 'action' => 'searchresults', '?' => $namedparams), array('class' => 'btn btn-default')); ?> 
 <h2><?php echo __('Delivery: ' . $supername . ' ' . $time . ', ' . $date); ?></h2> 
  	<?php //echo $this->Html->link(__('All Orders'), array('controller' => 'orders', 'action' => 'searchresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
-	<?php echo $this->Html->link(__('Unpaid'), array('controller' => 'Orders', 'action' => 'unpaidresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
+	<?php echo $this->Html->link(__('All Orders'), array('controller' => 'Orders', 'action' => 'unpaidresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Grocery List'), array('controller' => 'ItemsOrders', 'action' => 'resultsitemsorders', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?> 
 	<?php echo $this->Html->link(__('Deliveries'), array('controller' => 'Orders', 'action' => 'deliveriesresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?>
 	<?php echo $this->Html->link(__('Completed'), array('controller' => 'Orders', 'action' => 'completedresults', 'date' => $date1, 'time' => $time, 'supermarket_id' => $supermarket_id), array('class' => 'btn btn-default')); ?><br>
@@ -66,12 +66,7 @@
 <?php endforeach; ?>
 	</tbody>
 	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
+
 	<div class="paging">
 	<?php
 		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));

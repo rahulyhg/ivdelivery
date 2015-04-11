@@ -25,6 +25,10 @@
 	margin-right: auto !important;
 	text-align: center !important;
 }
+legend {
+	color: #26BBA4 !important;
+	font-weight: bold !important;
+}
 </style>
 
 
@@ -105,15 +109,30 @@
         'class' => 'form-control'
     )
 )); ?>
-<br>
 <h1>Review Order for <?php echo h($supermarket['Supermarket']['name']); ?>
 </h1>
 <br>
 
 
 <fieldset>
+	<legend>Delivery Details</legend>
+	<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd><?php echo($sessionOrderData['first_name']); ?> <?php echo($sessionOrderData['last_name']);  ?></dd>
+  <dt>Address</dt>
+  <dd><?php echo($sessionOrderData['street']);  echo(' ' . $sessionOrderData['street_2']); ?></dd>
+  <dt>Phone</dt>
+  <dd><?php echo($sessionOrderData['phone']); ?></dd>
+  <dt>Email</dt>
+  <dd><?php echo($sessionOrderData['email']);  ?></dd>
+  <dt>Delivery Time </dt>
+  <dd><?php
+ echo($sessionOrderData['delivery_date']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
+</dd>
 
-	<legend>Total</legend>
+</dl>
+<br>
+	<legend>Order Details</legend>
 
 
 <dl class="dl-horizontal">
@@ -132,40 +151,17 @@
   <dt>Processing Fee</dt>
   <dd> n/a </dd>
   <dt>Total Order Cost</dt>
-  <dd>$<?php echo $grandTotal; ?>
+  <dd>$<?php echo($sessionOrderData['total']); ?>
 </dd>
-
 </dl>
-</fieldset>
-<br>
 
-<fieldset>
-
-	<legend>Order Details</legend>
-
-
-<dl class="dl-horizontal">
-  <dt>Name</dt>
-  <dd><?php echo($sessionOrderData['first_name']); ?> <?php echo($sessionOrderData['last_name']);  ?></dd>
-  <dt>Address</dt>
-  <dd><?php echo($sessionOrderData['street']);  echo(' ' . $sessionOrderData['street_2']); ?></dd>
-  <dt>Phone</dt>
-  <dd><?php echo($sessionOrderData['phone']); ?></dd>
-  <dt>Email</dt>
-  <dd><?php echo($sessionOrderData['email']);  ?></dd>
-  <dt>Delivery Time </dt>
-  <dd><?php
- echo($sessionOrderData['delivery_date']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
-</dd>
-
-</dl>
 </fieldset>
 <br>
 
 	<legend>Payment Type</legend>
 
 	<fieldset>
-<iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="1150px" id="iframe1" frameborder="0"></iframe>
+<iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="450px" id="iframe1" frameborder="0"></iframe>
 
 	<?php
 	/*	$options1 = array(
@@ -192,12 +188,11 @@
 	</fieldset>
 <br>
 <?php
-echo $this->Form->submit(
+/*echo $this->Form->submit(
     'Submit Order', 
     array('class' => 'btn btn-success')
-);
+); */
 ?>
-<br><br><br>
 </div>
 
 

@@ -9,15 +9,9 @@
 			<?php echo $this->Html->link(($order['User']['first_name'] . ' ' . $order['User']['last_name']), array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
 			&nbsp;
 		</dd>
-
-		<dt><?php echo __('Payment Type'); ?></dt>
-		<dd>
-			<?php echo h($order['Payment'][0]['type']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Payment Status'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['payment_status']); ?>
+			<?php echo h($order['Order']['paypal_transaction_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Delivery Status'); ?></dt>

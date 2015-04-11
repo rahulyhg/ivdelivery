@@ -172,6 +172,7 @@ class SupermarketsController extends AppController {
 					unset($this->request->data['User'][0]);
 					unset($this->request->data['User'][1]);
 					$this->request->data['User'] = $data;
+					$this->request->data['User']['role'] = 'customer';
 					$this->loadModel('User');
 					$this->User->create();
 					if ($this->User->save($this->request->data)) {

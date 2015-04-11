@@ -50,7 +50,7 @@
 	<?php
 		echo $this->Form->label('Delivery Time');
 		echo ('<br>');
-		$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
+		$options = array('12:00:00' => '12:00 pm', '17:00:00' => '5:00 pm');
 		//$options = array('12:00 pm' => '12:00:00', '3:00 pm' => '15:00:00', '7:00 pm' => '19:00:00');
 		//$options = array('12:00:00' => '12:00 pm', '15:00:00' => '3:00 pm', '19:00:00' => '7:00 pm');
 		echo $this->Form->select('delivery_time', $options);

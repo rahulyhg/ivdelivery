@@ -19,7 +19,10 @@
 #itemth {
 	min-width: 230px !important;
 }
-
+legend {
+	color: #26BBA4 !important;
+	font-weight: bold !important;
+}
 </style>
 
 <script type="text/javascript">
@@ -29,6 +32,26 @@ jQuery(document).ready(function() {
     });
 });
 </script>
+<?php
+ if (!($cartData == NULL)) { 
+		$groceryTotal = 0;
+		$counter = 0;
+		$deliveryFees=0;
+		$itemCount = count($cartData);
+		$deliveryRate = 0;
+		foreach ($cartData as $cartItem) {
+	?>
+
+	<?php  
+		$itemTotal = $cartItem['total'];
+		$groceryTotal = ($groceryTotal+$itemTotal); 
+		$deliveryFees = ($deliveryFees+$cartItem['delivery_fee']); 
+	?>
+
+		
+
+	<?php }} ?>
+
 
 <div class="row">
         
@@ -592,24 +615,41 @@ echo $this->Form->select('delivery_choice', $deliveryOptions);
 	?>
 
 </fieldset>
-<br>
-	<legend>Delivery Details</legend>
-
+<br><br>
+	<legend>Delivery Information</legend>
 	<fieldset>
-
+	<table class="table borderless"><tr><td>
 	<?php
 		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
 
 <?php
 		//echo $this->Form->input('notes');
 		echo $this->Form->input('first_name', array('default' => $currentUser['first_name']));
+		?></td><td>
+
+		<?php
 		echo $this->Form->input('last_name', array('default' => $currentUser['last_name']));
+		?></td></tr><tr><td>
+		<?php
 		echo $this->Form->input('street', array('default' => $currentUser['street']));
+		?>
+		</td><td>
+		<?php
 		echo $this->Form->input('street_2', array('default' => $currentUser['street_2']));
+		?>
+		</td></tr><tr><td>
+		<?php
 		echo $this->Form->input('phone', array('default' => $currentUser['phone']));
+		?>
+		</td><td>
+		<?php
 		echo $this->Form->input('email', array('default' => $currentUser['email']));
+		?>
+		</td></tr></table>
+		<?php
 		echo $this->Form->hidden('item_total', array('value' => $itemTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
+
 		echo $this->Form->hidden('total', array('default' => $grandTotal));
 		echo $this->Form->hidden('driver_id');
 		echo $this->Form->hidden('processing_fee', array('default' => '0'));
@@ -617,14 +657,56 @@ echo $this->Form->select('delivery_choice', $deliveryOptions);
 	?>
 	</fieldset>
 <br>
+<legend>Billing Information</legend>
+	<fieldset>
+	<table class="table borderless"><tr><td>
+	<?php
+		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
 
-<fieldset>
+<?php
+		//echo $this->Form->input('notes');
+		echo $this->Form->input('billing_fname', array('default' => $currentUser['first_name'], 'label' => 'First Name'));
+		?></td><td>
 
+		<?php
+		echo $this->Form->input('billing_lname', array('default' => $currentUser['last_name'], 'label' => 'Last Name'));
+		?></td></tr><tr><td>
+		<?php
+		echo $this->Form->input('billing_street', array('default' => $currentUser['street'], 'label' => 'Street'));
+		?>
+		</td><td>
+		<?php
+		echo $this->Form->input('billing_street2', array('default' => $currentUser['street_2'], 'label' => 'Street 2'));
+		?>
+		</td></tr><tr><td>
+		<?php
+		echo $this->Form->input('billing_phone', array('default' => $currentUser['phone'], 'label' => 'Phone'));
+		?>
+		</td><td>
+		<?php
+		echo $this->Form->input('billing_email', array('default' => $currentUser['email'], 'label' => 'Email'));
+		?>
+		</td></tr></table>
+		<?php
+		echo $this->Form->hidden('item_total', array('value' => $groceryTotal));
+		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
 
+		echo $this->Form->hidden('total', array('default' => $grandTotal));
+		echo $this->Form->hidden('driver_id');
+		echo $this->Form->hidden('processing_fee', array('default' => '0'));
+		//echo $this->Form->input('Item');
+	?>
+	</fieldset>
 <br>
+<legend>Notes</legend>
 
 
-<br>
+		<?php
+		echo $this->Form->input('notes', array('label' => false, 'placeholder' => 'Leave notes for driver...'));
+		?>
+
+<br><br><br>
+
 <?php
 echo $this->Form->submit(
     'Add Details', 
@@ -633,7 +715,7 @@ echo $this->Form->submit(
 								echo $this->Form->end();
 
 ?>
-
+<br><br>
 </div>
 
 

@@ -47,6 +47,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     color: #fff !important;
 
   }
+  html {
+    text-shadow: none !important;
+
+  }
 
   </style>
     <meta charset="utf-8">
@@ -58,15 +62,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
   <!--
-    if (top.location!= self.location) {
-      top.location = self.location.href;
+    //if (top.location!= self.location) {
+      //top.location = self.location.href;
     //}
   //-->
 </script>

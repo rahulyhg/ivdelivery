@@ -25,7 +25,6 @@
 
      <div  class="row text-center contact-info">
          <div class="col-lg-12 col-md-12 col-sm-12">
-                             <hr />
                 <h2>Sucess! Order submitted for delivery!</h2>
 
                                 <hr />
@@ -119,6 +118,10 @@
              <hr />
               <div class="ttl-amts">
                   <h5>  Delivery Fee: $<?php echo $savedOrder['Order']['delivery_charge']; ?></h5>
+             </div>
+             <hr />
+              <div class="ttl-amts">
+                  <h5>  Discount Savings: $<?php echo $savedOrder['Order']['promotion_discount_amount']; ?></h5>
              </div>
              <hr />
               <div class="ttl-amts">

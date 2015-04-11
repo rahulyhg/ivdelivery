@@ -10,7 +10,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add', 'login', 'logout', 'edit', 'signup', 'home');
+        $this->Auth->allow('login', 'logout', 'edit', 'signup', 'home');
     }
 
 
@@ -105,7 +105,7 @@ class UsersController extends AppController {
 
 	public function logout() {
 		//$this->Session->setFlash(__('Logged out', 'alert alert-success'));
-	    return $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
+    	return $this->redirect($this->Auth->logout());
 	}
 
 
@@ -151,7 +151,6 @@ class UsersController extends AppController {
 	public function add() {
         $this->layout = 'BoostCake.generic';
 		if ($this->request->is('post')) {
-			$this->User->create();
 			$this->User->create();
 			//debug($this->request->data);
 			if ($this->User->save($this->request->data)) {
@@ -236,6 +235,7 @@ class UsersController extends AppController {
 							$password = $this->request->data['User']['password'];
 							unset($this->request->data['User']['password']);
 							$this->request->data['User']['password'] = $password;
+
 							//debug($this->request->data);
 							//return false;
 							//$data = $this->request->data['User'][0];
@@ -259,6 +259,7 @@ class UsersController extends AppController {
 							unset($this->request->data['User'][0]);
 							unset($this->request->data['User'][1]);
 							$this->request->data['User'] = $data;
+							$this->request->data['User']['role'] = 'customer';
 							$this->loadModel('User');
 							$this->User->create();
 							if ($this->User->save($this->request->data)) {

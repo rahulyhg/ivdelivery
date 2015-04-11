@@ -43,11 +43,14 @@
 .category { 
 	font-size: 16px !important;
 }
-	.btnContactUs {
-		background-color: #26BBA4 !important;
-		border-color: #23ab96 !important;
-		color: #fff;
-	}
+
+.btnContactUs {
+	background-color: #26BBA4 !important;
+	border-color: #23ab96 !important;
+	color: #fff;
+}
+
+
 </style>
 
 
@@ -150,7 +153,7 @@
           
 <br>
 <?php //debug($cartData); ?>
-	<h3><?php echo __('Grocery List'); ?></h3>
+	<h2><?php echo __('Grocery List'); ?></h2>
 
 	
 	<table class="table table-bordered" id="carttable">

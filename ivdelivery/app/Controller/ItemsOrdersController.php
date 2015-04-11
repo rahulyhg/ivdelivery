@@ -343,7 +343,6 @@ public function resultsitemsorders($id = null) {
 			array('Order.delivery_date' => $date),
 			array('Order.delivery_time' => $time),
 			array('Order.supermarket_id' => $supermarket_id),
-			array('Order.payment_status' => 'paid'),
 			array('ItemsOrder.canceled' => ''),
 		);
 		
