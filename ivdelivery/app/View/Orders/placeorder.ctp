@@ -24,7 +24,6 @@
 }
 #itemname {
 	font-size: 18px !important;
-
 }
 #controls {
 	width: 81px !important;
@@ -86,9 +85,10 @@
 <br>
 	<?php foreach($categoriesInfo as $category) { ?>
 	<h3 class="category" id="<?php echo($category['name']); ?>"><?php echo($category['name']); ?></h3>
+<div class="table-responsive">
 
 	<?php if (!empty($supermarket['Item'])): ?>
-	<table class="table table-hover" cellpadding = "0" cellspacing = "0">
+	<table class="table table-condensed" cellpadding = "0" cellspacing = "0">
 	<!--<tr>
 		<th><?php //echo __('Name'); ?></th>
 		<?php //if (!($supermarket['Supermarket']['name'] == 'Costco')) { ?>
@@ -106,23 +106,26 @@
 			//debug($itemCount);
 	?>
 
-
+	<?php $itemDisplayCount = 0; 
+			$extraItem = 'true';
+	?>
 
 	<?php foreach ($supermarket['Item'] as $item): ?>
 		<?php if ($item['category_id'] == $category['id']) { ?>
 		<?php //debug($item); ?>
-		<tr>
-			<td><p id="itemname"><?php echo $item['name']; ?> <br> <?php
+			<?php
+			if ($x % 2 == 0) {
+				?>
+						<tr>
+			<?php } ?>
+		<td>
+  		<?php echo $this->Html->link(__('+'), array('controller' => 'ItemsOrders', 'action' => 'addItemsOrder', $item['id']), array('class' => 'btn btn-primary btn-lg')); ?> <br></td>
+			<td><p id="itemname"><?php echo $item['name']; ?> <br>($<?php echo $item['cost']; ?>)<br> <?php
 
 				//echo $this->Html->image($item['img'], array('alt' => 'CakePHP', 'class' => 'img-thumbnail', 'id' => 'itemimage'));
 
 			//echo $item['img']; ?></p></td>
-		<?php if (!($supermarket['Supermarket']['name'] == 'Costco')) { ?>
-			<td><?php echo $item['brand']; ?></td>
-		<?php } ?>
 			<!--<td><?php echo $item['description']; ?></td>-->
-			<td><p id="itemname">$<?php echo $item['cost']; ?></p></td>
-			<td class="actions">
 		<div>
 		<?php
 		echo $this->Form->hidden('ItemsOrder.' . $x . '.item_id', array('value' => $item['id']));
@@ -132,14 +135,27 @@
 		echo $this->Form->hidden('ItemsOrder.' . $x . '.quantity', array('default' => '0'));
 		echo $this->Form->hidden('ItemsOrder.' . $x . '.total', array('default' => '0'));
 		?>  
-
-  		<?php echo $this->Html->link(__('Add to cart'), array('controller' => 'ItemsOrders', 'action' => 'addItemsOrder', $item['id']), array('class' => 'btn btn-primary btn-lg')); ?> <br><br>
-		<?php $x=$x+1; ?>
-		</tr>
+		<?php
+			$pricebutton = ('$' . $item['cost']); ?>
+			<?php
+			if (!($x % 2 == 0)) {
+				?>
+				</tr>
+			<?php } ?>
+					<?php $x=$x+1; ?>
+			<?php
+			$extraItem = 'false';
+			?>
 		<?php } ?>
 	<?php endforeach; ?>
-	</table>
+<?php
+	if (!($x % 2 == 0)) {	
+?>
+	<td></td></tr>
 	
+<?php } ?>
+	</table>
+	</div>
   		<?php //secho $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'enterdetails', $supermarket['Supermarket']['id']), array('class' => 'btn btn-success btn-lg', 'id' => 'placeordersubmit')); ?><br><br> 
 
 <?php endif; ?>

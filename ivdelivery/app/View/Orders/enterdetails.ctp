@@ -133,7 +133,7 @@ jQuery(document).ready(function() {
 </h1>
 <br>
 <fieldset>
-	<legend>Delivery Options</legend>
+	<legend>Delivery Information</legend>
 
 	
 
@@ -517,7 +517,7 @@ jQuery(document).ready(function() {
 				}
 
 
-			} elseif($dw == 7) {
+			} elseif($dw == 0) {
 
 				if ($currentTime < '10:30:00') {
 
@@ -572,7 +572,7 @@ jQuery(document).ready(function() {
 					}
 			}
 
-
+//debug($dw);
 			// /$dw2 = date("m-d", $dw2['date']);
 			//$dd = $date();
 			///$dw2 = strtotime($dw1); 
@@ -594,13 +594,13 @@ jQuery(document).ready(function() {
 
 				}
 */
-	?>
-	
+	?><?php
+	//debug($deliveryOptions); ?>
 	<?php
 //$options = array('1' => 'Today ', '2' => 'Today', '3' => );
 $attributes = array('legend' => false, 'separator' => '</li><br><li>');
 
-echo $this->Form->select('delivery_choice', $deliveryOptions);
+echo $this->Form->select('delivery_choice', $deliveryOptions, array('class' => 'form-control'));
 ?>
 	<br>	<?php
 		//echo $this->Form->label('Immediate Deliver?');
@@ -614,10 +614,7 @@ echo $this->Form->select('delivery_choice', $deliveryOptions);
 		*/
 	?>
 
-</fieldset>
-<br><br>
-	<legend>Delivery Information</legend>
-	<fieldset>
+
 	<table class="table borderless"><tr><td>
 	<?php
 		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
@@ -647,47 +644,6 @@ echo $this->Form->select('delivery_choice', $deliveryOptions);
 		?>
 		</td></tr></table>
 		<?php
-		echo $this->Form->hidden('item_total', array('value' => $itemTotal));
-		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
-
-		echo $this->Form->hidden('total', array('default' => $grandTotal));
-		echo $this->Form->hidden('driver_id');
-		echo $this->Form->hidden('processing_fee', array('default' => '0'));
-		//echo $this->Form->input('Item');
-	?>
-	</fieldset>
-<br>
-<legend>Billing Information</legend>
-	<fieldset>
-	<table class="table borderless"><tr><td>
-	<?php
-		echo $this->Form->hidden('user_id', array('value' => $authuserid)); ?>
-
-<?php
-		//echo $this->Form->input('notes');
-		echo $this->Form->input('billing_fname', array('default' => $currentUser['first_name'], 'label' => 'First Name'));
-		?></td><td>
-
-		<?php
-		echo $this->Form->input('billing_lname', array('default' => $currentUser['last_name'], 'label' => 'Last Name'));
-		?></td></tr><tr><td>
-		<?php
-		echo $this->Form->input('billing_street', array('default' => $currentUser['street'], 'label' => 'Street'));
-		?>
-		</td><td>
-		<?php
-		echo $this->Form->input('billing_street2', array('default' => $currentUser['street_2'], 'label' => 'Street 2'));
-		?>
-		</td></tr><tr><td>
-		<?php
-		echo $this->Form->input('billing_phone', array('default' => $currentUser['phone'], 'label' => 'Phone'));
-		?>
-		</td><td>
-		<?php
-		echo $this->Form->input('billing_email', array('default' => $currentUser['email'], 'label' => 'Email'));
-		?>
-		</td></tr></table>
-		<?php
 		echo $this->Form->hidden('item_total', array('value' => $groceryTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
 
@@ -697,7 +653,7 @@ echo $this->Form->select('delivery_choice', $deliveryOptions);
 		//echo $this->Form->input('Item');
 	?>
 	</fieldset>
-<br>
+
 <legend>Notes</legend>
 
 
@@ -715,7 +671,6 @@ echo $this->Form->submit(
 								echo $this->Form->end();
 
 ?>
-<br><br>
 </div>
 
 

@@ -115,7 +115,7 @@ legend {
 
 
 <fieldset>
-	<legend>Delivery Details</legend>
+	<legend>Delivery Information</legend>
 	<dl class="dl-horizontal">
   <dt>Name</dt>
   <dd><?php echo($sessionOrderData['first_name']); ?> <?php echo($sessionOrderData['last_name']);  ?></dd>

@@ -16,36 +16,4 @@
 ?>
 <?php echo $this->fetch('content'); ?>
 
-
-<h1>Receipt: Order #<?php echo($sessionOrderData['fsorderid']); ?> </h1>
-
-<br>
-<h4>
-Thank you <?php echo($sessionOrderData['first_name']); ?> for shopping with FoodSwoop
-</h4>
-<br>
-<h3>Order Details </h3>
-</ul>
-<li>
-	<b>Delivery Time:</b> <?php echo($sessionOrderData['delivery_date']); ?>
-</li>
-<li>
-	<b>Delivery Date:</b> <?php echo($sessionOrderData['delivery_time']); ?>
-</li>
-<li>
-	<b>Address:</b> <?php echo($sessionOrderData['street']); ?>
-</li>
-<li>
-	<b>Phone:</b> <?php echo($sessionOrderData['phone']); ?>
-</li>
-<li>
-	<b>Total Cost:</b> <?php echo($sessionOrderData['total']); ?>
-</li>
-</ul>
-<br>
-<b>Notes:</b>
-<br>
-<?php echo($sessionOrderData['notes']); ?>
-
-
 This email was sent using the CakePHP Framework, http://cakephp.org.

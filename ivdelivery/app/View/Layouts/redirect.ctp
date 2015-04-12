@@ -27,10 +27,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
     <meta charset="utf-8">
@@ -58,7 +56,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 <br><br><br>
 <div class="container">
-<h1>Please wait while the payment is loading </h1>
+<h1>Please wait a moment as the payment processes</h1>
   <div id="content">
     <br><br><br>
   			<?php //echo $this->Session->flash(); ?>

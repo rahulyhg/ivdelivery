@@ -59,12 +59,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     <meta name="author" content="">
 
     <title>Food Swoop</title>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <script type="text/javascript">
   <!--
     //if (top.location!= self.location) {
@@ -89,7 +84,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 </head>
 
   <!-- Preloader -->
-
+<body>
     <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
@@ -158,7 +153,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         </div>
         <!-- /.container -->
     </nav>
-
 <br><br><br>
 <div class="container">
 

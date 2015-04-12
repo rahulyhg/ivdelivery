@@ -29,7 +29,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script>
 
 </script>
-  <meta name="keywords" content="Groceries, Goleta, Trader Joes, Costco, conveniance, lunch, dinner, delivery, isla vista, college, ucsb, grocery, food, swoop, del playa, dp, iv, service, student, deltopia, halloween, santa barbara, college, california, university, beach, ocean, sun, fraternity, sorority, greek">
+  <meta name="keywords" content="Isla Vista Grocery Delivery, Groceries, Goleta, Trader Joes, Costco, Conveniance, Lunch, dinner, delivery, Isla Vista, College, UCSB, grocery, food, swoop, del playa, DP, IV, service, student, deltopia, halloween, santa barbara, california, university, beach, ocean, sun, fraternity, sorority, greek">
 <meta name="description" content="Isla Vista / UCSB Grocery Delivery">
 	<style>
 	.top-nav-collapse {

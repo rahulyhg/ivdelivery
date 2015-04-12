@@ -7,7 +7,7 @@ class EmailConfig {
         'port' => 465,
         'username' => 'imscotta11@gmail.com',
         'password' => 'HotNatured987',
-        //'transport' => 'Smtp'
+        'transport' => 'Smtp'
     );
 }
 

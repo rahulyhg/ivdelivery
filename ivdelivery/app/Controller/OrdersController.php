@@ -18,12 +18,12 @@ class OrdersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('placeorder', 'index', 'delete', 'searchorder', 'searchresults', 'view');
+        $this->Auth->allow('placeorder', 'view');
     }
 
 	public function isAuthorized($user) {
 	    // All registered users can add posts
-	    if ($this->action === 'placeorder' || 'enterdetails' || 'confirmorder' || 'receipt') {
+	    if ($this->action === 'placeorder' || 'enterdetails' || 'confirmorder' || 'receipt' || 'paypalredirect' || 'payment' || 'view') {
 		return true;
 	    }
 	    	    if (isset($user['role']) && $user['role'] === 'admin') {
@@ -277,6 +277,7 @@ class OrdersController extends AppController {
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
          	$sessionOrderData = $this->Session->read('Order');
+         	//debug($sessionOrderData);
 
 		$this->set('cartData', $cartData);		
 		$this->set('sessionOrderData', $sessionOrderData);		
@@ -319,8 +320,14 @@ class OrdersController extends AppController {
 		parse_str($resp, $arr);
 
 		if ($arr['RESULT'] != 0) {echo "<p>To order, please contact us.</p>";}
+		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['first_name'] . "&BILLTOLASTNAME=" . $sessionOrderData['last_name']);
+		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['first_name'] . "&BILLTOLASTNAME=" . $sessionOrderData['last_name']);
+		$paypalUrl=("https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN']);
 
-		$paypalUrl="https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'] . "&ECHODATA=True&BILLTOFIRSTNAME=Scott";
+		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['billing_fname'] . "&BILLTOLASTNAME=" . $sessionOrderData['billing_lname'] . "&BILLTOSTREET=" . $sessionOrderData['billing_street'] . "&BILLTOSTREET2=" . $sessionOrderData['billing_street2'] . "BILLTOSTATE=CA&BILLTOZIP=" . $sessionOrderData['billing_street']);
+
+
+
 
 		/*
 			Custom Parameters - USER1, USER2, USER3
@@ -1511,14 +1518,17 @@ class OrdersController extends AppController {
 		$theParams = $_POST;
 		$this->set('theParams', $theParams);		
 		//debug($theParams);
-		$theParams1 = $_GET;
-		$this->set('theParams1', $theParams1);
+		//$theParams1 = $_GET;
+		//$this->set('theParams1', $theParams1);
 		/* if (!($this->Order->deleteAll(array(), true))) {
 			return false;	
 		} */
 		//$this->Order->recursive = 0;
 		//$this->set('orders', $this->Paginator->paginate());
+		//return true;
 		if (isset($theParams)) {
+				//debug($theParams);
+				//return false;
 				if (isset($theParams['RESPMSG'])) {
 				if ($theParams['RESPMSG'] == "Approved") {
 
@@ -1540,6 +1550,9 @@ class OrdersController extends AppController {
 					$orderItemsData = $this->Session->read('cart.' . $superid);
 					//debug($sessionOrderData);
 					$this->Order->create();
+					$hashfs = hash('ripemd160', 'Manchester United is the greatest football club');
+					$foodswoop_id = substr($hashfs, -12);
+					$sessionOrderData['fsorderid'] = ('fs' . $foodswoop_id);
 					//$this->Order->OrdersItem->create();
 					//debug($sessionOrderData);
 					//debug($orderItemsData);
@@ -1549,15 +1562,27 @@ class OrdersController extends AppController {
 					$newOrderId=$this->Order->id;
 					$this->Session->setFlash(__('The order has been saved.'));
 					$this->Session->delete('cart.' . $superid);
-					$this->Session->delete('Order');
+					$this->Session->delete('Order.' . $sessionOrderData['supermarket_id']);
 
-
-					/*$Email = new CakeEmail();
+					/*
+					$Email = new CakeEmail();
+					$Email->template('receipt');
 					$Email->config('gmail');
+					$Email->emailFormat('html');
 					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'));
 					$Email->to('imscotta92@yahoo.com');
 					$Email->subject('Food Swoop Order Receipt');
-					$Email->send('My message'); */
+					$Email->send('Message');
+					*/
+
+					$Email = new CakeEmail();
+					$Email->config('gmail');
+					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'))
+					    ->to('imscotta92@yahoo.com')
+					    ->subject('About')
+						->emailFormat('html')
+					    ->viewVars(array("sessionOrderData"=>$sessionOrderData))
+					    ->send('My message');
 
 					//return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
 					$completedOrder = array(array('order_id' => $newOrderId), array('supermarket_id' => $superid));
