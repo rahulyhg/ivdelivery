@@ -72,6 +72,7 @@ legend {
 
 	<?php } ?>
 	<?php //calculate delivery fee
+	/*
 	if ($itemCount <= 3) {
 		$deliveryRate = 5;
 		$deliveryCost=($deliveryRate+$deliveryFees);
@@ -100,7 +101,13 @@ legend {
 			$deliveryCost=($deliveryRate+$deliveryFees);
 			$grandTotal = ($groceryTotal+$deliveryCost);
 		}
-	}
+	} */
+	$smallCut = ($groceryTotal*(.05));
+	$flatFee = 7.5;
+	$deliveryCost = ($flatFee + $smallCut + $deliveryFees);
+	$grandTotal = ($groceryTotal + $deliveryCost);
+
+
 ?>
 
 

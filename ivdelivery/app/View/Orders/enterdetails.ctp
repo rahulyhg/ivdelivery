@@ -86,6 +86,7 @@ jQuery(document).ready(function() {
 
 	<?php } ?>
 	<?php //calculate delivery fee
+	/*
 	if ($itemCount <= 3) {
 		$deliveryRate = 5;
 		$deliveryCost=($deliveryRate+$deliveryFees);
@@ -118,6 +119,17 @@ jQuery(document).ready(function() {
 			$grandTotal = ($groceryTotal+$deliveryCost);
 		}
 	}
+	*/
+	$smallCut = ($groceryTotal*(.05));
+	$flatFee = 7.5;
+	$deliveryCost = ($flatFee + $smallCut + $deliveryFees);
+	$grandTotal = ($groceryTotal + $deliveryCost);
+
+
+
+
+
+
 ?>
 <?php echo $this->Form->create('Order', array(
     'inputDefaults' => array(
