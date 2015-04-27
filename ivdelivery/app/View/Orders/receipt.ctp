@@ -51,9 +51,24 @@
                <h4>  <strong>Order Details </strong></h4>
                            <b>Bill Amount :  $<?php echo $savedOrder['Order']['total']; ?></b><br>
                                           <b>Payment Status :  Paid </b><br>
+
+                                        <?php $otime = $savedOrder['Order']['delivery_time'];
+                                          if ($otime == '12:00:00') { ?>
+
+
                Delivery Date :  <?php echo ($savedOrder['Order']['delivery_date']); ?>              <br />
-               Delivery Time :  <?php echo ($savedOrder['Order']['delivery_time']); ?>              <br />
+               Delivery Time :  12:00 pm            <br />
                Purchase Date : <?php echo ($savedOrder['Order']['created']); ?><br>
+
+               <?php } else { ?>
+
+
+               Delivery Date :  <?php echo ($savedOrder['Order']['delivery_date']); ?>              <br />
+               Delivery Time :  5:00 pm            <br />
+               Purchase Date : <?php echo ($savedOrder['Order']['created']); ?><br>
+
+
+               <?php } ?>
 
          </div>
      </div>
@@ -121,7 +136,14 @@
              </div>
              <hr />
               <div class="ttl-amts">
-                  <h5>  Discount Savings: $<?php echo $savedOrder['Order']['promotion_discount_amount']; ?></h5>
+                  <h5>  Discount Savings: $<?php 
+                                                  if (isset($savedOrder['Order']['promotion_discount_amount'])) {
+                                                    echo($savedOrder['Order']['promotion_discount_amount']);
+                                                  } else {
+                                                    echo(0.00);
+                                                  }
+
+                   ?></h5>
              </div>
              <hr />
               <div class="ttl-amts">
@@ -133,7 +155,7 @@
       <div class="row pad-top-botm">
          <div class="col-lg-12 col-md-12 col-sm-12">
              <hr />
-    <strong> Important: Please contact (XXX) XXX-XXXX with any concerns</strong>
+    <strong> Important: Please contact support@foodswoop.com with any concerns</strong>
 <br><br><br><br>
              </div>
          </div>

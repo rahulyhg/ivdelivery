@@ -29,7 +29,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 <script>
 
 </script>
-  <meta name="keywords" content="Isla Vista Grocery Delivery, Groceries, Goleta, Trader Joes, Costco, Conveniance, Lunch, dinner, delivery, Isla Vista, College, UCSB, grocery, food, swoop, del playa, DP, IV, service, student, deltopia, halloween, santa barbara, california, university, beach, ocean, sun, fraternity, sorority, greek">
+  <meta name="keywords" content="Isla Vista Grocery Delivery, Groceries, Goleta, Trader Joes, Costco, Conveniance, Lunch, Dinner, Delivery, Isla Vista, College, UCSB, Grocery, Food, Swoop, Del Playa, DP, IV, Service, Student, Deltopia, Halloween, Santa Barbara, California, University, Beach, Ocean, Sun, Fraternity, Sorority, Greek, Cool, Extravaganza">
 <meta name="description" content="Isla Vista / UCSB Grocery Delivery">
 	<style>
 	.top-nav-collapse {
@@ -65,8 +65,30 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	#contact {
 		  color: #fff;
 		  /*background-image: url('<?php echo $this->webroot; ?>/img/img7.jpg') !important;*/
-		  background-image: url('http://foodswoop.com/img/img7.jpg') !important;
+		  background-image: url('https://foodswoop.com/img/img7.jpg') !important;
 
+	}
+	#terms {
+		font-weight: bold !important;
+		font-size: 18px !important;
+		display: inline !important;
+	}
+	#check {
+		display: inline !important;
+		text-align: center !important;
+		padding-left: auto !important;
+		padding-right: auto !important;
+		vertical-align: center !important;
+	}
+	#checko {
+		min-width: 50px !important;
+	}
+	#homeic {
+		display: inline !important;
+		text-align: center !important;
+		padding-left: auto !important;
+		padding-right: auto !important;
+		vertical-align: center !important;
 	}
 
 
@@ -90,7 +112,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
     	<?php	echo $this->Html->css('nhstyle.css'); ?>
 	<!--<link href="<?php echo $this->webroot; ?>/color/default.css" rel="stylesheet">-->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<link href="foodswoop.com/color/default.css" rel="stylesheet">
+	<link href="https://foodswoop.com/color/default.css" rel="stylesheet">
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-custom">
@@ -123,7 +145,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="#about">About</a></li>
-		<li><a href="#service">Service</a></li>
+        <li><a href="#service">Service</a></li>
 		<li><a href="#contact">Sign Up</a></li>
 
 
@@ -184,7 +206,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 		<div class="slogan">
 			<h2>WELCOME TO <span class="text_color">Food Swoop</span> </h2>
-			<h4>Coming to Isla Vista 4/13</h4>
+			<h4>NOW Delivering to Isla Vista</h4>
 			
 			<a class="twitter-follow-button"
   href="https://twitter.com/food_swoop"
@@ -197,7 +219,7 @@ Follow Us
 <div class="fb-like" data-href="https://www.facebook.com/foodswoopk" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div><br>
 		</div>
 		<div class="page-scroll">
-			<a href="#service" class="btn btn-circle">
+			<a href="#about" class="btn btn-circle">
 				<i class="fa fa-angle-double-down animated"></i>
 			</a>
 		</div>
@@ -212,7 +234,7 @@ Follow Us
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="wow bounceInDown" data-wow-delay="0.1s">
 					<div class="section-heading">
-					<h2>Who We Are</h2>
+					<h2>How it works</h2>
 					<i class="fa fa-2x fa-angle-down"></i>
 
 					</div>
@@ -229,67 +251,47 @@ Follow Us
 			</div>
 		</div>
         <div class="row">
-            <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="col-xs-12 col-sm-4 col-md-4">
 				<div class="wow bounceInUp" data-wow-delay="0.1s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Scott Alexander</h5>
-                        <p class="subtitle">Co-Founder / Developer</p>
-                        <div class="avatar">
+						<h3>1. Order</h3>
+						                                         <div class="avatar">
+       <?php	echo $this->Html->image('team/6.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle', 'id'=>'homeic'));	?></div>
 
-                        <?php	echo $this->Html->image('team/1.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
+                        <p class="subtitle">Choose a store and fill out your shopping cart. Schedule a delivery for the same day or up to a week in advance. Food Swoop accepts credit card payments through PayPal and the site is in full compliance with PCI-DSS Standards to ensure security.</p>
 
 
-                        </div>
+
                     </div>
                 </div>
 				</div>
             </div>
-			<div class="col-xs-6 col-sm-3 col-md-3">
+			<div class="col-xs-12 col-sm-4 col-md-4">
 				<div class="wow bounceInUp" data-wow-delay="0.2s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Michael Zhang</h5>
-                        <p class="subtitle">Co-Founder / Management</p>
-                        <div class="avatar">
+						<h3>2. Pickup</h3>
+						                        <div class="avatar">
 
-                        <?php	echo $this->Html->image('team/2.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
+						                        <?php	echo $this->Html->image('team/7.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle', 'id' => 'homeic'));	?></div>
 
-                        </div>
+                        <p class="subtitle">Drivers pickup orders from specific grocery stores. The driver may call the customer's phone number with questions regarding the order. During transport, perishable items are stored in cooling units and temperatures are recorded for quality assurance.  </p>
 
                     </div>
                 </div>
 				</div>
             </div>
-			<div class="col-xs-6 col-sm-3 col-md-3">
+			<div class="col-xs-12 col-sm-4 col-md-4">
 				<div class="wow bounceInUp" data-wow-delay="0.3s">
                 <div class="team boxed-grey">
                     <div class="inner">
-						<h5>Charlie Bond</h5>
-                        <p class="subtitle">Co-Founder / Marketing</p>
-                        <div class="avatar">
+						<h3>3. Delivery</h3>
+						                                                <div class="avatar">
+<?php	echo $this->Html->image('team/8.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle', 'id' => 'homeic'));	?></div>
 
-                        <?php	echo $this->Html->image('team/3.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-
-                        </div>
-
-                    </div>
-                </div>
-				</div>
-            </div>
-			<div class="col-xs-6 col-sm-3 col-md-3">
-				<div class="wow bounceInUp" data-wow-delay=".4s">
-                <div class="team boxed-grey">
-                    <div class="inner">
-						<h5>Parker Webster</h5>
-                        <p class="subtitle">Co-Founder / Delivery</p>
-                        <div class="avatar">
-
-                        <?php	echo $this->Html->image('team/4.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-circle'));	?>
-
-
-                        </div>
+                        <p class="subtitle">Food Swoop services Isla Vista and UCSB campus. Orders are delivered up to an hour following the schedueled delivery time. Written and photographed receipts are available upon request. Final order prices may be adjusted to match actual receipt.</p>
+          
 
                     </div>
                 </div>
@@ -299,23 +301,15 @@ Follow Us
 		</div>
 
 	<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.1s">
-					<div class="section-heading"><br><br><br>
-					<p id="story">Founded on Del Playa, we are a new tech startup committed to serving Isla Vista. Our mission is to provide college students with an affordable way to get their favorite groceries at the simplest convenience.</p>
-
-					</div>
-					</div>
-				</div>
-			</div>
 	</div>
 		
 	</section>
 	<!-- /Section: about -->
 	
 
-	<!-- Section: services -->
+	
+	<!-- /Section: services -->
+		<!-- Section: services -->
     <section id="service" class="home-section text-center bg-gray">
 		
 		<div class="heading-about">
@@ -335,6 +329,10 @@ Follow Us
 		</div>
 
 
+
+
+
+
 		<div class="container">
 		<div class="row">
 			<div class="col-lg-2 col-lg-offset-5">
@@ -342,37 +340,22 @@ Follow Us
 			</div>
 		</div>
         <div class="row">
-			<div class="col-sm-6 col-md-6">
-				<div class="wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-box">
-					<!--<div class="service-icon">
-						<img src="img/icons/service-icon-2.png" alt="" />
-					</div>-->
-					<div class="service-desc">
-						<br><h3>Costco</h3><br>
-					</div>
-
-                                                        <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?>
-                </div>
-				</div>
-            </div>
-			<div class="col-sm-6 col-md-6">
+        				<div class="col-sm-4 col-md-4"></div>
+			<div class="col-sm-4 col-md-4">
 				<div class="wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-box">
 					<!--<div class="service-icon">
 						<img src="img/icons/service-icon-3.png" alt="" />
 					</div>-->
-					<div class="service-desc">
-						<br><h3>Trader Joes</h3><br>
-					</div>
+									                        <?php	echo $this->Html->image('logo.jpg', array('alt' => 'CakePHP', 'class' => 'img-responsive img-rounded'));	?>
+
                                                         <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
+								//echo $this->Html->link("Shop Trader Joes", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
                             ?>
                 </div>
 				</div>
             </div>
+			<div class="col-sm-4 col-md-4"></div>
 
         </div>		
 		</div>
@@ -381,10 +364,9 @@ Follow Us
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
 					<div class="wow bounceInDown" data-wow-delay="0.1s">
-					<div class="section-heading"><br><br><br><br><br>
-					<p id="servicedescription">We shop at Costco and Trader Joe’s and deliver to Isla Vista and UCSB every day from 12pm to 1pm and 6pm to 7pm. Choose from any or all of our stores at no extra charge! ≤15 items - $10 ; ≤30 items – $15</p><br><br><br><br>
- 
-<p>*orders must be placed one hour before the delivery window.</p>
+					<div class="section-heading"><br><br>
+					<p id="servicedescription">Food Swoop shops at local grocery stores and delivers to Isla Vista / UCSB every day from 12pm to 1pm and 5pm to 6pm. The delivery fee consists of a $7.50 flat rate plus 5% of the total item cost.</p><br>
+  
 
 					</div>
 					</div>
@@ -393,9 +375,42 @@ Follow Us
 	</div>
 
 
+
+
+		<div class="container">
+		<div class="row">
+			<div class="col-lg-2 col-lg-offset-5">
+				<hr class="marginbot-50">
+			</div>
+		</div>
+        <div class="row">
+        				<div class="col-sm-4 col-md-4"></div>
+			<div class="col-sm-4 col-md-4">
+				<div class="wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-box">
+					<!--<div class="service-icon">
+						<img src="img/icons/service-icon-3.png" alt="" />
+					</div>-->
+					<div class="service-desc">
+					</div>
+                                                 <?php
+								echo $this->Html->link("Shop Costco", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
+                            ?>       <br><br><br>
+                                                                                 <?php
+								echo $this->Html->link("Shop Trader Joes", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
+                            ?>
+                </div>
+				</div>
+            </div>
+			<div class="col-sm-4 col-md-4"></div>
+
+        </div>		
+		</div>
+
+
+
+
 	</section>
-	<!-- /Section: services -->
-	
 
 	
 
@@ -463,8 +478,14 @@ Follow Us
 									echo $this->Form->input('User.1.password');
 
 								?></td></tr>
+								<tr><td colspan="2"> <br>
+									<table><tr><td id="checko">
+								<?php echo $this->Form->checkbox('User.1.termsagreed', array('label' => false, 'class' => 'form-control', 'default' => '0', 'required' => true
+								)); ?></td><td>
+								<p id="terms">Agree to <?php echo $this->Html->link(__('Terms of Service'), array('controller' => 'supermarkets', 'action' => 'termsprivacy')); ?></p>
+										</td></tr></table></td></tr>
 								</table>
-								</fieldset><br><br>
+								</fieldset>
 							<?php
 							echo $this->Form->submit(
 							    'Submit',
@@ -763,11 +784,19 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</div>-->
 					<div class="service-desc text-center"><br>
 						<br>
-						<table class="table borderless"><tr><td><h3>Costco</h3></td><td><h3>Trader Joes</h3></td></tr>
-							<tr><td><?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg')) ?></td><td>  <?php
-								echo $this->Html->link("Go Shopping", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
-                            ?></td></tr>
+						<table class="table borderless">
+							<tr><td>  <?php
+								echo $this->Html->link("Shop Trader Joes", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5e8-ecb8-4f34-a80e-0485c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
+                            ?><br><br><br>
+                            <?php
+								echo $this->Html->link("Shop Costco", array('controller' => 'Orders', 'action'=> 'placeorder', '54eea5c6-b7cc-4bfb-97d3-04a5c0aa087a'), array('id' => 'btnContactUs', 'class' => 'btn btn-skin btn-lg'))
+                            ?>
+
+
+
+
+
+                        </td></tr>
 							</table>
 					</div>
                 </div>

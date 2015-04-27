@@ -18,12 +18,12 @@ class OrdersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('placeorder', 'view');
+        $this->Auth->allow('placeorder');
     }
 
 	public function isAuthorized($user) {
 	    // All registered users can add posts
-	    if ($this->action === 'placeorder' || 'enterdetails' || 'confirmorder' || 'receipt' || 'paypalredirect' || 'payment' || 'view') {
+	    if ($this->action === 'placeorder' || 'enterdetails' || 'confirmorder' || 'receipt' || 'paypalredirect' || 'payment' || 'failedreceipt') {
 		return true;
 	    }
 	    	    if (isset($user['role']) && $user['role'] === 'admin') {
@@ -59,6 +59,8 @@ class OrdersController extends AppController {
 		if (!$this->Order->exists($id)) {
 			throw new NotFoundException(__('Invalid order'));
 		}
+		$this->Order->recursive = 1;
+		//$currentItemsOrder = $this->Order->ItemsOrders
 		$options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
 		$this->set('order', $this->Order->find('first', $options));
 	}
@@ -290,39 +292,53 @@ class OrdersController extends AppController {
 		$paypalUrl = ($paypalBase . '/?' . $paypalParams); */
 
 		$amt = 10.00;
-		$txt = "Pay Now!";
+		$txt = "Submit Order!";
 
-		$PF_HOST_ADDR = "https://pilot-payflowpro.paypal.com";
+		//Test
+		$PF_HOST_ADDR = "https://payflowpro.paypal.com";
 
+		//Live
+		//$PF_HOST_ADDR = "https://pilot-payflowpro.paypal.com.";
+		//Payflow link
+		$total = $sessionOrderData['total'];
+		//$total=.01;
+		//debug($total);
 		$secureTokenId = uniqid('', true);
 
-		$postData = "USER=" . "djbloads"
+		$postData = "USER=" . "FoodSwoop777"
 		        .   "&VENDOR=" . "FoodSwoop777"
 		        .   "&PARTNER=" . "PayPal"
-		        .   "&PWD=" . "Swoop420"
+		        .   "&PWD=" . "Food6606"
 		        .   "&CREATESECURETOKEN=Y"
 		        .   "&SECURETOKENID=" . $secureTokenId
 		        .   "&TRXTYPE=S"
-		        .   "&AMT=" . $sessionOrderData['total'];
+		        .   "&AMT=" . $total;
 
-
+		        //debug($postData);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $PF_HOST_ADDR);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_setopt($ch, CURLOPT_POST, TRUE);
-
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+		//debug('a');
 
 		$resp = curl_exec($ch);
+		//debug($resp);
 
 		if (!$resp) {echo "<p>To order, please contact us.</p>";}
-
+		//debug($resp);
 		parse_str($resp, $arr);
+		//debug($arr);
 
 		if ($arr['RESULT'] != 0) {echo "<p>To order, please contact us.</p>";}
 		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['first_name'] . "&BILLTOLASTNAME=" . $sessionOrderData['last_name']);
-		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['first_name'] . "&BILLTOLASTNAME=" . $sessionOrderData['last_name']);
-		$paypalUrl=("https://pilot-payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN']);
+		$moreParams = ("&EMAILCUSTOMER=True&BILLTOEMAIL=" . $sessionOrderData['email'] . "&BILLTOFIRSTNAME=" . $sessionOrderData['first_name'] . "&BILLTOLASTNAME=" . $sessionOrderData['last_name'] . "&SHIPTOSTREET=" . $sessionOrderData['street']);
+		//Test Link
+		//$paypalUrl=("https://payflowlink.paypal.com/?MODE=TEST&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'] . "&ECHODATA=True&PARMLIST=" . $moreParams);
+		$paypalUrl=("https://payflowlink.paypal.com/?SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN'] . $moreParams);
+
+		//Live Link
+		//$paypalUrl=("https://payflowlink.paypal.com/?MODE=LIVE&SECURETOKENID=" . $secureTokenId . "&SECURETOKEN=" . $arr['SECURETOKEN']);
 
 		//$moreParams = ("BILLTOFIRSTNAME=" . $sessionOrderData['billing_fname'] . "&BILLTOLASTNAME=" . $sessionOrderData['billing_lname'] . "&BILLTOSTREET=" . $sessionOrderData['billing_street'] . "&BILLTOSTREET2=" . $sessionOrderData['billing_street2'] . "BILLTOSTATE=CA&BILLTOZIP=" . $sessionOrderData['billing_street']);
 
@@ -1550,9 +1566,6 @@ class OrdersController extends AppController {
 					$orderItemsData = $this->Session->read('cart.' . $superid);
 					//debug($sessionOrderData);
 					$this->Order->create();
-					$hashfs = hash('ripemd160', 'Manchester United is the greatest football club');
-					$foodswoop_id = substr($hashfs, -12);
-					$sessionOrderData['fsorderid'] = ('fs' . $foodswoop_id);
 					//$this->Order->OrdersItem->create();
 					//debug($sessionOrderData);
 					//debug($orderItemsData);
@@ -1575,15 +1588,6 @@ class OrdersController extends AppController {
 					$Email->send('Message');
 					*/
 
-					$Email = new CakeEmail();
-					$Email->config('gmail');
-					$Email->from(array('imscotta11@gmail.com' => 'Food Swoop'))
-					    ->to('imscotta92@yahoo.com')
-					    ->subject('About')
-						->emailFormat('html')
-					    ->viewVars(array("sessionOrderData"=>$sessionOrderData))
-					    ->send('My message');
-
 					//return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
 					$completedOrder = array(array('order_id' => $newOrderId), array('supermarket_id' => $superid));
 
@@ -1595,6 +1599,7 @@ class OrdersController extends AppController {
 			} else {
 				//debug($this->Order->validationErrors);
 				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
+
 			}
 			} else {
 
@@ -1609,21 +1614,20 @@ class OrdersController extends AppController {
 			} else {
 				$completedOrder = $this->Session->read('completedOrder');
 
-				$superid = $completedOrder[1]['supermarket_id'];
-				$newOrderId = $completedOrder[0]['order_id'];
+				if (isset($completedOrder)) {
+						$superid = $completedOrder[1]['supermarket_id'];
+						$newOrderId = $completedOrder[0]['order_id'];
+						return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
+					} else {
+					return $this->redirect(array('action' => 'failedreceipt'));
 
-				return $this->redirect(array('action' => 'receipt', 'supermarketid' => $superid, 'orderid' => $newOrderId));
 
+				}
+			}
 
 		}
-		
-
-
-
-		}
-		//$this->redirect($this->request->referer());		
-
 	}
+
 
 
 /**
@@ -1632,7 +1636,12 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function failedreceipt() {
-		$this->layout = 'error';		
+		$this->layout = 'error';
+		$params = ($this->request->params);
+		if (isset($params)) {
+		$val = $params['pass'][0];
+		$this->set('val', $val);
+	}
 		/* if (!($this->Order->deleteAll(array(), true))) {
 			return false;	
 		} */

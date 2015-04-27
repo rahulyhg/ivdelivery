@@ -134,7 +134,17 @@ legend {
   <dd><?php echo($sessionOrderData['email']);  ?></dd>
   <dt>Delivery Time </dt>
   <dd><?php
- echo($sessionOrderData['delivery_date']); echo(' ' . $sessionOrderData['delivery_time']);  ?>
+
+$otime = $sessionOrderData['delivery_time'];
+if ($otime == ('12:00:00')) {
+ echo($sessionOrderData['delivery_date']); echo(' 12:00 pm');
+
+}else {
+ echo($sessionOrderData['delivery_date']); echo(' 5:00 pm'); 
+}
+
+
+  ?>
 </dd>
 
 </dl>
@@ -146,7 +156,7 @@ legend {
   <dt>Items Total Cost</dt>
   <dd>$<?php echo $groceryTotal; ?></dd>
   <dt>Delivery Fees</dt>
-  <dd>$<?php echo ($deliveryCost); ?></dd>
+  <dd>$<?php echo($sessionOrderData['delivery_charge']); ?></dd>
   <dt>Discount Amount</dt>
   <dd>$<?php 
   if (!(isset($sessionOrderData['promotion_discount_amount']))) {
@@ -165,7 +175,7 @@ legend {
 </fieldset>
 <br>
 
-	<legend>Payment Type</legend>
+	<legend>Payments</legend>
 
 	<fieldset>
 <iframe src="<?php echo $paypalUrl; ?>" name="test_iframe" scrolling="no" width="490px" height="450px" id="iframe1" frameborder="0"></iframe>

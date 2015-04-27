@@ -85,8 +85,9 @@ class ItemsController extends AppController {
 			$this->request->data = $this->Item->find('first', $options);
 		}
 		$supermarkets = $this->Item->Supermarket->find('list');
-		$orders = $this->Item->Order->find('list');
-		$this->set(compact('supermarkets', 'orders'));
+		$categories = $this->Item->Category->find('list');
+		//$orders = $this->Item->Order->find('list');
+		$this->set(compact('supermarkets', 'categories'));
 	}
 
 /**

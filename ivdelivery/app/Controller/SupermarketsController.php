@@ -130,6 +130,10 @@ class SupermarketsController extends AppController {
 		$id = AuthComponent::user('id');
 		//debug($id);
 		if (isset($id)) {
+				/*$this->loadModel('Order');
+				$orders = $this->Supermarket->Order->findByUserId($id);
+				$this->set('orders', $orders);
+				debug($orders); */
 				//return $this->redirect(array('controller' => 'Users', 'action' => 'home'));
 		}
  		$this->layout = 'newhome';

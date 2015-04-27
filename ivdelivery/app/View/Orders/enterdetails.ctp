@@ -120,7 +120,8 @@ jQuery(document).ready(function() {
 		}
 	}
 	*/
-	$smallCut = ($groceryTotal*(.05));
+	$roughTotal = ($groceryTotal*(.05));
+	$smallCut = round($roughTotal, 2);
 	$flatFee = 7.5;
 	$deliveryCost = ($flatFee + $smallCut + $deliveryFees);
 	$grandTotal = ($groceryTotal + $deliveryCost);
@@ -658,7 +659,6 @@ echo $this->Form->select('delivery_choice', $deliveryOptions, array('class' => '
 		<?php
 		echo $this->Form->hidden('item_total', array('value' => $groceryTotal));
 		echo $this->Form->hidden('delivery_charge', array('default' => $deliveryCost));
-
 		echo $this->Form->hidden('total', array('default' => $grandTotal));
 		echo $this->Form->hidden('driver_id');
 		echo $this->Form->hidden('processing_fee', array('default' => '0'));

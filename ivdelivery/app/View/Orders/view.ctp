@@ -82,7 +82,7 @@
 <?php //if ($authUser['role'] == 'master') { ?>
 
 				<?php //echo $this->Html->link(__('Edit Item'), array('controller' => 'ItemsOrders', 'action' => 'edit', $item['ItemsOrder']['id']), array('class' => 'btn btn-warning')); ?>
-				<?php echo $this->Html->link(__('Cancel Item'), array('controller' => 'Orders', 'action' => 'calculatevalue', 'itemorderid' => $item['ItemsOrder']['id'], 'orderid' => $order['Order']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to remove %s?', $item['name'])); //} ?>
+				<?php //echo $this->Html->link(__('Cancel Item'), array('controller' => 'Orders', 'action' => 'calculatevalue', 'itemorderid' => $item['ItemsOrder']['id'], 'orderid' => $order['Order']['id']), array('class' => 'btn btn-danger'), __('Are you sure you want to remove %s?', $item['name'])); //} ?>
 
 				<?php } ?>
 

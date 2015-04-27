@@ -152,7 +152,8 @@ class UsersController extends AppController {
         $this->layout = 'BoostCake.generic';
 		if ($this->request->is('post')) {
 			$this->User->create();
-			//debug($this->request->data);
+
+			$this->request->data['User']['role'] = 'customer';
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
 				return $this->redirect(array('action' => 'index'));

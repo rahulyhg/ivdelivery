@@ -10,6 +10,9 @@ body {
 legend {
 	color: #fff !important;
 }
+	#checko {
+		min-width: 50px !important;
+	}
 </style>
 <div class="users form" id="signupform">
 	<?php echo $this->Form->create('User', array(
@@ -51,7 +54,12 @@ legend {
 		echo $this->Form->input('User.1.password');
 
 	?></td></tr>
-
+<tr><td colspan="2"> <br>
+									<table><tr><td id="checko">
+								<?php echo $this->Form->checkbox('User.1.termsagreed', array('label' => false, 'class' => 'form-control', 'default' => '0', 'required' => true
+								)); ?></td><td>
+								<p id="terms">Agree to <?php echo $this->Html->link(__('Terms of Service'), array('controller' => 'supermarkets', 'action' => 'termsprivacy')); ?></p>
+										</td></tr></table></td></tr>
 
 </table>
 	</fieldset><br><br>

@@ -30,7 +30,7 @@
 
 }
 #carttable{
-	max-width: 265px !important;
+	width: 100% !important;
 
 }
 
@@ -40,7 +40,8 @@
 
 } 
 .category { 
-	font-size: 16px !important;
+	font-size: 18px !important;
+	/*text-shadow: -0.5px 0 0px #000 !important; */
 }
 
 .btnContactUs {
@@ -48,7 +49,17 @@
 	border-color: #23ab96 !important;
 	color: #fff;
 }
+.sidebar-nav-fixed {
+    padding: 9px 0;
+    position:fixed;
+    left:20px;
+    top:60px;
+    width:250px;
+}
 
+.row-fluid > .span-fixed-sidebar {
+    margin-left: 290px;
+}
 
 </style>
 
@@ -164,7 +175,7 @@
 </div>
 
 
-     <div class="col-md-4 sidebar-offcanvas" id="sidebar" role="navigation">
+     <div class="col-md-4 fixed-top" id="sidebar" role="navigation">
           <div>
           
 <br>
@@ -209,9 +220,9 @@
 	
 	<?php } ?>
 	</table>
+	<img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Buy now with PayPal" /><br><br>
   		<?php echo $this->Html->link(__('Checkout'), array('controller' => 'Orders', 'action' => 'enterdetails', $supermarket['Supermarket']['id']), array('class' => 'btn btn-success btn-lg', 'id' => 'btnContactUs')); ?>
-<br>
-
+<br><br>
 
 
 

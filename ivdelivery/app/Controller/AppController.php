@@ -36,7 +36,7 @@ class AppController extends Controller {
 
 
     public $components = array(
-    	'DebugKit.Toolbar',
+    	//'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
             'loginRedirect' => array(
@@ -73,7 +73,7 @@ class AppController extends Controller {
 	public function isAuthorized($user) {
 	    // Admin can access every action
 	    if (isset($user['role']) && $user['role'] === 'admin') {
-		return true;
+		  return true;
 	    }
 
 	    // Default deny
@@ -82,7 +82,7 @@ class AppController extends Controller {
 
     public function beforeFilter() {
 
-        $this->Auth->allow('login', 'home', 'placeorder', 'logout', 'signup', 'emptyCart');
+        $this->Auth->allow('login', 'home', 'placeorder', 'logout', 'signup', 'emptyCart', 'termsprivacy', 'about', 'failedreceipt', 'paypalredirect', 'receipt');
 
 	   $this->set('authUser', $this->Auth->user());
 
