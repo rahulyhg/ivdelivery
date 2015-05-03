@@ -275,7 +275,7 @@ class OrdersController extends AppController {
 		$items = $this->Order->Item->find('list');
 		$authuserid = $this->Auth->user('id');
 		$this->set('currentUser', $this->Auth->user());
-		//$this->set('authUser', $this->Auth->user()); 
+		$this->set('authUser', $this->Auth->user()); 
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
          	$sessionOrderData = $this->Session->read('Order');
@@ -390,7 +390,21 @@ class OrdersController extends AppController {
 					$Email->subject('Food Swoop Order Receipt');
 					$Email->send('My message'); */
 
-
+					if (isset($authUser['User']['reference_user_id'])) {
+							$userID = $authUser['User']['id'];
+							$currentUserOrders = $this->Order->findAllByUserId($userID);
+							$userOrderCount = count($currentUserOrders);
+							if (($userOrderCount) == "1") {
+								$refUserID = $authUser['User']['reference_user_d'];
+								$this->Order->User->id = $refUserId;
+								$referencedUser = $this->Order->User->findById($refUserID);
+								$balance = $referencedUser['User']['credit_balance'];
+								$newBalance = ($balance + 2.00);
+								$referencedUser['user']['credit_balance'] = $newBalance;
+								$userData = array('id' => $refUserId, 'credit_balance' => $newBalances);
+								$this->Order->User->save($userData);
+							}
+					}
 
 
 

@@ -44,7 +44,21 @@
 			<?php echo h($user['User']['email']); ?>
 			&nbsp;
 		</dd>
-
+		<dt><?php echo __('Referral Code'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['referral_code']); ?>
+			&nbsp;
+		</dd>
+				<dt><?php echo __('Delivery Credit'); ?></dt>
+		<dd>$s
+			<?php echo h($user['User']['credit_balance']); ?>
+			&nbsp;
+		</dd>
+								<dt><?php echo __('Reffered by'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['reference_user_id']); ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 

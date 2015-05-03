@@ -478,6 +478,12 @@ Follow Us
 									echo $this->Form->input('User.1.password');
 
 								?></td></tr>
+								<tr><td colspan="2">
+							><?php
+
+									echo $this->Form->input('User.1.signup_referral_code');
+
+								?></td></tr>
 								<tr><td colspan="2"> <br>
 									<table><tr><td id="checko">
 								<?php echo $this->Form->checkbox('User.1.termsagreed', array('label' => false, 'class' => 'form-control', 'default' => '0', 'required' => true
@@ -705,7 +711,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">Home</a></li>
         <li><a href="#about">Account</a></li>
-		<li><a href="#service">Rewards</a></li>
 		     <?php  //if (!($authUser['role'] == 'admin')) { ?>
 
         <li class="dropdown">
@@ -829,6 +834,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</div>
 			</div>
 		</div>
+
 		<div class="container">
 
 		<div class="row">
@@ -846,70 +852,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             </div>
         </div>		
 		</div>
-
-	<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading"><br><br><br>
-					<p id="story"></p>
-
-					</div>
-					</div>
-				</div>
-			</div>
 	</div>
 		
 	</section>
 	<!-- /Section: about -->
 	
 
-	<!-- Section: services -->
-    <section id="service" class="home-section text-center bg-gray">
-		
-		<div class="heading-about">
-			<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading">
-					<h2>Rewards</h2>
-					<i class="fa fa-2x fa-angle-down"></i>
-
-					</div>
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-
-
-		<div class="container">
-		<div class="row">
-			<div class="col-lg-2 col-lg-offset-5">
-				<hr class="marginbot-50">
-			</div>
-		</div>
-    	
-		</div>
-
-	<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-lg-offset-2">
-					<div class="wow bounceInDown" data-wow-delay="0.4s">
-					<div class="section-heading"><br><br><br><br><br><br><br><br>
-
-					<h3>Coming soon!</h3>
-
-					</div>
-					</div>
-					<br><br><br><br><br><br>
-				</div>
-			</div>
-	</div>
-
-
-	</section>
 	<!-- /Section: services -->
 	
 	<!-- /Section: contact -->

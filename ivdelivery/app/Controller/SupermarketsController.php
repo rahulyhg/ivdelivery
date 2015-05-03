@@ -177,7 +177,18 @@ class SupermarketsController extends AppController {
 					unset($this->request->data['User'][1]);
 					$this->request->data['User'] = $data;
 					$this->request->data['User']['role'] = 'customer';
+					$this->request->data['User']['credit_balance'] = 00.00;
 					$this->loadModel('User');
+					$randomNum = rand(10,100);
+					$ufname = $this->request->data['User']['first_name'];
+					$this->request->data['User']['referral_code'] = ('fs' . $ufname . $randomNum);
+					$this->loadModel('User');
+					if (isset($this->request->data['User']['signup_referral_code'])) {
+						$refCode = $this->request->data['User']['signup_referral_code'];
+						$referenceUser = $this->User->findByReferralCode($refCode);
+						$refUID = $referenceUser['User']['id'];
+						$this->request->data['User']['reference_user_id'] = $refUID;
+					}
 					$this->User->create();
 					if ($this->User->save($this->request->data)) {
 									//$this->Session->setFlash(__('Successful Registration and Login!', 'alert alert-success'));

@@ -54,6 +54,12 @@ legend {
 		echo $this->Form->input('User.1.password');
 
 	?></td></tr>
+	<tr><td colspan="2">
+							<?php
+
+									echo $this->Form->input('User.1.signup_referral_code');
+
+								?></td></tr>
 <tr><td colspan="2"> <br>
 									<table><tr><td id="checko">
 								<?php echo $this->Form->checkbox('User.1.termsagreed', array('label' => false, 'class' => 'form-control', 'default' => '0', 'required' => true
