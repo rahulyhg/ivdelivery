@@ -32,8 +32,6 @@
 	<table cellpadding="0" cellspacing="0" class="table">
 	<thead>
 	<tr>
-			<th><?php echo $this->Paginator->sort('role'); ?></th>
-			<th><?php echo $this->Paginator->sort('username'); ?></th>
 			<th><?php echo $this->Paginator->sort('first_name'); ?></th>
 			<th><?php echo $this->Paginator->sort('last_name'); ?></th>
 			<th><?php echo $this->Paginator->sort('phone'); ?></th>
@@ -47,8 +45,6 @@
 	<tbody>
 	<?php foreach ($users as $user): ?>
 	<tr>
-		<td><?php echo h($user['User']['role']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['first_name']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['last_name']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['phone']); ?>&nbsp;</td>
