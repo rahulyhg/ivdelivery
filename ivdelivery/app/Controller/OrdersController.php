@@ -276,13 +276,16 @@ class OrdersController extends AppController {
 		$authuserid = $this->Auth->user('id');
 		$this->set('currentUser', $this->Auth->user());
 		$this->set('authUser', $this->Auth->user()); 
+		$authUser = $this->Auth->user();
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
          	$sessionOrderData = $this->Session->read('Order');
-         	//debug($sessionOrderData);
+         	debug($sessionOrderData);
 
 		$this->set('cartData', $cartData);		
-		$this->set('sessionOrderData', $sessionOrderData);		
+		$this->set('sessionOrderData', $sessionOrderData);	
+		$balance = $authUser['credit_balance'];
+		
 
 		/* $secureTokenId = 0;
 		$secureToken = 0;
@@ -291,7 +294,6 @@ class OrdersController extends AppController {
 		$paypalParams = "TRXTYPE=A&BILLTOSTREET=123 Main St.&BILLTOZIP=95131&AMT=23.45&CURRENCY=USD&INVNUM=INV12345&PONUM=PO9876&**CREATESECURETOKEN**=Y&**SECURETOKENID**=9a9ea8208de1413abc3d60c86cb1f4c5&ECHODATA=True";
 		$paypalUrl = ($paypalBase . '/?' . $paypalParams); */
 
-		$amt = 10.00;
 		$txt = "Submit Order!";
 
 		//Test
@@ -301,6 +303,17 @@ class OrdersController extends AppController {
 		//$PF_HOST_ADDR = "https://pilot-payflowpro.paypal.com.";
 		//Payflow link
 		$total = $sessionOrderData['total'];
+
+		$deliveryCharge = $sessionOrderData['deliver_charge'];
+		if ($deliveryCharge < $balance) {
+			$sessionOrderData['credit_balance_used'] = $deliveryCharge;
+			$total = $total - $deliveryCharge;
+		} else {
+			$sessionOrderData['credit_balance_used'] = $balance;
+			$total = $total - $balance;
+
+		}
+
 		//$total=.01;
 		//debug($total);
 		$secureTokenId = uniqid('', true);
@@ -367,12 +380,38 @@ class OrdersController extends AppController {
 		if ($this->request->is('post')) {
 			//debug($this->request->data);
 			
-			$sessionOrderData = $this->request->data['Order'];
+			//$sessionOrderData = $this->request->data['Order'];
 			$orderItemsData = $this->Session->read('cart.' . $id);
-			$paymentData = $this->request->data['Payment'];
+			//$paymentData = $this->request->data['Payment'];
 		
 		//	if ($this->Session->write('Order', $sessionOrderData)) {
-			
+			if (isset($authUser['reference_user_id'])) {
+							$authUser = $this->Auth->user();
+							$userId = $authUser['id'];
+							//debug($userId);
+							$userOrderCount = $this->Order->find('count', array(
+								'conditions' => array('Order.user_id' => $userId)));
+							debug($userOrderCount);
+							if ($userOrderCount === 0) {
+								//debug('b');
+								$refUserId = $authUser['reference_user_id'];
+								$this->Order->User->id = $refUserId;
+								$referencedUser = $this->Order->User->findById($refUserId);
+								$balance = $referencedUser['User']['credit_balance'];
+								$newBalance = ($balance + 2.00);
+								$referencedUser['user']['credit_balance'] = $newBalance;
+								$userData = array('id' => $refUserId, 'credit_balance' => $newBalance);
+								//debug('c');
+								 if ($this->Order->User->save($userData)) {
+								 	//debug('updated');
+								 }
+							}
+					} 
+
+
+					//return false;
+
+
 				$this->Order->create();
 				//$this->Order->OrdersItem->create();
 				if ($this->Order->saveNewOrder($sessionOrderData, $orderItemsData, $paymentData)) {
@@ -389,22 +428,8 @@ class OrdersController extends AppController {
 					$Email->to('imscotta92@yahoo.com');
 					$Email->subject('Food Swoop Order Receipt');
 					$Email->send('My message'); */
-
-					if (isset($authUser['User']['reference_user_id'])) {
-							$userID = $authUser['User']['id'];
-							$currentUserOrders = $this->Order->findAllByUserId($userID);
-							$userOrderCount = count($currentUserOrders);
-							if (($userOrderCount) == "1") {
-								$refUserID = $authUser['User']['reference_user_d'];
-								$this->Order->User->id = $refUserId;
-								$referencedUser = $this->Order->User->findById($refUserID);
-								$balance = $referencedUser['User']['credit_balance'];
-								$newBalance = ($balance + 2.00);
-								$referencedUser['user']['credit_balance'] = $newBalance;
-								$userData = array('id' => $refUserId, 'credit_balance' => $newBalances);
-								$this->Order->User->save($userData);
-							}
-					}
+					
+					
 
 
 
@@ -1574,6 +1599,9 @@ class OrdersController extends AppController {
 					$sessionOrderData = $this->Session->read('Order');
 					$sessionOrderData['paypal_transaction_id'] = $theParams['PNREF'];
 					$superid = $sessionOrderData['supermarket_id'];
+
+
+
 					//$sessionOrderData['payment_status'] = 'paid';
 					//$sessionOrderData = array('Order' => $sessionOrderData);
 				//	if ($this->Session->write('Order', $sessionOrderData)) {
@@ -1590,6 +1618,41 @@ class OrdersController extends AppController {
 					$this->Session->setFlash(__('The order has been saved.'));
 					$this->Session->delete('cart.' . $superid);
 					$this->Session->delete('Order.' . $sessionOrderData['supermarket_id']);
+
+
+
+					$authUser = $this->Auth->user();
+					$userId = $authUser['id'];
+					$authbalance = $authUser['credit_balance'];
+					if (isset($authUser['reference_user_id'])) {
+							$userId = $authUser['id'];
+							//debug($userId);
+							$userOrderCount = $this->Order->find('count', array(
+								'conditions' => array('Order.user_id' => $userId)));
+							debug($userOrderCount);
+							if ($userOrderCount === 1) {
+								//debug('b');
+								$refUserId = $authUser['reference_user_id'];
+								$this->Order->User->id = $refUserId;
+								$referencedUser = $this->Order->User->findById($refUserId);
+								$balance = $referencedUser['User']['credit_balance'];
+								$newBalance = ($balance + 2.00);
+								$referencedUser['user']['credit_balance'] = $newBalance;
+								$userData = array('id' => $refUserId, 'credit_balance' => $newBalance);
+								//debug('c');
+								 if ($this->Order->User->save($userData)) {
+								 	//debug('updated');
+								 }
+							}
+					}
+
+					if (isset($sessionOrderData['credit_balance_used'])) {
+						$orderCredit = $sessionOrderData['credit_balance_used'];
+						$newAuthBalance = ($authbalance - $orderCredit);
+						$data = array('id' => $userId, 'credit_balance' => $newAuthBalance);
+						// This will update Recipe with id 10
+						$this->Order->User->save($data);
+					}
 
 					/*
 					$Email = new CakeEmail();

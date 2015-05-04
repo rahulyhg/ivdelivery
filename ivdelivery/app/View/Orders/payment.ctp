@@ -157,7 +157,7 @@ if ($otime == ('12:00:00')) {
   <dd>$<?php echo $groceryTotal; ?></dd>
   <dt>Delivery Fees</dt>
   <dd>$<?php echo($sessionOrderData['delivery_charge']); ?></dd>
-  <dt>Discount Amount</dt>
+  <dt>Discounts Applied</dt>
   <dd>$<?php 
   if (!(isset($sessionOrderData['promotion_discount_amount']))) {
   	echo('0');
@@ -165,10 +165,25 @@ if ($otime == ('12:00:00')) {
   	echo($sessionOrderData['promotion_discount_amount']);  
   }
   	?></dd>
+  	  <dt>Account Credit</dt>
+  <dd>$<?php 
+  if (!(isset($authUser))) {
+  	echo('0.00');
+  	$balance = 0.00;
+  } else {
+  	echo($authUser['credit_balance']); 
+  	$balance = $authUser['credit_balance']; 
+  }
+  	?></dd>
+  	
   <dt>Processing Fee</dt>
   <dd> n/a </dd>
   <dt>Total Order Cost</dt>
-  <dd>$<?php echo($sessionOrderData['total']); ?>
+  <dd>$<?php 
+  $total = $sessionOrderData['total'];
+  $newtotal = $total - $balance;
+
+  echo($newtotal); ?>
 </dd>
 </dl>
 
@@ -205,10 +220,10 @@ if ($otime == ('12:00:00')) {
 	</fieldset>
 <br>
 <?php
-/*echo $this->Form->submit(
+echo $this->Form->submit(
     'Submit Order', 
     array('class' => 'btn btn-success')
-); */
+); 
 ?>
 </div>
 

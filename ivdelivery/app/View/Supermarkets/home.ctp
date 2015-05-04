@@ -50,7 +50,7 @@
 			&nbsp;
 		</dd>
 				<dt><?php echo __('Delivery Credit'); ?></dt>
-		<dd>$s
+		<dd>$
 			<?php echo h($user['User']['credit_balance']); ?>
 			&nbsp;
 		</dd>
