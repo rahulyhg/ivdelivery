@@ -280,10 +280,8 @@ class OrdersController extends AppController {
 		//debug($authUser);
 		$this->set(compact('users', 'drivers', 'items', 'authuserid'));
          	$sessionOrderData = $this->Session->read('Order');
-         	debug($sessionOrderData);
 
 		$this->set('cartData', $cartData);		
-		$this->set('sessionOrderData', $sessionOrderData);	
 		$balance = $authUser['credit_balance'];
 		
 
@@ -304,15 +302,24 @@ class OrdersController extends AppController {
 		//Payflow link
 		$total = $sessionOrderData['total'];
 
-		$deliveryCharge = $sessionOrderData['deliver_charge'];
+		$deliveryCharge = $sessionOrderData['delivery_charge'];
 		if ($deliveryCharge < $balance) {
 			$sessionOrderData['credit_balance_used'] = $deliveryCharge;
+			$this->Session->write('Order.credit_balance_used', $deliveryCharge);
 			$total = $total - $deliveryCharge;
 		} else {
 			$sessionOrderData['credit_balance_used'] = $balance;
+			$this->Session->write('Order.credit_balance_used', $balance);
 			$total = $total - $balance;
 
 		}
+
+		         	//debug($sessionOrderData);
+
+		$sessionOrderData['total'] = $total;
+		$this->Session->write('Order.total', $total);
+
+		$this->set('sessionOrderData', $sessionOrderData);	
 
 		//$total=.01;
 		//debug($total);
@@ -391,7 +398,7 @@ class OrdersController extends AppController {
 							//debug($userId);
 							$userOrderCount = $this->Order->find('count', array(
 								'conditions' => array('Order.user_id' => $userId)));
-							debug($userOrderCount);
+							//debug($userOrderCount);
 							if ($userOrderCount === 0) {
 								//debug('b');
 								$refUserId = $authUser['reference_user_id'];
@@ -1629,7 +1636,7 @@ class OrdersController extends AppController {
 							//debug($userId);
 							$userOrderCount = $this->Order->find('count', array(
 								'conditions' => array('Order.user_id' => $userId)));
-							debug($userOrderCount);
+							//debug($userOrderCount);
 							if ($userOrderCount === 1) {
 								//debug('b');
 								$refUserId = $authUser['reference_user_id'];
@@ -1649,6 +1656,7 @@ class OrdersController extends AppController {
 					if (isset($sessionOrderData['credit_balance_used'])) {
 						$orderCredit = $sessionOrderData['credit_balance_used'];
 						$newAuthBalance = ($authbalance - $orderCredit);
+						$this->Order->User->id = $userId;
 						$data = array('id' => $userId, 'credit_balance' => $newAuthBalance);
 						// This will update Recipe with id 10
 						$this->Order->User->save($data);

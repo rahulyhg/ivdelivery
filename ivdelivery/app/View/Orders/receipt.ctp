@@ -136,9 +136,20 @@
              </div>
              <hr />
               <div class="ttl-amts">
+                  <h5>  Credit Applied: $<?php 
+                                                  if (isset($savedOrder['Order']['credit_balance_used'])) {
+                                                    echo($savedOrder['Order']['credit_balance_used']);
+                                                  } else {
+                                                    echo(0.00);
+                                                  }
+
+                   ?></h5>
+             </div>
+               <hr />
+              <div class="ttl-amts">
                   <h5>  Discount Savings: $<?php 
-                                                  if (isset($savedOrder['Order']['promotion_discount_amount'])) {
-                                                    echo($savedOrder['Order']['promotion_discount_amount']);
+                                                  if (isset($savedOrder['Order']['promotion_code'])) {
+                                                    echo('2.00');
                                                   } else {
                                                     echo(0.00);
                                                   }

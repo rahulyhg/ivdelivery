@@ -167,23 +167,14 @@ if ($otime == ('12:00:00')) {
   	?></dd>
   	  <dt>Account Credit</dt>
   <dd>$<?php 
-  if (!(isset($authUser))) {
-  	echo('0.00');
-  	$balance = 0.00;
-  } else {
-  	echo($authUser['credit_balance']); 
-  	$balance = $authUser['credit_balance']; 
-  }
+ echo($sessionOrderData['credit_balance_used']);
   	?></dd>
   	
-  <dt>Processing Fee</dt>
-  <dd> n/a </dd>
+  <!--<dt>Processing Fee</dt>
+  <dd> n/a </dd>-->
   <dt>Total Order Cost</dt>
   <dd>$<?php 
-  $total = $sessionOrderData['total'];
-  $newtotal = $total - $balance;
-
-  echo($newtotal); ?>
+echo($sessionOrderData['total']); ?>
 </dd>
 </dl>
 
